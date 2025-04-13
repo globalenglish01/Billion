@@ -17,9 +17,13 @@ jobs:
           npm install
           npm run build
 
+      - name: Clean up gh-pages branch
+        run: |
+          git push origin --delete gh-pages || true
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          force: true  # 强制推送
+          force: true
