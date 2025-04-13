@@ -1,0 +1,26 @@
+name: Generate package-lock.json
+
+on:
+  workflow_dispatch: # 手动触发
+
+jobs:
+  generate-lockfile:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 16
+
+    - name: Install dependencies and generate lockfile
+      run: |
+        npm install
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "github-actions[bot]@users.noreply.github.com"
+        git add package-lock.json
+        git commit -m "Generate package-lock.json"
+        git push origin main
