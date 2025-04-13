@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
@@ -85,4 +85,61 @@ export default function StockBoardStrategy() {
               <p>
                 <Button
                   onClick={async () => {
-                    const ranking = await
+                    const ranking = await fetchStockRanking(s.code);
+                    console.log(ranking);
+                  }}
+                  className="mt-2"
+                >
+                  查看龙虎榜
+                </Button>
+              </p>
+              {/* K线图展示 */}
+              <div>
+                <h3>股价走势</h3>
+                <LineChart
+                  width={300}
+                  height={150}
+                  data={[
+                    { name: "开盘", uv: s.close * 0.9 },
+                    { name: "收盘", uv: s.close },
+                  ]}
+                >
+                  <Line type="monotone" dataKey="uv" stroke="#8884d8" />
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis dataKey="name" />
+                  <YAxis />
+                  <Tooltip />
+                  <Legend />
+                </LineChart>
+              </div>
+              {/* 低吸策略筛选 */}
+              {lowBuyStrategy(s) && <p>符合低吸策略条件</p>}
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// useInterval hook 实现
+import { useRef } from "react";
+
+export function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // 保存最新的回调
+  useEffect(() => {
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    if (delay !== null) {
+      const tick = () => {
+        savedCallback.current();
+      };
+      const id = setInterval(tick, delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
+}
