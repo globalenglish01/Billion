@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
+import { useInterval } from "@/hooks/useInterval"; // 确保路径指向正确
 
-// useInterval hook 实现
-// 确保这里是唯一的定义或导入
-import { useInterval } from "@/hooks/useInterval";
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
 export default function StockBoardStrategy() {
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  // 设定策略条件
   const fetchStockData = async () => {
     setLoading(true);
     try {
