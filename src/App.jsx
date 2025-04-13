@@ -4,13 +4,13 @@ import { Button } from "@/components/ui/button";
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
 // useInterval hook 实现
+// 确保这里是唯一的定义或导入
 import { useInterval } from "@/hooks/useInterval";
 
 export default function StockBoardStrategy() {
   const [stocks, setStocks] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  // 设定策略条件
   const fetchStockData = async () => {
     setLoading(true);
     try {
@@ -28,7 +28,7 @@ export default function StockBoardStrategy() {
           volume: item.f5,
           amount: item.f6 / 1e8,
           ratio: parseFloat(item.f9),
-          close: item.f3, // 模拟股价数据
+          close: item.f3,
         }))
         .filter((s) => s.pct > 9.8 && s.turnover > 5 && s.amount > 1 && s.ratio > 1.5);
       setStocks(filtered);
@@ -38,27 +38,12 @@ export default function StockBoardStrategy() {
     setLoading(false);
   };
 
-  // 设置自动刷新功能
   useInterval(() => {
     fetchStockData();
   }, 300000); // 每5分钟自动刷新数据
 
-  // 额外加入龙虎榜数据（示例）
-  const fetchStockRanking = async (code) => {
-    try {
-      const res = await fetch(
-        `https://push2.eastmoney.com/api/qt/clist/get?pn=1&pz=20&po=1&np=1&ut=bd1d9ddb04089700cf9c27f6f7426281&fltt=2&invt=2&fid=f3&fs=m:0+t:6,m:0+t:13&fields=f12,f14,f3,f10,f5,f6,f8,f9&stk=${code}`
-      );
-      const json = await res.json();
-      return json?.data?.diff;
-    } catch (error) {
-      console.error("Failed to fetch stock ranking:", error);
-    }
-  };
-
-  // 加入低吸策略条件（示例）
   const lowBuyStrategy = (stock) => {
-    return stock.close < 5 && stock.pct < 0.05; // 简单的低吸策略，假设股价小于5元，且涨幅小于5%
+    return stock.close < 5 && stock.pct < 0.05;
   };
 
   useEffect(() => {
@@ -93,7 +78,6 @@ export default function StockBoardStrategy() {
                   查看龙虎榜
                 </Button>
               </p>
-              {/* K线图展示 */}
               <div>
                 <h3>股价走势</h3>
                 <LineChart
@@ -112,7 +96,6 @@ export default function StockBoardStrategy() {
                   <Legend />
                 </LineChart>
               </div>
-              {/* 低吸策略筛选 */}
               {lowBuyStrategy(s) && <p>符合低吸策略条件</p>}
             </CardContent>
           </Card>
@@ -120,23 +103,4 @@ export default function StockBoardStrategy() {
       </div>
     </div>
   );
-}
-
-// useInterval hook 实现
-import { useRef } from "react";
-
-export function useInterval(callback, delay) {
-  const savedCallback = useRef();
-
-  // 保存最新的回调
-  useEffect(() => {
-    savedCallback.current = callback;
-  }, [callback]);
-
-  useEffect(() => {
-    if (delay !== null) {
-      const id = setInterval(() => savedCallback.current(), delay);
-      return () => clearInterval(id);
-    }
-  }, [delay]);
 }
