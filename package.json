@@ -13,4 +13,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   }
+  "scripts": {
+  "predeploy": "npm run build",
+  "deploy": "gh-pages -d build"
+}
 }
