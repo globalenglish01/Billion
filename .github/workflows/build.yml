@@ -31,3 +31,6 @@ jobs:
 
     - name: Build project
       run: npm run build
+    - name: Add .nojekyll
+      run: echo > dist/.nojekyll
+  
