@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { useInterval } from "@/hooks/useInterval"; // 确保路径指向正确
+import { useInterval } from "../hooks/useInterval"; // 确保路径指向正确
 
 import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from "recharts";
 
