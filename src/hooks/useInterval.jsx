@@ -1,8 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 
 export function useInterval(callback, delay) {
+  const savedCallback = useRef();
+
+  // 保存最新的回调
   useEffect(() => {
-    const interval = setInterval(callback, delay);
-    return () => clearInterval(interval);
-  }, [callback, delay]);
+    savedCallback.current = callback;
+  }, [callback]);
+
+  useEffect(() => {
+    if (delay !== null) {
+      const id = setInterval(() => savedCallback.current(), delay);
+      return () => clearInterval(id);
+    }
+  }, [delay]);
 }
