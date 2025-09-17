@@ -1,0 +1,5688 @@
+# chatgpt_block_1.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第1页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 免責事項：これらのスライドは著作権で保護されており、個人的な使用のみを目的としています。•このドキュメントは、以下のコースに登録されている方を対象としています。究極のAWSソリューションアーキテクト・アソシエイトコース•この文書は、個人的な使用および試験の準備のみを目的としていますので、共有することはご遠慮ください。•これらのスライドをコースのウェブサイトではないウェブサイトで無料で入手した場合は、piracy@datacumulus.comまでご連絡ください。•試験に向けてベストを尽くし、楽しく学んでください。
+
+--- 第2页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS認定ソリューションアーキテクトアソシエイトコースSAA-C03
+
+--- 第3页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ようこそ!•AWS 認定ソリューションアーキテクトアソシエイト合格のための講座です•決して簡単な資格ではなく、このコースも20時間を超えるボリュームですが、楽しみながら学べるようにしています•前提: 基礎的なIT知識•30以上のAWSサービスを取り上げます•AWS やIT初心者の方、歓迎です!（競争ではないので、ご自身のペースで）
+
+--- 第4页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 私(松本) について•とあるベンチャーでソフトウェアエンジニアとして勤務•数年にわたりAWSを利用しています機械学習サービス、ウェブサイトなど•AWS 認定DevOpsエンジニアプロフェッショナル所有•AWS に関する講座を作成しています•各種リンク•GitHub: https://github.com/smatsumt •Twitter: https://twitter.com/smatsumt •Menta: https://menta.work/user/26628
+
+--- 第5页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 私（Stephane）について•IT コンサルタント、AWSソリューションアーキテクト、デベロッパー、SysOpsとして働いています•長年に渡りAWS を利用していますウェブサイト、アプリ、ストリーミングプットフォームの構築•AWS のベテラン講師(認定資格, CloudFormation, Lambda, EC2…)•各種リンク•GitHub: https://github.com/simplesteph•LinkedIn: https://www.linkedin.com/in/stephanemaarek•Medium: https://medium.com/@stephane.maarek•Twitter : https://twitter.com/stephanemaarek
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_10.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第46页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスタイプ: 例InstancevCPUMem (GiB)StorageNetwork PerformanceEBS Bandwidth (Mbps)t2.micro11EBS-OnlyLow to Moderatet2.xlarge416EBS-OnlyModeratec5d.4xlarge16321 x 400 NVMe SSDUp to 10 Gbps4,750r5.16xlarge64512EBS Only20 Gbps13,600m5.8xlarge32128EBS Only10 Gbps6,800t2.micro はAWS 無料利用枠に含まれています(月750 時間まで)Great website:https://instances.vantage.sh
+
+--- 第47页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com セキュリティグループ•セキュリティグループは、AWSでのネットワーク・セキュリティの基礎になります•EC2 インスタンスへのイン・アウト両方のトラフィックを制御します•セキュリティグループに書けるのはルールのみです•セキュリティグループのルールは、IPアドレスまたはセキュリティグループを参照できますインバウンドアウトバウンド
+セキュリティグループWWW
+EC2インスタンス
+
+--- 第48页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com セキュリティグループDeep Dive•セキュリティグループがEC2インスタンスの"ファイアウォール"として機能している•セキュリティグループで制限できる項目•ポートへのアクセス•認可されたIPアドレスの範囲-IPv4およびIPv6•インバウンドネットワークの制御（外からインスタンスへ）•アウトバウンドネットワークの制御（インスタンスから外へ）
+
+--- 第49页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com セキュリティグループ図解
+EC2インスタンスIP XX.XX.XX.XX ポート22 ポート22 セキュリティグループ1インバウンドルールによるIP/ポートのフィルタリング任意のポートセキュリティグループ1アウトバウンドルールによるIP/ポートのフィルタリングあなたのコンピュータIP XX.XX.XX.XX(22番ポート許可) その他のコンピュータ(22番ポート不許可) WWWAny IP -Any Port
+
+--- 第50页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com セキュリティグループ知っておきたいこと•複数のインスタンスにアタッチ（接続）可能•リージョンとVPCの組み合わせの中に“閉じて” います•EC2の“外”にある-トラフィックがブロックされると、EC2インスタンスからは通信があったことが”見えない”•SSHアクセス用のセキュリティグループを別につくっておくのがオススメ•アプリケーションにアクセスできない（タイムアウトする）場合、セキュリティグループの問題のことが多いです•アプリケーションで「接続が拒否されました」というエラーが出る場合、アプリケーションのエラーか、起動していないかのどちらかです•デフォルトでは、すべてのインバウンド・トラフィックがブロックされる•デフォルトでは、すべてのアウトバウンド・トラフィックが許可される
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_100.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第496页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3forSolutionArchitect•運用:  操作の必要なし•セキュリティ:  IAM、バケットポリシー、ACL、暗号化（サーバー／クライアント）、SSL•信頼性:  99.999999999% の耐久性／99.99% の可用性、マルチAZ、クロスリージョンレプリケーション•パフォーマンス:  毎秒数千回の読み書きに対応し、CloudFrontによる転送効率の向上、マルチパートにも対応•コスト:  ストレージ使用量、ネットワークコスト、リクエスト数に応じて支払う
+
+--- 第497页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DocumentDB•Aurora は“AWS実装” のPostgreSQL / MySQL•DocumentDBは“AWS実装” のMongoDB (NoSQL データベースの1 つ)•MongoDB はJSON データの保存、クエリ、インデックスが可能•Aurora と同様の“デプロイメントコンセプト”•フルマネージド、高可用性（3 AZ レプリケーション）•DocumentDBストレージは10GB 単位で自動的に増加、最大64 TB•毎秒何百万規模のワークロードに対しても自動的にスケール
+
+--- 第498页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Neptune•マネージドなグラフデータベース•どんなときにグラフを使うのか？•相互に“いろいろな関連” があるデータ•ソーシャルネットワーキング:  ユーザーがユーザーと友達になり、ユーザーの投稿にコメントを返したり、他のコメントに「いいね！」を押したり•ナレッジグラフ（Wikipedia）•3 つのAZ で高可用性を実現し、最大15 のリードレプリカを使用可能•ポイントインタイムリカバリー、Amazon S3 への連続バックアップ•KMS によるデータの暗号化+ HTTPS のサポート
+
+--- 第499页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Neptune for Solutions Architect•運用:  RDSと同様•セキュリティ:  IAM、VPC、KMS、SSL（RDSと同様）＋IAM認証•信頼性:  マルチAZ, クラスタリング•パフォーマンス:  グラフに最適、クラスタリングでパフォーマンス向上•コスト:  プロビジョニングされたノードごとに支払う（RDSと同様）•重要:  Neptune = グラフ
+
+--- 第500页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Keyspaces(Apache Cassandra 互換)•Apache Cassandra はオープンソースのNoSQL 分散データベースです•マネージドなApache Cassandra互換データベースサービス•サーバレス、スケーラブル、高可用性、フルマネージド•アクセス流量により自動的にスケールアップ・ダウン•テーブルは、複数AZ にまたがって3 つ複製•Cassandra Query Language (CQL)を使ってクエリー•数ミリ秒単位のアクセス時間で、毎秒数千アクセスを処理可能•キャパシティ: オンデマンドモード、またはプロビジョンモード（オートスケール可）•暗号化、バックアップ、35 日間までのPoint-In-Time Recovery (PITR)•ユースケース: IoT デバイス情報の保存、時系列データの保存など
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_101.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第501页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon QLDB•QLDB は”Quantum Ledger Database”の略（直訳: 量子台帳データベース）•台帳とは、金融の取引情報（トランザクション）が保管されているところ•フルマネージド、サーバレス、高可用性、3 AZ にまたがる複製•すべてのアプリケーションデータへの変更履歴を管理するために使用•イミュータブルシステム: すべてのエントリは削除・変更できず、暗号化技術により改ざんされていないことを検証可能
+•一般的なブロックチェーン台帳フレームワークより、2,3 倍高パフォーマンス、SQL によるデータ操作•Amazon Managed Blockchainとの違い: 金融ルールに適合するため、分散型のコンポーネントを持たない
+https://docs.aws.amazon.com/qldb/latest/developerguide/ledger-structure.html
+
+--- 第502页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Timestream•フルマネージド、高速、スケーラブル、サーバレスな時系列データベース•キャパシティに応じて自動的にスケールアップ/ダウン•1日あたり数兆個規模のイベントを格納・解析が可能•RDS と比較して、1000倍高速で1/10 のコスト•定期的クエリー、多次元レコード、SQL互換•データ保存階層: 直近のデータはメモリーに、より過去のデータはコスト最適なストレージに保存•組み込みの時系列解析関数(リアルタイムに時系列データのパターンを分析するのに有用)•通信時・保存時の暗号化•ユースケース: IoT アプリ, 日々運用されるアプリケーション, リアルタイム解析, …
+
+--- 第503页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Timestream –アーキテクチャ
+AmazonTimestreamAWS IoT
+Kinesis DataStreams
+Lambda
+Prometheus
+Amazon MSK
+Kinesis Data AnalyticsFor Apache Flink
+Kinesis DataStreams
+AmazonQuickSight
+AmazonSageMaker
+他のJDBC 接続
+
+--- 第504页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Athena の概要•SQL 機能を備えた完全なサーバーレスデータベース•S3 のデータを照会するために使用•クエリー単位の課金•結果をS3 に出力•IAM によるセキュリティ•使用例:  1回限りのSQL クエリ、S3 上でのサーバーレスクエリ、ログアナリティクス
+
+--- 第505页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Athena for Solutions Architect•運用:  運用が不要、サーバーレス•セキュリティ:  IAM + S3セキュリティ•信頼性:  マネージドサービス、Prestoエンジン使用、高可用性•パフォーマンス:  データサイズに応じたクエリのスケーリング•コスト:  クエリごとに支払い／スキャンしたデータのTBごとに支払い=>サーバーレス
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_102.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第506页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Redshift の概要•Redshift はPostgreSQL ベースですが、OLTPには使われていない•Redshift はOLAP -オンライン分析処理（アナリティクスやデータウェアハウス）です•他のデータウェアハウスに比べて10倍以上のパフォーマンス、PB 単位のデータに対応•行ベースではなく列ベースでのデータ保存•大規模並列クエリ実行（MPP）、高可用性•プロビジョニングされたインスタンスに基づく従量課金制•クエリを実行するためのSQL インターフェース•AWS QuicksightやTableau などのBI ツールとの統合
+
+--- 第507页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Redshiftの続き...•データは、S3、DynamoDB、DMS、その他のDB...から読み込まれます•1 ノードから128 ノードまで、1 ノードあたりの容量は最大128TB•リーダーノード:  クエリのプランニングと結果の集約を行う•コンピュートノード:  クエリを実行し、結果をリーダーに送る•Redshift Spectrum:  S3に対して直接クエリを実行（ロードの必要なし）•バックアップ＆リストア、セキュリティVPC / IAM / KMS、モニタリング•Redshift Enhanced VPC Routing:  VPC 経由のCOPY / UNLOAD
+
+--- 第508页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Redshift -スナップショットとDR•Redshift には"Multi-AZ "モードがありません•スナップショットは、クラスタのポイントインタイム・バックアップで、S3に内部保存されます。•スナップショットはインクリメンタル（変更された部分のみが保存される）です•スナップショットを、新しいクラスターにリストアできます•自動化:  8時間ごと、5GBごと、またはスケジュールに基づいて。保持期間の設定が必要•手動:  削除するまでスナップショットが保持される•クラスタのスナップショット（自動または手動）を別のAWSリージョンに自動的にコピーするようにAmazon Redshift を設定することができます
+リージョン(us-east-1)
+Redshift Cluster(オリジナル)クラスターのスナップショットスナップショット
+リージョン(eu-west-1)
+Redshift Cluster(New)コピーされたスナップショットリストア自動/手動コピー
+
+--- 第509页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RedshiftへのデータのロードAmazon Kinesis Data Firehose S3へのCOPYコマンド
+Amazon KinesisData Firehose 
+Amazon RedshiftCluster(S3コピーによる) 
+Amazon RedshiftCluster S3バケット(mybucket) copy customerfrom 's3: //mybucket/mydata' iam_role'arn: aws: iam: : 0123456789012: role/MyRedshiftRole'; 
+InternetエンハンストVPCルーティングなしエンハンストVPCルーティングありVPC経由EC2インスタンスJDBCドライバ
+Amazon RedshiftClusterEC2インスタンスデータを一括して書くほうがいい
+
+--- 第510页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Redshift Spectrum•S3 にすでにあるデータを、読み込まずにクエリする•クエリを開始するためには、Redshiftクラスタが利用可能である必要があります•クエリは何千ものRedshiftSpectrumノードに送信されますクエリーselect count (*), ...from s3.ext_tableGROUP BY ...
+Amazon Redshift Cluster
+JDBC/ODBCリーダーノードコンピュートノード
+12….N
+RedshiftSpectrumAmazon S3
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_103.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第511页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Redshift for Solutions Architect•運用:  RDSと同様•セキュリティ:  IAM、VPC、KMS、SSL（RDS と同様）•信頼性:  高可用性、オートヒーリング機能、スナップショット複製•パフォーマンス:  他のデータウェアハウスと比較して約10 倍のパフォーマンス•コスト:  プロビジョニングされたノードごとに支払い、他のデータウェアハウスと比べて1/10 のコスト•vs Athena:  インデックスによるクエリ/結合/集約の高速化•重要:  Redshift = アナリティクス／BI／データウェアハウス
+
+--- 第512页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElasticSearch/OpenSearch•（2021年9月より、AWSが提供するサービスは“OpenSearch”となりました）•例えば、DynamoDBでは、主キーやインデックスでしか検索できません•ElasticSearchでは、どんなフィールドでも、部分的にマッチしたものでも検索できます•他のデータベースを補完する形でElasticSearchを使うのが一般的です•ElasticSearchは、ビッグデータのアプリケーションにも使われています•インスタンスのクラスタをプロビジョニングすることができます•AWS との統合:  Amazon Kinesis Data Firehose, AWS IoT, Amazon CloudWatch Logs によるデータ収集•Cognito & IAMによるセキュリティ、KMSの暗号化、SSL& VPC•Kibana（可視化）とLogstash（ログの取り込み）を搭載-ELKスタック
+
+--- 第513页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElasticSearch/OpenSearchfor Solutions Architect•運用:  RDSと同様•セキュリティ:  Cognito、IAM、VPC、KMS、SSL•信頼性:  マルチAZ, クラスタリング•性能:  ElasticSearchプロジェクト（オープンソース）をベースに、ペタバイト規模に対応•コスト:  プロビジョニングされたノードごとに支払う（RDSと同様）•重要:  ElasticSearch/OpenSearch= Indexing&Search
+
+--- 第514页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon EMR•EMRは“Elastic MapReduce”の略です•EMRは、膨大なデータを分析・処理するためのHadoopクラスター（ビッグデータ）の構築を支援します•クラスターは数百台のEC2インスタンスで構成されます•また、Apache Spark, HBase, Presto, Flink...にも対応しています•EMRがすべてのプロビジョニングとコンフィギュレーションを行います•オート・スケーリングとSpotインスタンスとの統合•使用例：データ処理、機械学習、Webインデックス作成、ビッグデータ...
+
+--- 第515页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon QuickSight•サーバレスで機械学習を活用した、インタラクティブなダッシュボードを作成するBI (Business Intelligence) サービス•高速、自動スケーラブル、他のWeb ページに組み込み可能、セッション単位の課金•ユースケース:•ビジネス分析•可視化の構築•対話的な分析の実施•データからビジネス上の見解を得る•RDS, Aurora, Athena, Redshift, S3 との統合•SPICEを使ったインメモリでの計算エンジン（QuickSightにデータを取り込んだ場合）•Enterprise エディション:列単位のセキュリティを設定可能
+https://aws.amazon.com/quicksight/
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_104.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第516页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com QuickSight統合
+QuickSight
+RDS
+Redshift
+Athena
+S3
+ELF &CLF(ログ形式)
+OpenSearchAurora
+Timestreamデータソース(AWS サービス)
+データソース(SaaS)データソース(インポート)
+オンプレミスDB (JDBC)
+
+--- 第517页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com QuickSight –ダッシュボード& 分析•ユーザとグループ(enterprise エディション)を定義•ここのユーザ、グループはQuickSight内のみ。IAM とは無関係!!•ダッシュボードは…•書き込み不可の共有可能な分析結果のスナップショット•分析の設定を保存(フィルタ設定, パラメータ, ソートなど)•ユーザやグループに、分析やダッシュボードを共有可能•ダッシュボードを共有するためには、公開(publish) する必要があります•ダッシュボードを見られるユーザは、元になるデータも見られます
+
+--- 第518页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Glue•ETL（Extract, Transform, and Load）のマネージドサービス•分析のためのデータの準備と変換•完全なサーバーレスサービス
+S3バケット
+Amazon RDS
+ExtractTransformGlue ETL
+RedshiftData WarehouseLoad
+
+--- 第519页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Glue データカタログ
+•Glueデータカタログ：データセットのカタログ
+JDBCAmazon S3Amazon RDSAmazon DynamoDBAWS Glueデータカタログメタデータの書き込みデータベース
+テーブル(メタデータ)データベース
+テーブル(メタデータ)
+Amazon AthenaAmazonRedshiftSpectrumAmazon EMR
+AWS Glueデータクローラー
+Glue ジョブ（ETL）データディスカバリー
+
+--- 第520页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Lake Formation•データレイク= 分析のためのデータがすべて集まる中心となる場所•データレイクを数日で立ち上げるための、フルマネージドなサービス•データレイクの探索、クレンジング、変換、挿入•複雑な手動手順（収集、クレンジング、移動、カタログ化）や重複除去（ML 変換を利用）を自動化•構造化データと非構造化データを結合•組み込みのデータソース取り込み:S3, RDS, Relational& NoSQLDB…•細やかなアクセス制御(行and/or 列レベル)•AWS Glue上に構築
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_105.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第521页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Lake Formation
+データソースAmazon S3RDSオンプレミスDB(SQL & NoSQL)AWS Lake Formation
+データ収集ETL、下準備データカタログセキュリティ設定アクセス制御Data Lake(stored in S3)AthenaRedshiftEMR
+ユーザ
+収集
+Aurora
+
+--- 第522页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Lake Formation権限の中央管理の例
+データソースAmazon S3RDSAWS Lake Formation
+アクセス制御行単位のセキュリティData Lake(S3に保管)Athena
+ユーザ収集
+Aurora
+Quicksight
+
+--- 第523页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data Analytics for SQL Applications
+SourcesKinesisData StreamsKinesisData Firehose
+KinesisData Streams
+KinesisData Analyticsfor SQL ApplicationsKinesisData FirehoseAWS LambdaSQL Statements
+Amazon S3Amazon Redshift(COPY through S3)Other Firehose destinations…
+Applicationsanywhere
+Sinksanywhere
+Reference Data in S3
+
+--- 第524页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data Analytics for SQL Applications•SQL を使ったKinesis Data Streams & Firehose でのリアルタイム分析•SQL で使う参照データをS3 から追加可能•フルマネージド、事前にプロビジョンするサーバなし•自動スケーリング•実際の消費レートに応じた支払い•出力:•Kinesis Data Streams: リアルタイム分析クエリーにデータを送るストリームを作る•Kinesis Data Firehose: 分析クエリー結果を保存先S3 バケットに送る•ユースケース:•時系列データの分析•リアルタイムダッシュボード•リアルタイムメトリクス
+
+--- 第525页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data Analytics for Apache Flink•ストリームデータの処理・分析にFlink (Java, Scala or SQL)を使う•AWS のマネージドクラスタでApache Flink のアプリケーションを実行可能•計算機リソースのプロビジョンニング、並列計算、自動スケーリング•アプリケーションバックアップ(チェックポイント、スナップショット)•Apache Flinkのすべての機能を利用可能•FlinkはFirehose からは読み込みできません(代わりにKinesis Analytics for SQL を利用)
+Amazon MSK
+Kinesis Data AnalyticsFor Apache Flink
+Kinesis DataStreams
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_106.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第526页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Managed Streaming for Apache Kafka (Amazon MSK)•Amazon Kinesisの代替•フルマネージドなAWS で動作するApache Kafka•クラスタの作成、更新、削除•Kafka ブローカーノード・Zookeeperノードを作成・管理•VPC、AZ にMSK クラスタをデプロイ（最大3 AZ）•Apache Kafka のよくある障害からの自動復旧•EBS へのデータ保存（期間に制限なし）•MSK サーバレス•キャパシティの管理なしにApache Kafka をMSK で実行•計算機・ストレージリソースを自動的にプロビジョニング
+
+--- 第527页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Apache Kafka の概要
+KinesisIoTRDSEtc…
+MSK Cluster
+Etc…
+Broker 2
+Broker 3Broker 1Producers(コード書く)Consumers(コード書く)EMRS3SageMakerKinesisRDSトピック書き込みトピック読み込み複製複製
+
+--- 第528页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data Streams vs. Amazon MSK
+Kinesis Data Streams•メッセージサイズ: 上限1 MB•データストリームをシャードでまとめる•シャードを分割・結合が可能•TLS による通信路暗号化•KMS によるデータ暗号化•デフォルト上限1MB、変更可能(例: 10MB)•Kafka トピックをパーティションでまとめる•パーティションにトピックを追加のみ•平文またはTLS による通信路暗号化•KMS によるデータ暗号化
+Amazon MSK
+
+--- 第529页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon MSK Consumers
+Amazon MSK
+Kinesis DataAnalyticsfor Apache Flink
+AWS GlueストリーミングETL ジョブApache Spark StreamingLambdaAmazon EC2Applications Running onECSEKS
+
+--- 第530页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ビッグデータ収集パイプライン•完全サーバレスな収集パイプライン•リアルタイムのデータ収集•データ変換•SQL を使ったデータクエリ•クエリー結果のレポートをS3 に保存•データウェアハウスにデータをロードして、ダッシュボードを作成
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_107.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第531页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ビッグデータ収集パイプライン
+Amazon Kinesis Data Streams
+Amazon Kinesis Data Firehose
+AWS Lambda
+Amazon Simple Storage Service (S3)Amazon Simple Queue Service
+AWS Lambda
+Amazon Athena
+Amazon Simple Storage Service (S3)レポートバケット
+IoT デバイス収集バケット(任意)1 分ごとリアルタイム起動データ取得
+Amazon QuickSight
+Amazon Redshift(not serverless)
+
+--- 第532页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ビッグデータ収集パイプラインについて•IoT Core によりIoT デバイスからのデータ収集が可能•Kinesis はリアルタイムのデータ収集に最適•Firehose は準リアルタイム(遅延1分程度) でのS3 へのデータ保存•Lambda はFirehose 保存前のデータ変換に利用可能•Amazon S3 はSQS への通知をトリガ可能•Lambda はSQS を購読可能(S3 とLambda の接続も可能)•Athena はサーバレスSQL サービスで、結果をS3 に保存可能•レポートバケットには分析結果を保存、AWSQuickSight, Redshift などの結果を保存可能
+
+--- 第533页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSのモニタリング監査とパフォーマンスCloudWatch, CloudTrail & AWS Config
+
+--- 第534页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudWatch メトリクス•CloudWatchは、AWSのすべてのサービスのメトリクスを提供します•メトリクスは、監視する変数です（CPU使用率、通信量...）•メトリクスは”名前空間”(namespace)に属します•“ディメンション”は、メトリクスの属性（インスタンスID、環境など...）です•メトリクスあたり最大10 ディメンション•メトリクスにはタイムスタンプがある•メトリクスのCloudWatch ダッシュボードを作成可能
+
+--- 第535页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudWatch EC2 詳細モニタリング•EC2 インスタンスのメトリクスが"5 分ごと"•詳細なモニタリング（有償）では、"1 分ごと” にデータを取得します。•より迅速にASG の規模を拡大したい場合は、詳細なモニタリングを行ってください•AWS 無料利用枠で、10 個の詳細なモニタリング指標が使えます•注:  EC2のメモリ使用量はデフォルトではプッシュされません（インスタンス内部からカスタムメトリックとしてプッシュする必要があります）
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_108.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第536页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudWatch カスタムメトリクス•独自のカスタムメトリクスを定義し、CloudWatchに送信することができます•例:メモリ使用量、ディスクの空き容量、ログインユーザー数•「PutMetricData」API を使用•ディメンション（属性）を使ってメトリクスをセグメント化できます•Instance.id•Environment.name•メトリックの解像度（StorageResolutionAPIパラメータ-2つの可能な値）•標準:  1分（60秒）•高解像度:  1/5/10/30秒-高いコスト•重要:タイムスタンプに指定できるのは2週間前〜2時間後の範囲（EC2インスタンスの時刻を正確にしておく必要がある）
+
+--- 第537页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudWatch ダッシュボード•ダッシュボードを使うことで、重要なメトリクスやアラームに素早くアクセスできます•ダッシュボードはグローバル•ダッシュボードには異なる地域のグラフを含めることができます•ダッシュボードのタイムゾーン＆タイムレンジを変更できます•自動更新の設定が可能（10s、1m、2m、5m、15m）•ダッシュボードはAWSアカウントのない人とも共有可能（公開、eメール、外部SSOプロバイダー+AmazonCognito）•価格:  •ダッシュボード3 個（最大50 メトリクス）を無料で提供•4 個め以降:  $3/dashboard/月
+
+--- 第538页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudWatch Logs •“ロググループ”: 任意の名前、通常はアプリケーションを表す•“ログストリーム”: アプリケーション内のインスタンス/ログファイル/コンテナ•ログの有効期限ポリシーを定義可能（期限なし、30日など）•CloudWatchLogsでは、以下にログを書き出すことができます•S3 へのバッチエクスポーターで、アーカイブする•各種ストリームに出力して、さらなる処理・分析を実施（Lambda,KinesisDataStream,KinesisDataFirehose）•ElasticSearchクラスタのストリームに出力
+
+--- 第539页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudWatch Logs収集元•SDK やCloudWatchLogsエージェント、CloudWatchUnifiedエージェントによるログ送信•Elastic Beanstalk: アプリケーションからのログの収集•ECS: コンテナのログを収集•AWS Lambda: ファンクションログからの収集•VPCフローログ: VPC固有のログ•API Gateway•フィルターに基づくCloudTrail•Route53: DNS クエリのログ
+
+--- 第540页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudWatch Logs Metric Filter & Insights•CloudWatch Logsでは、フィルター式が使えます•例1:ログの中の特定のIPアドレスを見つける•例2:“ERROR”がログに出力された数をカウント•MetricFilterを使って、CloudWatchアラームをトリガーできます•CloudWatch Logs Insightsは、CloudWatchDashboards にクエリ結果を表示するために使えます
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_109.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第541页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 のCloudWatch Logs•デフォルトでは、EC2マシンからのログはCloudWatch に送られません•必要なログファイルをプッシュするために、EC2上でCloudWatchエージェントを実行する必要があります•IAM のパーミッションが正しいことを確認してください•CloudWatch のログエージェントはオンプレミスでも設定可能ですEC2インスタンスCloudWatch Logs AgentオンプレミスサーバーCloudWatch Logs AgentCloudWatch Logs
+
+--- 第542页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudWatch Logs Agent & Unified Agent•EC2インスタンス、オンプレミスのサーバーで動作•CloudWatch Logs Agent•旧バージョンのエージェント•CloudWatch Logs のみ送信可能•CloudWatch Unified Agent•RAM、プロセスなど、システムレベルの追加メトリクスを収集•CloudWatch Logs に送信するログを収集します•SSM Parameter Store を利用した一元的な設定
+
+--- 第543页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudWatch Unified Agent -Metrics •CPU（アクティブ、アイドル、システム、ユーザー、ステイル）•ディスクメトリクス（空き、使用、合計）、ディスクIO（書き込み、読み込み、バイト、iops）•RAM（空き、非アクティブ、使用、合計、キャッシュ）•通信（TCPおよびUDPの接続数、ネットパケット数、バイト数）•プロセス（トータル、デッド、ブロックド、アイドル、実行、スリープ）•スワップ領域（空き、使用、使用率）•リマインダー:EC2 で最初からとれるメトリクス-ディスク、CPU、ネットワーク（ハイレベル）
+
+--- 第544页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudWatch Alarms•任意のメトリックが設定した条件を満たしたときに、通知を出すためのしくみ•様々なオプション（サンプリング、％、最大、最小、etc...）•アラームの状態:•OK•INSUFFICIENT_DATA•ALARM•“期間”を設定できます: •メトリックを評価するための時間の長さ（秒）•高解像度カスタムメトリクス: 10秒または30秒のみ選択可能
+
+--- 第545页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudWatch Alarmsの送付先•EC2:EC2インスタンスを停止、終了、再起動、復旧•Auto Scaling:オートスケーリングの開始•SNS:SNSに通知する
+AmazonEC2EC2AutoScalingAmazonSNS
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_11.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第51页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 他のセキュリティグループの参照図解
+EC2インスタンスIP XX.XX.XX.XX ポート123 ポート123 ポート123     セキュリティグループ1インバウンド許可: セキュリティグループ1許可: セキュリティグループ2 EC2インスタンスIP XX.XX.XX.XX セキュリティグループ2 (アタッチ) EC2インスタンスIP XX.XX.XX.XX セキュリティグループ1 (アタッチ) EC2インスタンスIP XX.XX.XX.XX セキュリティグループ3 (アタッチ)
+
+--- 第52页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com よく使うWell-known ポート•22 = SSH (Secure Shell) -Linux マシンに遠隔で安全にログイン•21 = FTP (File Transport Protocol) –ファイル共有のためにファイルをアップロード•22 = SFTP (Secure File Transport Protocol) –SSHでファイルをアップロード•80 = HTTP –安全でないWeb サイトへのアクセス•443 = HTTPS –安全なWeb サイトへのアクセス•3389 = RDP (Remote Desktop Protocol) –Windows インスタンスにログイン
+
+--- 第53页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SSHサマリーテーブルMacLinuxWindows < 10Windows >= 10SSHPuttyEC2インスタンスコネクト
+
+--- 第54页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスコネクト•ブラウザでEC2インスタンスに接続します•ダウンロードしたキーファイルは使わなくて大丈夫ですAWSによって一時的な鍵がEC2にアップロードされます•Amazon Linux 2ではすぐに使用できます•22番ポートが開いているかどうか確認してください
+
+--- 第55页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスの購入方法•オンデマンドインスタンス: 短期/中期のワークロード、価格が予測可能•リザーブド: (最小1 年)•リザーブドインスタンス:長期のワークロード•コンバーティブルリザーブドインスタンス:長期間のワークロード、インスタンスの柔軟性があります•スポットインスタンス:短期のワークロード, 安価, インスタンスが停止する可能性(低信頼性)•専有ホスト:物理サーバ全体を予約; インスタンス配置を制御•専有インスタンス:ハードウェアが他のユーザと共有されない
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_110.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第546页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2インスタンスの復旧（リカバー）
+CloudWatchアラームStatusCheckFailed_System •ステータスチェック•インスタンスの状態= EC2 VM を確認する•システムの状態= 基盤となるハードウェアの確認EC2インスタンスモニターEC2インスタンスの復旧
+SNSトピックアラート•復旧: 同じプライベート、パブリック、ElasticIP、メタデータ、デプロイメントグループ
+
+--- 第547页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudWatchEvents•イベントパターン: AWSサービスに何かあったら反応•例: EC2インスタンスの起動、CodeBuildの失敗,S3バケットの設定を変更•CloudTrailとの統合により、すべてのAPI呼び出しと連携可能•スケジュール: 1時間ごとなど、定期的な処理•CloudWatch Event は、変更に関する情報を伝える小さなJSON ドキュメントを作成し、様々な処理にわたすことができます•Lambda,Batch,ECStask•SQS,SNS,KinesisDataStreams,KinesisDataFirehose•StepFunctions,CodePipeline,CodeBuild•SSM,EC2Actions
+
+--- 第548页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AmazonEventBridge•CloudWatchEventsの進化版•”デフォルトイベントバス”:AWSにより作成済み（CloudWatch Event）•“パートナーイベントバス”:他のSaaSサービスやアプリケーションのイベントを受信(Zendesk,DataDog,Segment,Auth0,…)•“カスタムイベントバス”:独自のイベントバスも作成可能•イベントバスは、他のAWSアカウントからもアクセス可能•“ルール”:イベントに対する処理を定義（CloudWatchEventsと同様）
+
+--- 第549页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AmazonEventBridgeスキーマレジストリ•EventBridgeは、イベント(JSONドキュメント)を分析してスキーマを推測してくれます•スキーマレジストリは、スキーマを処理するコードを生成することができます•スキーマのバージョン管理も可能です
+
+--- 第550页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AmazonEventBridgevsCloudWatchEvents•AmazonEventBridgeはCloudWatchEventsを拡張したものです•EventBridgeは、同様のサービスAPI・基盤を使っています•EventBridgeは独自アプリのイベントバスや、サードパーティのサービスと連携するイベントバスを追加できます•EventBridgeはスキーマレジストリがあります•EventBridgeは、機能拡張に伴って違う名前になりました•将来的にCloudWatchEventsはEventBridgeに置き換えられます
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_111.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第551页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudTrail•AWS アカウントのガバナンス、コンプライアンス、監査•CloudTrail はデフォルトで有効です•あなたのAWS アカウント内で行われたイベント/API コールの履歴を記録します•コンソール•SDK•CLI•AWSサービス•CloudTrail からのログをCloudWatch Logs やS3 に入れることが可能です•CloudTrailは、全リージョン（デフォルト）または単一のリージョンに適用することができます•AWSでリソースが消えた場合は、まずCloudTrailを調査してください
+
+--- 第552页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudTrail
+SDK
+CLI
+コンソールCloudTrailコンソール
+検査・監査
+CloudWatch Logs
+S3 バケット
+IAMユーザ＆IAMロール
+
+--- 第553页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudTrail イベント•マネジメントイベント: •AWSアカウントのリソースに対して実行される操作•例•セキュリティの設定（IAMAttachRolePolicy）•ルーティングデータのルールを設定する（AmazonEC2 CreateSubnet）•ロギングの設定（AWSCloudTrail CreateTrail）•デフォルトでは、CloudTrailはマネジメントイベントを記録するように設定されています•読み取りイベント（リソースを変更しない）と書き込みイベント（リソースを変更する可能性がある）を分離可能•データイベント:•デフォルトでは、データイベントは記録されません（膨大な操作が記録されるため）•Amazon S3 のオブジェクトレベルのアクティビティ（例: GetObject, DeleteObject, PutObject）: Read とWrite のイベントを分離可能•AWS Lambda 関数の実行アクティビティ（InvokeAPI）•CloudTrail Insights イベント: 次のスライドで
+
+--- 第554页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudTrail Insights•CloudTrail Insights を有効にして、AWSアカウントにおける通常と違うアクティビティを検出します•いつもと違うリソースのプロビジョニング•サービスの上限に到達•AWS のIAM アクションのバースト•定期メンテナンス活動でのギャップ•CloudTrail Insights は通常のマネジメントイベントを分析し、ベースラインを作成します•そして、書き込みイベントを継続的に分析し、異常なパターンを検出します•CloudTrailコンソールに異常が表示される•イベントがAmazonS3に送信される•EventBridgeイベントが生成される（自動化のため）
+マネジメントイベントCloudTrail Insights継続的な分析インサイトイベント
+生成
+CloudTrailコンソール
+S3バケット
+EventBridgeイベント
+
+--- 第555页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudTrail イベントの保持•イベントはCloudTrail に90 日間保存されます•この期間を超えてイベントを保持するには、S3 にログを記録し、Athena を使用します
+CloudTrail
+S3バケット長期保存
+データイベント
+マネジメントイベントインサイトイベント
+ログ90日間保存
+アナライズAthena
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_112.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第556页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Config•AWSリソースのコンプライアンスの監査と記録を支援します•構成と経時変化の記録に有用です•AWS Config によって解決できる疑問•セキュリティグループには無制限のSSH アクセスが可能になってない？•バケットがpublicになってない？•ALB の構成は、時間の経過とともにどのように変化した？•変更があった場合にアラート（SNS通知）を受け取ることができます•AWS Configはリージョンごとのサービスです•リージョンやアカウントを超えて集計可能•構成データをS3へ保存することが可能（Athenaで解析可能）
+
+--- 第557页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Config Rules•AWSマネージドコンフィグルールの使用が可能（75 以上）•カスタムの設定ルールを作ることができる（AWSLambda で定義する必要あり）•例:各EBS ディスクがgp2 タイプであるかどうかを評価する•例:各EC2 インスタンスがt2.micro であるかどうかを評価する•設定したルールは常に評価され、その後のアクションがトリガーされます•設定変更ごとにand/or 一定の時間間隔で•ルール違反をEventBridgeに通知が可能（その後にSNSやLambdaなどを接続可能）•ルールに自動修復機能を持たせることができます。•リソースが準拠していない場合は、自動修復をトリガーすることができます。•例: 承認されていないタグを持つインスタンスの停止•AWS Config Rules はアクションの発生を予防するわけではありません(拒否設定ではない)•価格: 無料期間なし、構成の記録1件につき$0.003、ルールの評価1回につき$0.001
+
+--- 第558页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Configリソース•リソースのコンプライアンスを時系列で表示•リソースの構成を時系列で表示•CloudTrail API コールを表示（有効になっている場合）
+
+--- 第559页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudWatch vs CloudTrail vs Config•CloudWatch•パフォーマンスモニタリング（メトリクス、CPU、ネットワークなど）とダッシュボード•イベント＆アラート•ログ集計・分析•CloudTrail•アカウント内で全員が行ったAPI コールの記録•特定のリソースのためのトレイルを定義できる•グローバルサービス•Config•リソースの設定変更の記録•コンプライアンスルールに基づいたリソースの評価•変更とコンプライアンスのタイムライン
+
+--- 第560页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Elastic Load Balancer の場合•CloudWatch:•接続メトリクスをモニタリング•エラーコードを時系列で可視化•ロードバランサーのパフォーマンスを把握するためのダッシュボードの作成•Config:•ロードバランサーのセキュリティグループルールの追跡•ロードバランサーの設定変更の追跡•ロードバランサーに常にSSL 証明書が割り当てられていること（コンプライアンス）•CloudTrail:•ロードバランサーに変更を加えた人をAPI コールレベルで追跡
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_113.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第561页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS STSセキュリティ・トークン・サービス•AWSリソースへの、限定的かつ一時的なアクセスを許可することができます•トークンは1時間まで有効です（それ以上使う場合、リフレッシュが必要です）•AssumeRole•自身のアカウント内で: セキュリティ強化のため•クロスアカウントアクセス: 別のアカウントでアクションを実行するために、そのアカウントのロールを“引き受ける” こと•AssumeRoleWithSAML•SAML でログインしたユーザーの認証情報を返す•AssumeRoleWithWebIdentity•IdP でログインしたユーザーの認証情報を返す（Facebookログイン、Googleログイン、OIDC互換...）。•AWS はこれを使わず、代わりにCognito を使うことを推奨しています。•GetSessionToken•ユーザーまたはAWS アカウントのルートユーザーがMFA するときに利用
+
+--- 第562页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com STS: AssumeRole•アカウントまたはクロスアカウント内でのIAM Role を定義•どのプリンシパルが、そのIAM ロールにアクセスできるかを定義します•AWS STS (Security Token Service)を使って認証情報を取得し、アクセスしたIAM Role になりきります(AssumeRoleAPI)•一時的な認証情報は、15分から1時間の間、有効ですAWS STS権限Role（同一または別のアカウント）一時的なセキュリティクレデンシャル
+IAM 
+ユーザーAssumeRole API
+
+--- 第563页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com STS によるクロスアカウントアクセス
+https://docs.aws.amazon.com/ja_jp/IAM/latest/UserGuide/id_roles_common-scenarios_aws-accounts.html
+
+--- 第564页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS におけるID フェデレーション•フェデレーションは、AWS 外のユーザーがAWS リソースにアクセスするために、一時的なロールを引き受けられるようにします•ユーザーは、サードパーティのID に関連づけられたロールを引き受けます•フェデレーションには様々な種類があります•SAML 2.0•カスタムアイデンティティブローカー•Amazon Cognito によるWeb Identity Federation•Amazon Cognito を使わないWeb Identity Federation•シングルサインオン•AWS Microsoft AD での非SAML•フェデレーションを利用すれば、IAM ユーザーを作成する必要がありません（ユーザー管理はAWS の外で行われる）
+ユーザー
+サードパーティログインクレデンシャルを提供
+AWSへのアクセス信頼
+
+--- 第565页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SAML 2.0 フェデレーション•Active Directory / ADFS とAWS（または任意のSAML 2.0）を統合•AWS コンソールまたはCLI へのアクセスを提供する（一時的な認証情報を通じて）•従業員ごとにIAM ユーザーを作成する必要がありません
+https: //docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html 
+https: //docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-saml.html
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_114.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第566页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SAML 2.0 フェデレーション-Active Directory FS•SAML 2.0 互換のIdP と同様のプロセス
+https: //aws.amazon.com/blogs/security/aws-federated-authentication-with-active-directory-federation-services-ad-fs/
+
+--- 第567页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SAML 2.0 フェデレーション•AWS IAM とSAML の間にトラストを設定する必要がある（両方向）•SAML 2.0 によるWeb ベースのクロスドメインSSO の実現•STS API を使用: AssumeRoleWithSAML •SAML によるフェデレーションは"古いやり方"であることに注意•Amazon シングルサインオン（SSO）フェデレーションは、新しいマネージドな方法で、よりシンプルです•続きはこちらから:  https: //aws.amazon.com/blogs/security/enabling-federation-to-aws-using-windows-active-directory-adfs-and-saml-2-0/
+
+--- 第568页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com カスタムID ブローカー(Custom Identify Broker)•ID プロバイダがSAML 2.0 と互換性がない場合にのみ使用します。•アイデンティティ・ブローカーは、適切なIAM ポリシーを決定する必要があります•STS APIを使用: AssumeRoleまたはGetFederationT oken 
+https: //docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_federated-users.html
+
+--- 第569页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ウェブID フェデレーション(Web Identity Federation) -AssumeRoleWithWebIdentity •現在、AWSでは推奨されていません-代わりにCognitoを使いましょう（匿名ユーザー、データの同期、MFAが可能）
+https: //docs.amazonaws.cn/en_us/amazondynamodb/latest/developerguide/WIF.html
+
+--- 第570页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Cognito •ゴール•クライアントサイド（モバイル、ウェブアプリ）からのAWS リソースへの直接アクセスの提供•例•Facebook ログインを利用して、S3バケットへの書き込み権限を一時的に付与•課題•アプリユーザーにIAM ユーザーを作りたくない•アプローチ•連携したID プロバイダーへのログイン、または匿名でのログイン•フェデレーティッドアイデンティティプールから一時的なAWS 認証情報を取得•この認証情報には、パーミッションを明記したIAM ポリシーがあらかじめ設定されています
+フェデレーティッドアイデンティティ
+FIPに認証を行う一時的AWS認証情報アプリID プロバイダー
+CUP
+Google
+FacebookTwitterSAMLOpenID….ログイントークンベリファイトークン
+認証情報の取得
+Amazon S3 バケット
+呼び出し
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_115.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第571页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Microsoft Active Directory（AD）とは？•AD ドメインサービスのあるすべてのWindows サーバーで利用可能•オブジェクトのデータベース: ユーザーアカウント、コンピュータ、プリンタ、ファイル共有、セキュリティグループ•一元的なセキュリティ管理、アカウントの作成、権限の割り当て•オブジェクトはツリー状に整理されている•ツリーの集まりがフォレスト
+ドメインコントローラ
+Johnpassword
+
+--- 第572页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSディレクトリサービス•AWS Managed Microsoft AD•AWS に独自のAD を作成し、ローカルでユーザーを管理、MFAをサポート•オンプレミスのAD との「トラスト」接続を確立•AD コネクタ•オンプレミスのAD にリダイレクトするディレクトリゲートウェイ（プロキシ）•ユーザーはオンプレミスのAD で管理•シンプルなAD•AWS 上のAD 互換のマネージドディレクトリ•オンプレミスのAD と連携できない
+オンプレミスのADAWS Managed ADトラスト
+オンプレミスのADADコネクタプロキシ
+シンプルなADauth auth auth
+
+--- 第573页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Organizations•グローバルサービス•複数のAWS アカウントの管理が可能•メインアカウントはマスターアカウントであり、変更できません•その他のアカウントはメンバーアカウント•メンバーアカウントは、1つの組織にしか所属できません•すべてのアカウントを統合した請求書、単一の支払い方法•集約された使用量による価格メリット（EC2、S3などのボリュームディスカウント）•AWSのアカウント作成を自動化するためのAPIがあります
+
+--- 第574页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com マルチアカウント戦略•部署ごと、コストセンターごと、開発/テスト/プロダクションそれぞれにアカウントを作成、規制上の制限に基づいて（SCPを使用）、リソースの分離（VPCなど）、アカウントごとのサービス制限、ログ用の独立したアカウントの作成•マルチアカウントvs単一アカウントのマルチVPC•課金のためのタグ付け基準の使用•すべてのアカウントでCloudTrail を有効にし、ログをマスターアカウントのS3 に送る•CloudWatch のログをマスターアカウントCloudWatch に送る•管理者用のクロスアカウントロールの設定
+
+--- 第575页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 組織単位（OU）-例
+ビジネスユニット環境ライフサイクルプロジェクトベース
+https://aws.amazon.com/answers/account-management/aws-multi-account-billing-strategy/
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_116.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第576页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Organizationsの構成例
+マスターアカウントProd OU
+ファイナンスOU
+Dev OU
+ルートOU
+HR OU
+
+--- 第577页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サービスコントロールポリシー（SCP）•ホワイトリストまたはブラックリストのIAM アクション•OU またはアカウントレベルでの適用•マスターアカウントには適用されません•SCP は、Rootユーザーを含む、アカウントのすべてのユーザーとロールに適用されます•SCP は、サービスリンクロールには影響を与えません•サービスリンクロールは、他のAWS サービスがAWS Organizations と統合することを可能にするもので、SCPで制限することはできません•SCP は、明示的なAllow が必要（デフォルトでは何も許可しない）•ユースケース•特定のサービスへのアクセスを制限する（例：EMRの使用ができない）•サービスを明示的に無効化することで、コンプライアンスを強化
+
+--- 第578页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SCP ヒエラルキー
+マスターアカウントProd OU
+HR OU
+ルートOU
+ファイナンスOU
+FullAWSAccess SCPDenyAccessAthena SCPDenyRedshiftSCPAuthorizeRedshiftSCPDenyAWSLambdaSCPアカウントAアカウントBアカウントC•マスターアカウント•何でもできる•(SCP適用外)•アカウントA •何でもできる•Redshiftへのアクセスは拒否（OU で明示的な拒否）•アカウントB •何でもできる•Redshiftへのアクセスは拒否(Prod OUで明示的に拒否) •Lambda へのアクセスは拒否(HR OU で明示的に拒否)•アカウントC•何でもできる•Redshiftへのアクセスは拒否(Prod OU で明示的に拒否)
+
+--- 第579页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SCP の例ブラックリストとホワイトリストの戦略
+その他の例：https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_example-scps.html
+
+--- 第580页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Organizations-アカウントの移動アカウントをある組織から別の組織に移行するには1.旧組織からメンバーアカウントを削除する2.新組織への招待状の送付3.メンバーアカウントから新組織への招待を受け入れる旧組織のマスターアカウントも新組織に参加させたい場合は、以下のようにします。1.上記の手順で組織からメンバーアカウントを削除する2.旧組織の削除3.上記のプロセスを繰り返し、古いマスターアカウントを新しい組織に招待する
+組織A組織B
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_117.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第581页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAMCondition（条件）
+aws:SourceIP:API を呼び出せる発信元となるクライアントIPを制限するAws:RequestedRegion:API の呼び出せる地域を制限する
+
+--- 第582页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAMCondition（条件）
+タグによる制限MFA を必須に
+
+--- 第583页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+IAMの例:S3向けIAM•ListBucketのパーミッションは以下に適用されますarn:aws:s3:::test•=> バケットレベルのパーミッション•GetObject、PutObject、DeleteObjectは、以下に適用されますarn:awn:s3:::test/*。•=> オブジェクトレベルのパーミッション
+
+--- 第584页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM ロールvsリソースベースのポリシー•ポリシーが設定されたIAMロールを通じてアクセスする方法vsポリシーをリソースにアタッチする方法（例：S3バケットポリシー）ユーザーアカウントA
+Amazon S3ロールアカウントBS3バケットポリシーユーザーアカウントA
+Amazon S3
+
+--- 第585页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM ロールvsリソースベースのポリシー•あるロール（ユーザー、アプリケーション、サービス）を引き受ける（assumeする）と、元の権限を放棄し、そのロールに割り当てられた権限を取得します•リソースベースのポリシーを使用する場合、ユーザーは自分の権限を放棄する必要はありません•例: アカウントA のユーザーが、アカウントA のDynamoDB テーブルをスキャンして、アカウントB のS3 バケットにダンプする必要がある•リソースベースのポリシーのサポート: Amazon S3バケット、SNSトピック、SQSキュー
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_118.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第586页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM パーミッションバウンダリー•IAM Permission Boundaries は、ユーザーとロールでサポートされています（グループは対象外）•IAM エンティティが取得できるパーミッションの上限を設定する高度な機能
+IAMパーミッションバウンダリー+IAMポリシーを通じたIAMパーミッション
+=パーミッションなし例
+
+--- 第587页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM パーミッションバウンダリー•AWS Organizations SCP との組み合わせで使用可能
+https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_boundaries.html 使用例•新しいIAM ユーザーの作成など、権限の範囲内で非管理者に責任を委ねることができる•開発者が自分でポリシーを割り当て、自分の権限を管理できるようにする一方で、開発者が自分の権限を「エスカレート」できないようにする（＝自分を管理者にする）•特定のユーザーを制限するのに便利（Organization & SCPを使ってアカウント全体を制限する代わりに）
+
+--- 第588页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM ポリシー評価ロジック
+https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_evaluation-logic.html
+
+--- 第589页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAMポリシーの例
+•sqs:CreateQueueを実行できますか？•sqs:DeleteQueueを実行できますか？•ec2:DescribeInstancesを実行できますか？
+
+--- 第590页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Resource Access Manager（RAM）•自分が所有するAWS リソースを他のAWS アカウントと共有する•どのアカウントとも共有可能、組織内の共有も可能•リソースの重複は避けましょう!•VPC のサブネット: •すべてのリソースを同じサブネットで動くようにする•VPC  サブネットは、同じAWS Organizations のものでなければなりません。•セキュリティグループとデフォルトVPC は共有できません•参加者は、自分のリソースを管理できる•参加者は、他の参加者や所有者に属するリソースを閲覧、修正、削除できない•AWS トランジットゲートウェイ•Route53 リゾルバルール•ライセンスマネージャーの設定
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_119.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第591页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com リソースアクセスマネージャー-VPCの例AWSクラウド-VPC オーナー
+VPC
+プライベートサブネット
+アカウント1
+アカウント2      s
+ALBEC2EC2
+•各アカウント...•自分のリソースに責任を持ちます•他のアカウントの他のリソースを表示、変更、削除することはできません。•ネットワークが共有されているので...•VPC に配置されたものは、VPC 内の他のリソースと通信可能•プライベートIP を使って、アカウント間で簡単にアプリケーションにアクセスできます•他のアカウントのセキュリティグループを参照することで、最大限のセキュリティを確保できます
+
+--- 第592页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS シングルサインオン（SSO）•シングルサインオンを使って、複数のアカウントのアクセスを一元的に管理できます•AWS Organizations との統合•SAML 2.0 マークアップをサポート•オンプレミスのActive Directory との連携•パーミッションの一元管理•CloudTrail による集中的な監査
+https://aws.amazon.com/blogs/security/introducing-aws-single-sign-on/
+
+--- 第593页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSシングルサインオン（SSO）-ADによるセットアップ
+
+--- 第594页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SSO -vs AssumeRoleWithSAML
+アイデンティティストア
+ブラウザサードパーティIDPログインポータル
+SAML
+AssumeRoleWithSAML 
+アイデンティティストアSAML 2.0対応
+ブラウザ
+AWS SSO ログインポータルログインAWS SSO統合
+
+--- 第595页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSのセキュリティと暗号化KMS、暗号化SDK、SSMパラメータストア
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_12.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第56页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 オンデマンド•使った分だけ支払う•Linux -最初の1分以降は1秒単位で課金•他のOS (Windows など) -1時間単位で課金•コストは最も高いが、初期費用がかからない•長期的なコミットメントなし•アプリケーションがどう動くか予測できないような、短期的で中断のないワークロードに適しています
+
+--- 第57页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2リザーブドインスタンス•オンデマンドと比較して最大72％の割引•予約期間は、1年または3年（長期ほど割引大）•購入オプション: 前払いなし、一部前払い、全部前払い（後者のほうが割引大）•特定のインスタンスタイプを予約する•定常的に使用するアプリケーション（データベースなど）にお勧め•コンバーティブルリザーブドインスタンス•EC2 インスタンスのタイプを変更することが可能•最大54％の割引
+
+--- 第58页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2スポットインスタンス•オンデマンドに比べて最大90％の割引が可能•最大指定価格が現在のスポット価格よりも低い場合、どの時点でも「インスタンスが停止」する可能性があるインスタンス•AWSで最も費用対効果の高いインスタンス•障害に強いワークロードに有効•バッチジョブ•データ分析•画像処理•開始・終了時間に制約がない処理…•クリティカルなジョブやデータベースには向かない
+
+--- 第59页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 専有ホスト(Dedicated ホスト)•物理的なEC2サーバーを専有•用途：サーバ単位でライセンスされる商用ソフトウェアを使う場合や、コンプライアンス要求で求められている場合•3 年分の予約を割り当て•より高価•複雑なライセンスモデル（BYOL-Bring Y our Own License）を持つソフトウェアに有効•規制やコンプライアンスのニーズが強い企業にも
+
+--- 第60页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2専有インスタンス(Dedicated インスタンス)•専有ハードウェアで動作するインスタンス•同じアカウント内の他のインスタンスとハードウェアを共有されるかも•インスタンスの配置を制御できない（停止/開始後、同じハードウェアとは限らない）
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_120.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第596页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com なぜ暗号化なのか？通信路の暗号化（SSL）•データは送信前に暗号化され、受信後に復号化されます•SSL証明書を活用した暗号化（HTTPS）•通信路の暗号化により、MITM（manin the middle attack）の発生を防止あなたHTTPSウェブサイト（AWS）U：adminP：supersecretHTTPS aGVsbG8gd29ybGQgZWh... SSL暗号化aGVsbG8gd29ybGQgZWh... U：adminP：supersecretaGVsbG8gd29ybGQgZWh... SSL復号化
+
+--- 第597页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com なぜ暗号化なのか？サーバーサイドでの暗号化•データはサーバーで受信後、暗号化される•データを復号化して送信する•キー（通常はデータキー）により暗号化されて保存される•暗号化/復号化の鍵をどこかで管理し、サーバーがそれにアクセスできる必要があるAWSサービス（例：EBS）
++オブジェクト暗号化HTTP/S
+オブジェクト
+復号化
+HTTP/S
+データキーデータキー
+
+--- 第598页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com なぜ暗号化なのか？クライアントサイドの暗号化•データはクライアントによって暗号化され、サーバーでは復号化されません•データは受信側のクライアントによって復号化•サーバーがデータを解読できないようにしますクライアントの暗号化任意のストア（FTP、S3など）暗号化
+オブジェクト
+クライアント側のデータキー+
+クライアントの復号化復号化オブジェクト
+クライアント側のデータキー+
+
+--- 第599页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS KMS（KeyManagement Service）•AWSのサービスで「暗号化」とあれば、ほとんどの場合KMSです•AWSがキーを管理してくれるので、データへのアクセスを簡単にコントロールできます•IAMとの完全な統合による認証•さまざまなAWSサービスとシームレスに統合されています•Amazon EBS: ボリュームの暗号化•Amazon S3:サーバー側でのオブジェクトの暗号化•Amazon Redshift: データの暗号化•Amazon RDS:データの暗号化•Amazon SSM:パラメータストア•などなど...•CLI / SDKを使用することもできます
+
+--- 第600页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com KMS -カスタマーマスターキー（CMK）の種類•対称型（AES-256キー）•暗号化と復号化に使用される単一の暗号化キー•KMSと統合されたAWSサービスでは、対象型CMKを使用しています•エンベロープ（コンテンツ）の暗号化に必要なもの•暗号化されていない鍵に直接アクセスすることはできません（使用するにはKMSAPIを呼び出す必要があります）•非対称（RSAとECCのキーペア）•公開鍵(暗号化)と秘密鍵(復号化)のペア•暗号化/復号化、電子署名/検証の操作に使用されます•公開鍵はダウンロード可能だが、暗号化されていない秘密鍵にはアクセスできない•使用例：KMSAPIを呼び出すことができないユーザーによるAWS外での暗号化
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_121.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第601页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS KMS（KeyManagement Service）•キー＆ポリシーを完全に管理することができます•作成•ローテーションポリシー•無効化•有効化•鍵の使用状況の監査が可能（CloudTrailを使用）•3種類のカスタマーマスターキー（CMK）•AWSマネージドサービスのデフォルトCMK：無料•KMSで作成したユーザーキー：$1/月•ユーザーキーのインポート（256ビット対称鍵のみ）: $1 / 月•+ KMSへのAPI呼び出しの支払い（$0.03 / 10000コール）
+
+--- 第602页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS KMS の基本的な使い方•機密情報を共有するときは...KMSを使う•データベースのパスワード•外部サービスへのクレデンシャル•SSL証明書の秘密鍵•KMSの価値は、データの暗号化に使われたCMKをユーザーが決して取り出すことができないこと、そしてCMKをローテーションしてセキュリティを高めることができることです
+
+--- 第603页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS KMS の基本的な使い方•絶対に秘密情報を平文で保存してはいけません、特にコードの中には•暗号化された秘密情報は、コード/環境変数に保存して構いません•KMSは、1回の呼び出しで最大4KBのデータを暗号化することしかできません•データが4KB以上の場合、エンベロープ暗号を使用•誰かにKMSへのアクセス権を与えるためには:•Key Policyがユーザーに許可していることを確認します•IAMポリシーがAPI呼び出しを許可していることを確認します
+
+--- 第604页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com リージョン間でのスナップショットのコピー
+EBSボリュームKMSによる暗号化EBSスナップショットKMSによる暗号化KMSキーA
+KMSキーAリージョンEU-WEST-2
+EBSボリュームKMSによる暗号化EBSスナップショットKMSによる暗号化KMSキーBKMSキーBリージョンap-southeast-2
+KMSキーBでのKMS再暗号化
+
+--- 第605页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com KMS キーポリシー•S3バケットのポリシーと同様に、KMSキーへのアクセスを制御•違い：アクセスをコントロールにはKMSキーポリシーが必須•デフォルトKMSキーポリシー•特定のKMSキーポリシーを提供していない場合に作成される•ルートユーザー＝AWSアカウント全体への鍵の完全なアクセス•IAMポリシーによるアクセス制御を与える•カスタムKMSキーポリシー•KMSキーにアクセスできるユーザー、ロールの定義•キーを管理できる人を定義する•KMSキーのクロスアカウントアクセスに有効
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_122.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第606页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com アカウント間でのスナップショットのコピー1.独自のCMKで暗号化されたスナップショットの作成2.アカウント間のアクセスを許可するKMSキーポリシーの添付3.暗号化されたスナップショットの共有4.スナップショットのコピーを作成し、自分のアカウントのKMSキーで暗号化5.スナップショットからボリュームを作成
+KMS キーポリシー
+
+--- 第607页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com KMS 自動キーローテーション•自身で管理するCMK（AWSが管理するCMKではない）の場合•有効にする設定キーの自動ローテーションは1年ごと•一つ前のキーも有効であるため、古いデータを復号化することができます•新キーはCMK IDが同じ（バッキングキーのみ変更）
+111122223333CMK ID = 1234abcd-12ab-34cd-56ef-1234567890abバッキングキー
+444455556666CMK ID = 1234abcd-12ab-34cd-56ef-1234567890abバッキングキー
+キーローテーション
+111122223333保存されたバッキングキー
+
+--- 第608页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com KMS マニュアルキーローテーション•90日ごと、180日ごとなど、でキーをローテーションさせたいときに•新しいキーは異なるCMK ID •古いデータを復号できるように、以前のキーを有効にしておく•この場合、エイリアスを使用した方が良い（アプリケーションのキーの変更を隠すため）•非対称のCMKなど、自動ローテーションの対象とならないCMKをローテーションするための良いソリューションです
+111122223333CMK ID = 1234abcd-12ab-34cd-56ef-1234567890abエイリアス= MyCustomKey 
+111122223333
+クライアント
+クライアント
+手動ローテーション
+444455556666CMK ID = 1234abcd-12ab-34cd-56ef-1234567890abCMK ID = 0978dcba-09fe-65ba-ab0987654321エイリアス= MyCustomKey
+
+--- 第609页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com KMSエイリアスの更新•この場合、エイリアスを使用した方が良い（アプリケーションのキーの変更を隠すため）
+キーエイリアス= MyAppKeyUpdateAlias APICMK ID = eba96e8f-7f66-4d5a-aeb6-f32ae8d65d85 旧キー新キー
+CMK ID = 881cd7f5-b3eb-43e2-82fc-d6f5dba81e00
+アプリケーション
+
+--- 第610页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SystemsManager(SSM)パラメータストア•設定項目や秘密情報を安全に保管•KMSによるシームレスな暗号化（オプション）•サーバーレス、スケーラブル、高耐久性、簡単なSDK•設定項目・秘密情報のバージョン管理•パスとIAMを使った構成管理•EventBridgeによる通知•CloudFormationとの連携SSMパラメータストアアプリケーション平文の設定項目暗号化された設定項目IAMの権限確認AWS KMS復号化サービス
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_123.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第611页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SystemsManagerパラメータストア階層構造•/my-department/•my-app/•dev/•db-url•db-password•prod/•db-url•db-password•other-app/•/other-department/•/aws/reference/secretsmanager/secret_ID_in_secrets_manager•/aws/service/ami-amazon-linux-latest/amzn2-ami-hvm-x86_64-gp2Devラムダ関数GetParameters またはGetParametersByPath APIProdラムダ関数
+
+--- 第612页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com スタンダード/アドバンススタンダードアドバンスド許容されるパラメータの総数(AWSアカウントおよびリージョンごと)10,000100,000パラメータ値の最大サイズ4 KB8 KB利用可能なパラメータポリシーいいえはいコスト追加料金なし料金がかかりますストレージの価格無料アドバンストパラメータ1個あたり$0.05/月APIインタラクションの価格(より高いスループット＝最大1000トランザクション/秒)標準スループット：無料高スループット：APIインタラクション10,000 回につき$0.05標準的なスループット: APIインタラクション10,000回につき$0.05高スループット：APIインタラクション10,000回につき$0.05
+
+--- 第613页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com パラメーターポリシー（高度なパラメーター用）•パスワードなどの機密データを強制的に更新または削除するために、パラメータ（有効期限）にTTLを割り当てることができるようになりました•一度に複数のポリシーを割り当てることが可能有効期限（パラメータを削除する）
+ExpirationNotification（EventBridgeイベント）
+NoChangeNotification（EventBridgeイベント）
+
+--- 第614页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Secrets Manager•秘密情報を保管するための新しいサービス•X日ごとに秘密情報を強制的にローテーションさせる機能•ローテーションによるシークレットの自動生成（Lambdaを使用）•Amazon RDSとの連携(MySQL, PostgreSQL, Aurora)•秘密情報はKMSで暗号化•主にRDSとの連携を目的としています
+
+--- 第615页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudHSM•KMS⇒暗号化のためのソフトウェアをAWSが管理•CloudHSM=> AWSが暗号化ハードウェアを提供•専用ハードウェア（HSM＝ハードウェア・セキュリティ・モジュール）•暗号化キーの管理はすべて自分で行う（AWSではない）•HSMデバイスは耐タンパー性、FIPS 140-2 Level 3準拠•CloudHSMクラスターは複数のAZ(HA)に分散しているため、セットアップが必要です•対称型および非対称型の暗号化（SSL/TLSキー）に対応•無料版はありません•CloudHSMクライアントソフトウェアを使用する必要があります•Redshiftがデータベースの暗号化と鍵の管理にCloudHSMをサポート•SSE-C暗号を使用するための良い選択肢です
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_124.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第616页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudHSM図説
+AWSCloudHSMCloudHSMクライアント
+AWSはハードウェアを管理SSL接続ユーザーによるキーの管理IAMパーミッション：•HSMクラスタのCRUDCloudHSMソフトウェア:•キーの管理•ユーザーの管理
+認証情報を紛失した場合AWSは鍵を回復できません
+
+--- 第617页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSシールド•AWSシールドStandard:•AWS利用者は無料で有効•SYN/UDPフラッド、リフレクション攻撃などのレイヤ3/レイヤ4攻撃から保護•AWS シールドAdvanced:•オプションの対DDoSサービス（1組織あたり$3,000/月）•Amazon EC2、Elastic Load Balancing（ELB）、Amazon CloudFront、AWSGlobal Accelerator、Route53に対するより巧妙な攻撃からの保護•AWSのDDoS対応チーム（DRP）への24時間365日のアクセス•DDoSによる使用量急増時の料金上昇を防ぐ
+
+--- 第618页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS WAF -Web Application Firewall•一般的なWeb脆弱性（レイヤ7）からウェブアプリケーションを保護します•レイヤ7はHTTP（レイヤ4はTCP）•アプリケーションロードバランサー、APIGateway、CloudFrontで利用可能•Web ACL（WebAccess Control List）を定義:•ルールに含む要素:IPアドレス、HTTPヘッダ、HTTPボディ、またはURI文字列•一般的な攻撃であるSQLインジェクションやクロスサイトスクリプティング（XSS）からの保護•サイズ制限、ジオマッチ（国・地域単位のブロック）•アクセスレートベースのルール（イベントの発生をカウント）-DDoS対策用
+
+--- 第619页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSファイアウォールマネージャー•AWSOrganizationのすべてのアカウントのルールを管理する•共通のセキュリティルールの設定•WAFルール（アプリケーションロードバランサー、APIGateway、CloudFront）•AWS Shield Advanced (ALB, CLB, Elastic IP, CloudFront)•VPC内のEC2およびENIリソースのセキュリティグループ
+
+--- 第620页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DDoS防御のためのサンプルリファレンスアーキテクチャ
+https://aws.amazon.com/answers/networking/aws-ddos-attack-mitigation/
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_125.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第621页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon GuardDuty •AWSアカウントを保護するインテリジェントな脅威発見サービス•機械学習アルゴリズム、異常検知、サードパーティデータの使用•ワンクリックで使用可能（30日間のトライアル）、ソフトウェアのインストールは不要•入力データ（一部）:•CloudTrailログ：異常なAPIコール、不正なデプロイメント•VPCフローログ：異常な内部トラフィック、異常なIPアドレス•DNSログ：侵害されたEC2インスタンスがDNSクエリ内で暗号化されたデータを送信している•発見された場合に通知されるCloudWatchのイベントルールを設定可能•CloudWatch Eventsのルールは、AWSLambdaやSNSを対象とすることができます•CryptoCurrency攻撃からの防御が可能（専用の"finding "がある）
+
+--- 第622页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon GuardDuty 
+VPCフローログ
+CloudTrailのログ
+DNSログ（AWSDNS）GuardDuty 
+CloudWatchEvents
+SNS
+Lambda
+
+--- 第623页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+Amazon Inspector•EC2インスタンスのための自動化セキュリティ評価•意図しないネットワークアクセシビリティの分析•既知の脆弱性に対する実行中のOSの分析•EC2インスタンスのOSにAWS Inspector Agentをインストールする必要があります•評価後には、脆弱性のリストを含むレポートが発行されます•SNSへの通知が可能
+InspectorAgentInspectorService
+SNSトピック評価の実行状態調査結果
+
+--- 第624页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AmazonMacie
+•Amazon Macieは、機械学習とパターンマッチングを利用して、AWS内のセンシティブなデータを発見して保護する、フルマネージドのデータセキュリティおよびデータプライバシーサービスです•Macieは、個人を特定できる情報（PII:PersonallyIdentifiableInformation）などのセンシティブなデータを識別し、警告するのに役立ちます
+S3バケット
+Macie機密データ（PII）の発見
+CloudWatchEventEventBridge分析通知インテグレーション
+
+--- 第625页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSの責任分担モデル•AWSの責任-クラウドのセキュリティ•すべてのAWSサービスを稼働させるインフラ（ハードウェア、ソフトウェア、設備、ネットワーク）の保護•S3、DynamoDB、RDSなどのマネージドサービス•ユーザの責任-クラウドでのセキュリティ•EC2インスタンスの場合、ゲストOSの管理（セキュリティパッチやアップデートを含む）、ファイアウォールやネットワークの設定、IAMなどはユーザの責任となります
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_126.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第626页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 例：RDSの場合•AWSの責任•基盤となるEC2インスタンスの管理、SSHアクセスの無効化•DBパッチの自動化•OSパッチの自動化•インスタンスとディスクを監査し、その機能を保証する•ユーザの責任•DBのSGのポート/IP/セキュリティグループのインバウンドルールの確認•データベース内でのユーザー作成とパーミッション•公開の有無にかかわらず、データベースの作成•パラメータグループまたはDBがSSL接続のみを許可するように設定されていること•データベースの暗号化設定
+
+--- 第627页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 例：S3の場合•AWSの責任•無制限のストレージを保証•暗号化を保証する•異なる顧客間でのデータの分離を確実に行う•AWSの従業員がデータにアクセスできないようにする•ユーザの責任•バケット構成•バケットポリシー／公開設定•IAMユーザーとロール•暗号化を有効にする
+
+--- 第628页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 責任共有モデル図
+https://aws.amazon.com/compliance/shared-responsibility-model/
+
+--- 第629页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSのネットワーク-VPC
+
+--- 第630页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPC 構成図
+コーポレートDCインターネットゲートウェイVPCフローログ
+カスタマーゲートウェイ
+VPNゲートウェイサイトtoサイトVPN接続
+VPCピアリングエンドポイントVPC NATゲートウェイ
+ネットワークアクセスコントロールリスト
+AZ Aパブリックサブネット
+プライベートサブネット
+Amazon CloudWatch 
+AmazonS3 
+ネットワークアクセスコントロールリストルータールートテーブル
+パブリックEC2セキュリティグループ
+セキュリティグループ
+セキュリティグループ
+ルータールートテーブル
+インターネット
+www
+AmazonDynamoDB 
+プライベートEC2プライベートEC2
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_127.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第631页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CIDRについて-IPv4(Classless Inter-Domain Routing)•CIDRは、IPアドレスの範囲を定義するために使われます•セキュリティグループのルールや、AWSのネットワーク全般に使われています•CIDRでのIP アドレスの範囲の定義の仕方•WW.XX.YY .ZZ/32 == 1 つのIP アドレス•0.0.0.0/0 == 全てのIPアドレス•例えば192.168.0.0/26: 192.168.0.0 -192.168.0.63 (64 IP) のように定義することもできます
+
+--- 第632页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CIDRについて•CIDR には2つの要素があります•ベースとなるIP(XX.XX.XX.XX)•サブネットマスク(/26) •ベースとなるIP は、CIDRが指すIPの上位アドレスの値を表します•サブネットマスクは、IPの上位何ビットが固定かを、定義します•サブネットマスクには2つの形式があります•255.255.255.0    少しめずらしい書き方•/24                   より一般的な書き方
+
+--- 第633页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CIDRについてサブネットマスク•サブネットマスクは、ベースとなるIPのどこまでが固定されているか、を表します•/32で1IP=2^0を表す•/31で2IP=2^1を表す•/30で4IP=2^2を表す•/29で8IP=2^3を表す•/28で16IP=2^4を表す•/27で32IP=2^5を表す•/26で64IP=2^6を表す•/25で128IP=2^7を表す•/24で256IP＝2^8を表す•/16で65,536IP=2^16を表す•/0はすべてのIP=2^32 を表すクイックメモ:192.168.0.1というアドレスに対して…•/32 –IPアドレスが変更できない•/24 -最後の数字が変更可能•/16 -最後の2つの数字が変更可能•/8 -最後の3つの数字が変更可能•/0 -すべてのIPアドレスが変更可能
+
+--- 第634页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CIDRの理解ちょっとした練習•192.168.0.0/24 = … ?•192.168.0.0 -192.168.0.255 (256 IP)•192.168.0.0/16 = … ?•192.168.0.0 -192.168.255.255 (65,536 IP)•134.56.78.123/32 = … ?•134.56.78.123 のみ•0.0.0.0/0•すべてのIPアドレス!•より理解を深めたいときはこのサイトを使ってください: https://www.ipaddressguide.com/cidr（英語サイト）https://www.softel.co.jp/labs/tools/network/（日本語サイト）
+
+--- 第635页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プライベートIP とパブリックIP（IPv4）許可された範囲•IANA (Internet Assigned Numbers Authority) は、プライベート(LAN) およびパブリック（インターネット）アドレスとして使用するために、IPV4アドレスの一定のブロックを設定しています•プライベートIPでは、特定の値のみ使うことが可能です•10.0.0.0 -10.255.255.255 (10.0.0.0/8    ) <= 大規模なネットワークの場合•172.16.0.0 -172.31.255.255 (172.16.0.0/12) <= 中規模-AWS VPC のデフォルト•192.168.0.0 -192.168.255.255 (192.168.0.0/16) <=例: ホームネットワーク•インターネット上の残りのIP アドレスはすべてパブリックIP
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_128.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第636页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com デフォルトVPC の概要•すべての新規アカウントは、デフォルトのVPC があります•サブネットが指定されていない場合、新規EC2インスタンスがデフォルトVPC に起動されます•デフォルトのVPC はインターネットに接続されており、すべてのインスタンスはパブリックIP を持っています•また、パブリック・プライベートともにDNS 名がつきます
+
+--- 第637页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS のVPC -IPv4•VPC = VirtualPrivateCloud•リージョン内に複数のVPC を設置可能（1 リージョンあたり最大5 個、申請により緩和可能）•VPC あたりの最大CIDR は5 つ。各CIDR ごとに•最小サイズは/28 = 16 IP アドレス•最大サイズは/16 = 65536 IP アドレス•VPC はプライベートなので、プライベートIP レンジのみが許可されます•10.0.0.0 –10.255.255.255 (10.0.0.0/8) •172.16.0.0 –172.31.255.255 (172.16.0.0/12) •192.168.0.0 –192.168.255.255 (192.168.0.0/16)•VPC のCIDR は、他のネットワークと重複しないようにしてください（例：企業内ネットワーク）
+
+--- 第638页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ハンズオン完了時の状態
+
+--- 第639页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サブネットの追加
+AZ Aパブリックサブネット
+プライベートサブネット
+
+--- 第640页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サブネット-IPv4 •各サブネットに5 つのIP アドレス（最初の4 つと最後の1 つ）は予約済みです•これら5 つのIP はインスタンスに割り当てることはできません•例）CIDRブロック10.0.0.0/24 の場合、予約済みIP は•10.0.0.0: ネットワークアドレス•10.0.0.1: VPC ルータ用にAWS が予約•10.0.0.2: AWS が提供するDNS にマッピングするために予約されています•10.0.0.3: 将来使用するためにAWS によって予約されています•10.0.0.255: ネットワークのブロードキャストアドレス。AWSはVPC でのブロードキャストをサポートしていませんが、このアドレスは予約されています•試験のヒント•EC2インスタンスに29 個のIP アドレスが必要な場合、サイズ/27（32 IP）のサブネットでは足りません（32 –5 = 27 < 29）•最低でも64 個のIP、サブネットサイズ/26 が必要です（64 –5 = 59 > 29）
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_129.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第641页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com インターネットゲートウェイ•インターネットゲートウェイは、VPCインスタンスがインターネットに接続するためのものです•水平方向にスケールし、高可用性と冗長性があります•VPC とは別に作成する必要があります•1 つのVPC は1 つのI GW にしか接続できず、逆もそうです•インターネットゲートウェイだけでは、インターネットに接続することはできません...•ルートテーブルも編集しなければなりません
+
+--- 第642页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IGWの追加
+AZ Aパブリックサブネット
+プライベートサブネット
+インターネットゲートウェイ
+
+--- 第643页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ルートテーブルの編集
+AZ Aパブリックサブネット
+プライベートサブネット
+インターネットゲートウェイ
+ルータールートテーブル
+セキュリティグループ
+wwwインターネット
+パブリックEC2
+
+--- 第644页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com NAT ゲートウェイ•NAT:NetworkAddressTranslation（IPアドレスの変換）•プライベートサブネットのEC2インスタンスが、インターネットにつながるようにします•AWS マネージドNAT、高い帯域幅、高可用性、管理不要•使用量と帯域幅に基づき時間単位での支払い•NAT は特定のAZ で作成され、EIPを使用します•IGW が必要（プライベートサブネット⇒NAT ⇒IGW）•5 Gbps の帯域幅（最大45 Gbpsまで自動拡張可能）•セキュリティグループは必要としません（設定できません）
+AZ Aパブリックサブネット
+プライベートサブネット
+インターネットゲートウェイ
+ルータールートテーブル
+パブリックEC2
+IP:10.0.0.1プライベートEC2ルータールートテーブルNATゲートウェイ
+IP:50.60.4.10
+EIP:12.34.56.78Src:10.0.0.1Dst:50.60.4.10Src:12.34.56.78Dst:50.60.4.10Src:12.34.56.78Dst:50.60.4.10Src:50.60.4.10Dst:12.34.56.78
+Src:50.60.4.10Dst:10.0.0.1
+
+--- 第645页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 高可用性を備えたNATゲートウェイ
+AZ Aパブリックサブネット
+プライベートサブネット
+インターネットゲートウェイ
+インターネット
+パブリックEC2
+VPC NATゲートウェイ
+AZ Bパブリックサブネット
+プライベートサブネット
+VPC NATゲートウェイ
+•NATゲートウェイは、シングルAZ の中での冗長性があります•フォールトトレランスのために、複数のAZ に複数のNATゲートウェイを作成する必要があります•AZ が停止したらNAT が必要なくなるため、クロスAZ のフェイルオーバーは必要ありませんルートテーブル
+ルートテーブルルートテーブル
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_13.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第61页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com どのホストが自分に合っているのか？•オンデマンド: 好きな時にリゾートに来て、好きな時に泊まることができ、料金は全額支払う•リザーブド: 事前に計画を立てることが好きで、長期滞在を予定している場合、良い割引が得られることがあります•スポット: ホテルは空室を入札してもらう。最高額の入札者がその部屋をキープする。いつでも追い出される可能性•専有: リゾートの建物全体を予約する
+
+--- 第62页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 価格比較例-m4.large -us-east-1価格タイプ価格（1時間あたり）オンデマンド$0.10 スポットインスタンス（スポット価格）$0.032～0.045 （最大90％オフ）スポットブロック（1～6時間）$0.032～0.045 （最大90％オフ）リザーブドインスタンス（12ヶ月）-初期費用なし$0.062リザーブドインスタンス（12ヶ月）-全額前払い$0.058リザーブドインスタンス（36ヶ月）-初期費用なし$0.043リザーブドコンバーチブルインスタンス（12ヶ月）-初期費用なし$0.071専有ホストオンデマンド価格専有ホストの予約最大70％オフ
+
+--- 第63页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 –Associate
+
+--- 第64页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プライベートIP とパブリックIP  (IPv4) •ネットワークには2 種類のIP があります。IPv4 とIPv6 です•IPv4: 1.160.10.240•IPv6: 3ffe:1900:4545:3:200:f8ff:fe21:67cf•このコースでは、IPv4 のみを使用します•IPv4のほうが、（未だに）よく使われています•IPv6 の方が新しく、IoT（Internetof Things）に適しています•IPv4 では37 億通りのアドレスがパブリック空間にあります•IPv4: [0-255].[0-255].[0-255].[0-255]
+
+--- 第65页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com B社プライベートネットワーク192.168.0.1/22 A社プライベートネットワーク192.168.0.1/22 プライベートIPとパブリックIP (IPv4)例
+インターネットゲートウェイ（パブリック）149.140.72.10Webサーバー（公開）。79.216.59.75 サーバー（公開）211.139.37.43 インターネットゲートウェイ（パブリック）253.144.139.205WWW
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_130.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第646页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com NATインスタンスとゲートウェイ
+参照: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-comparison.html NAT ゲートウェイNAT インスタンス可用性高可用性。各アベイラビリティーゾーンのNAT ゲートウェイは冗長性を持たせて実装されます。アベイラビリティーゾーンごとにNAT ゲートウェイを作成し、ゾーンに依存しないアーキテクチャにします。スクリプトを使用してインスタンス間のフェイルオーバーを管理します。帯域幅45 Gbps まで拡張できます。インスタンスタイプの帯域幅に依存します。メンテナンスによって管理されますAWS ユーザーがメンテナンスを行う必要はありません。ユーザーが管理します(インスタンスでソフトウェアアップデートやオペレーティングシステムのパッチをインストールするなど)。パフォーマンスソフトウェアはNAT トラフィックを処理するように最適化されます。一般的なAMI がNAT を実行するように設定されます。コストNAT ゲートウェイの使用数、使用期間、NAT ゲートウェイを通じて送信するデータの量に応じて課金されます。NATインスタンスの使用数、使用期間、インスタンスタイプとサイズに応じて課金されます。セキュリティグループ✖✔ポート転送✖✔踏み台サーバー✖✔
+
+--- 第647页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPC でのDNS 解決•enableDnsSupport: (= DNS 解決の設定)•VPC でDNS 解決がサポートされているかどうかの設定:デフォルトTr ue•Tr ue の場合、169.254.169.253 のAWS DNS サーバーに問い合わせます（プライベートサブネットの場合はxxx.xxx.xxx.2を経由して）•enableDnsHostname:(= DNS ホスト名の設定)•デフォルト: 新規に作成されたVPC はFalse、デフォルトのVPC はTr ue•enableDnsSupport=True でないと何もしません•Tr ue の場合、EC2 インスタンスにパブリックなIPアドレスがある場合、ホスト名を割り当てます•Route 53 のプライベートゾーンでカスタムDNS ドメイン名を使用する場合、これらの属性を両方ともtrueに設定する必要があります
+
+--- 第648页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+ネットワークACL とセキュリティグループ受信リクエスト
+セキュリティグループEC2
+ネットワークアクセスコントロールリストサブネットレベルNACL インバウンドルールセキュリティグループのインバウンドルール
+アウトバウンド許可（ステートフル）NACL アウトバウンドルール(ステートレス)サブネット
+
+--- 第649页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+ネットワークACL とセキュリティグループ発信リクエスト
+セキュリティグループEC2
+ネットワークアクセスコントロールリストサブネットレベルNACL アウトバウンドルールセキュリティグループのアウトバウンドルール
+インバウンド許可（ステートフル）NACLインバウンドルール（ステートレス）サブネット
+
+--- 第650页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ネットワークACL•NACL は、サブネットとの間のトラフィックを制御するファイアウォールのようなものです•デフォルトのNACL は、すべてのアウトバウンドとすべてのインバウンドを許可します•サブネットごとに1 つのNACL、新しいサブネットにはデフォルトのNACL が割り当てられます•NACLルールの定義•ルールには番号（1-32766）があり、番号が小さいほど優先される•一番最初にマッチしたルールのみが評価される•例：#100 ALLOW <IP>と#200 DENY <IP>を定義すると、IPが許可されます•最後のルールはアスタリスク(*)で、ルールがマッチしない場合にリクエストを拒否します•AWSでは、100 単位でルール番号を追加していくことを推奨しています。•新設されたNACLはすべて拒否になっています•NACL は、サブネットレベルで特定のIP をブロックする優れた方法です
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_131.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第651页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com •IP通信では、返信を受けとるために発信側もポートを使用します•発信側が使う一時的なポートを“エフェメラルポート（一時ポート）”といいます•NACLは“ステートレス”のため、この一時ポートも許可するルールが必要になりますネットワークACL と一時ポート（エフェメラルポート）
+https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html 
+EC2ポート:80ポート:38451
+
+--- 第652页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ネットワークACL とセキュリティグループの比較
+https://docs.aws.amazon.com/ja_jp/vpc/latest/userguide/VPC_Security.html#VPC_Security_Comparison
+
+--- 第653页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPC ピアリング•AWS のネットワークを利用して2 つのVPC をプライベートに接続します•あたかも同じネットワークにいるかのように動作させます•CIDR が重複してはなりません•VPC Peering の接続は透過的ではありません（通信が必要なVPC ごとに確立する必要がある）•別のAWS アカウント間でVPC ピアリングができます•各VPC のサブネットのルートテーブルを更新して、インスタンスが通信できるようにする必要がありますVPCピアリングA ⬄B 
+VPCピアリングB ⬄C 
+VPC AVPC CVPC B
+VPCピアリングA ⬄C
+
+--- 第654页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPCピアリング-知っておくべきこと•VPCピアリングは、リージョン間、アカウント間で動作可能•ピアリングされたVPCのセキュリティグループを参照することができます（クロスアカウント機能）
+
+--- 第655页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPCピアリングインターネットゲートウェイVPCフローログ
+VPCピアリングVPC NATゲートウェイ
+ネットワークアクセスコントロールリスト
+AZ Aパブリックサブネット
+プライベートサブネット
+ネットワークアクセスコントロールリストルータールートテーブル
+パブリックEC2セキュリティグループ
+セキュリティグループプライベートEC2
+ルータールートテーブル
+インターネット
+www
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_132.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第656页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPCエンドポイントインターネットゲートウェイVPCフローログ
+VPCピアリングVPC NATゲートウェイ
+ネットワークアクセスコントロールリスト
+AZ Aパブリックサブネット
+プライベートサブネット
+ネットワークアクセスコントロールリストルータールートテーブル
+パブリックEC2セキュリティグループ
+セキュリティグループプライベートEC2
+ルータールートテーブル
+インターネットwww
+エンドポイント
+Amazon CloudWatch 
+www
+AmazonDynamoDB 
+セキュリティグループプライベートEC2
+AmazonS3
+
+--- 第657页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPC エンドポイント•エンドポイントを使うことで、パブリックWWW ネットワークを通らずに、プライベートネットワーク経由でAWS サービスに接続することができます•水平方向に拡張し、冗長性があります•AWS サービスにアクセスするためのIGW やNAT などを導入しなくてよくなります•インターフェース:ENI（プライベートIPアドレス）をエントリーポイントとして規定（セキュリティグループをアタッチする必要あり）-ほとんどのAWSサービス•ゲートウェイ:ターゲットを規定し、ルートテーブルで使用する必要がある-S3とDynamoDB•うまくつながらない場合•VPC でのDNS 設定の解決を確認•ルートテーブルの確認
+
+--- 第658页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com フローログ•インターフェイスに流入するトラフィックの情報を取得します•VPC フローログ•サブネットフローログ•Elastic Network Interface のフローログ•接続問題の監視とトラブルシューティングを支援•フローログのデータは、S3 / CloudWatch Logs に保存されるようにすることができます•AWS のマネージドインターフェースからもネットワーク情報を取得: ELB, RDS, ElastiCache, Redshift, WorkSpaces
+
+--- 第659页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPC フローログインターネットゲートウェイVPCフローログ
+VPCピアリングVPC NATゲートウェイ
+ネットワークアクセスコントロールリスト
+AZ Aパブリックサブネット
+プライベートサブネット
+ネットワークアクセスコントロールリストルータールートテーブル
+パブリックEC2セキュリティグループ
+セキュリティグループプライベートEC2
+ルータールートテーブル
+インターネットwww
+エンドポイント
+Amazon CloudWatch 
+www
+AmazonDynamoDB 
+セキュリティグループプライベートEC2
+AmazonS3
+
+--- 第660页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com フローログ構文•<version> <account-id> <interface-id> <srcaddr> <dstaddr> <srcport> <dstport> <protocol> <packets> <bytes> <start> <end> <action> <log-status>•Srcaddr, dstaddr は、問題のあるIPを特定するのに役立ちます•Srcport, dstport は、問題のあるポートを特定するのに役立ちます•Action: Security Group / NACLによるリクエストの成功または失敗•使用パターンや悪意のある行動の分析に利用できます•フローログの例: https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records •Athena on S3 またはCloudWatch Logs Insights を使って、VPC フローログを検索(query)できます
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_133.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第661页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com フローのログ: “ACTION "フィールドの見方SG vs NACL の問題を解決するには？
+リクエストの受信についてインバウンドのREJECT: NACLまたはSGインバウンドACCEPT, アウトバウンドREJECT: NACL発信型リクエストの場合アウトバウンドのREJECT: NACLまたはSGアウトバウンドACCEPT、インバウンドREJECT: NACL
+
+--- 第662页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Bastion Host（要塞ホスト,踏み台ホスト）•Bastion Hostを使ってプライベート・インスタンスにSSH接続することができます•Bastion はパブリックサブネットにあり、そこから他のすべてのプライベートサブネットに接続されています•Bastion Host のセキュリティグループは強化しておく必要があります•試験のヒント: バスティオンホストが、他のインスタンスのセキュリティグループからではなく、必要なIPからのポート22トラフィックのみを許可するようにしてください
+
+--- 第663页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Site to Site VPN
+コーポレートDCインターネットゲートウェイVPCフローログ
+カスタマーゲートウェイ
+VPNゲートウェイサイトtoサイトVPN接続
+VPCピアリングエンドポイントVPC NATゲートウェイ
+ネットワークアクセスコントロールリスト
+AZ Aパブリックサブネット
+プライベートサブネット
+Amazon CloudWatch 
+AmazonS3 
+ネットワークアクセスコントロールリストルータールートテーブル
+パブリックEC2セキュリティグループ
+セキュリティグループプライベートEC2
+セキュリティグループプライベートEC2
+ルータールートテーブル
+インターネット
+www
+AmazonDynamoDB
+
+--- 第664页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Site to Site VPN•バーチャルプライベートゲートウェイ:•VPN 接続のAWS 側のVPN コンセントレーター•サイト間VPN 接続を行うVPC にVGW が作成され、接続されます•ASN のカスタマイズが可能•顧客側ゲートウェイ:•VPN 接続の顧客側にあるソフトウェア・アプリケーションまたは物理デバイス•https://docs.aws.amazon.com/vpc/latest/adminguide/Introduction.html#DevicesTested •IPアドレス:•お客様のゲートウェイ機器には、インターネットに接続可能な固定IP アドレスを使用してください•NAT の背後にあるCGW の場合（NAT-Tの場合）、NAT のパブリックIP アドレスを使用してください
+
+--- 第665页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ダイレクトコネクト•リモートネットワークからVPC への専用プライベート接続を提供•顧客のDC とAWS Direct Connect のロケーション間に専用の接続を設定する必要があります•VPC 上でVirtual Private Gateway を設定する必要があります•パブリックリソース（S3）とプライベートリソース（EC2）に同一接続でアクセス可能•ユースケース:•帯域幅のスループットの向上-大規模なデータセットの処理-低コスト化•より安定したネットワーク体験-リアルタイムデータフィードを使用したアプリケーション•ハイブリッド環境（オンプレミス＋クラウド）•IPv4 とIPv6 の両方に対応
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_134.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第666页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ダイレクトコネクト
+リージョン(us-east-1)
+VPC
+プライベートサブネット
+EC2インスタンス
+バーチャルプライベートゲートウェイ
+Amazon S3Amazon Glacier
+AWS Direct Connect の設置場所AWS “ケージ”お客様またはパートナー“ケージ”AWSダイレクト接続エンドポイントお客様またはパートナールーター
+コーポレートデータセンター
+顧客ネットワーク顧客ルーター/ファイアウォールVLAN 1VLAN 2
+プライベート・バーチャル・インターフェースパブリック・バーチャル・インターフェース
+
+--- 第667页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ダイレクトコネクトゲートウェイ•複数の異なるリージョン（同一アカウント）にあるVPC への直接接続を設定する場合は、Direct Connect Gatewayを使用する必要があります
+リージョン(us-east-1)
+VPC
+リージョン(us-west-1)
+VPC10.0.0.0/16172.16.0.0/16ダイレクトコネクトゲートウェイ
+顧客のネットワーク
+AWSダイレクトコネクト接続プライベートバーチャルインターフェースプライベートバーチャルインターフェースプライベートバーチャルインターフェース
+
+--- 第668页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ダイレクトコネクト-接続タイプ•専用接続: 1Gbps および10Gbps の容量•顧客専用の物理的なイーサーネットポート•まずAWS に依頼し、その後AWS Direct Connect パートナーが完成させます•ホスト型接続: 50Mbps、500Mbps、10Gbpsまで•接続リクエストは、AWS Direct Connect Partners を介して行われます•必要に応じて容量の追加や削除が可能です•1、2、5、10 Gbps は一部のAWS Direct Connect パートナーで利用可能です•新しい接続を確立するためのリードタイムは1 ヶ月以上かかることが多い
+
+--- 第669页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ダイレクトコネクト-暗号化•通信中のデータは暗号化されていないが、プライバシーは確保されています•AWS Direct Connect + VPN は、IPsecで暗号化されたプライベート接続を提供します•セキュリティレベルはより向上しますが、設置はやや複雑
+リージョン(us-east-1)
+VPCアベイラビリティゾーン(us-east-1a)
+アベイラビリティゾーン(us-east-1b)
+プライベートサブネット1
+プライベートサブネット2
+EC2インスタンス
+EC2インスタンス
+AWSダイレクト接続先AWSダイレクト接続エンドポイント
+顧客ネットワーク顧客ルーター/ファイアウォール
+コーポレートデータセンター
+VPN 接続方法
+クライアント
+クライアント
+
+--- 第670页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ダイレクトコネクト–耐障害性クリティカルなワークロードのための高い耐障害性
+複数の場所で1つの接続クリティカルなワークロードのための最大の耐障害性
+複数の場所にある別々のデバイスを、それぞれ接続することで、最大の耐障害性を得られます
+リージョン
+AWSダイレクト接続先-1
+コーポレートデータセンター
+AWSダイレクト接続先-2
+コーポレートデータセンター
+リージョン
+AWSダイレクト接続先-1
+コーポレートデータセンター
+AWSダイレクト接続先-2
+コーポレートデータセンター
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_135.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第671页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Egress Only インターネットゲートウェイ•Egress=出ていくこと、出口、外に出る権利•Egress Only インターネットゲートウェイはIPv6 のみ•知っておくべきこと: IPv6はすべてパブリックアドレス•そのため、IPv6を持つすべてのインスタンスは、パブリックアクセスが可能です•Egress Only インターネットゲートウェイは、IPv6インスタンスがインターネットにアクセスできるようにしますが、インターネットから直接到達することはないようにします•NAT と同様にプライベートネットワークから外向きの通信のみを可能にしますが、NAT はIPv4 に対応します•Egress Only インターネットゲートウェイを作成した後、ルートテーブルを編集する必要があります
+
+--- 第672页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 自分のVPCのサービスを他のVPCに公開する•選択肢1：公開する•公開されたwwwで通信•アクセス管理が難しい•オプション2：VPCピアリング•多くのピアリング関係を構築しなければならない•ネットワーク全体を開くピアリング接続
+サービスVPC
+顧客のVPC
+アプリケーションサービス
+サービスVPC顧客のVPCWith IGW
+アプリケーションサービス
+インターネット
+
+--- 第673页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS プライベートリンク(VPCエンドポイントサービス)•数千のVPC（自社または他社のアカウント）にサービスを公開する最も安全でスケーラブルな方法•VPC ピアリング、インターネットゲートウェイ、NAT、ルートテーブルなどは必要ありません。•ネットワークロードバランサー（Service VPC）とENI（Customer VPC）が必要です。•NLB が複数のAZ にあり、ENI が複数のAZ にある場合、このソリューションはフォールトトレラントです
+サービスVPC顧客のVPC
+アプリケーションサービス
+ネットワークロードバランサー
+エラスティックネットワークインターフェース(ENI)AWSプライベートリンク
+クライアントアプリケーションAWS プライベート
+
+--- 第674页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プライベートサブネットプライベートサブネットAWSのプライベートリンクとECSVPC
+Amazon ECSサービス
+ネットワークロードバランサーアプリケーションロードバランサー
+AWSプライベートリンク
+AWSダイレクト接続エンドポイント
+顧客ネットワーク
+コーポレートデータセンタ
+バーチャルプライベートゲートウェイ
+顧客ネットワーク
+コーポレートデータセンタカスタマーゲートウェイ
+カスタマーゲートウェイVPN接続方法
+タスク1タスク2タスク3タスク4AWSダイレクト接続先
+
+--- 第675页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ネットワークのトポロジーが複雑になる
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_136.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第676页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com トランジットゲートウェイ•数千のVPC とオンプレミスの間で推移的ピアリングを行うために、ハブ＆スポーク（スター型）接続•リージョナルリソース、クロスリージョンで使えます•クロスアカウントでの共有にはRAM（ResourceAccess Manager）を使います•トランジットゲートウェイをリージョン間でピアリングすることが可能です•ルートテーブル: どのVPCが他のVPCと通信できるかを制限します•Direct Connect Gateway、VPNコネクションに対応•IPマルチキャストに対応（他のAWSサービスでは対応していません）
+AWSダイレクトコネクトゲートウェイ
+Amazon VPC
+Amazon VPC
+Amazon VPC
+Amazon VPCVPNコネクションカスタマーゲートウェイトランジットゲートウェイ
+
+--- 第677页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com トランジットゲートウェイSite to Site VPN ECMP•ECMP = イコールコストマルチパスルーティング•複数のベストパスでパケットを転送することを可能にするルーティング戦略•使用例：複数のSite-to-Site VPN 接続を作成し、AWSへの接続の帯域幅を増加させるVPC
+VPC
+VPC
+VPC
+AWS トランジットゲートウェイVPCアタッチメントVPCアタッチメントVPCアタッチメントVPCアタッチメント
+コーポレートデータセンター172.16.0.0/16
+VPNアタッチメント
+
+--- 第678页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com トランジットゲートウェイ:ECMPによるスループットVPN→バーチャルプライベートゲートウェイ
+1x=1xVPC
+1x=1.25 Gbps
+VPN接続(2トンネル)トランジットゲートウェイへのVPN
+1x=1xVPC
+VPC
+VPC
+VPC
+1x=2.5 Gbps（ECMP）
+2x=5.0 Gbps（ECMP）
+3x=7.5 Gbps（ECMP）
+TGWが扱ったデータ（1GBあたり）
+
+--- 第679页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com トランジットゲートウェイ複数のアカウント間でDirect Connect を共有
+AWSダイレクトコネクトロケーション
+コーポレートデータセンター
+クライアント
+クライアント
+サーバ
+AWSダイレクトコネクトエンドポイントカスタマールータ/ファイアウォールトランジットVIFVLANアカウント1ダイレクトコネクトゲートウェイ
+AWSクラウドリージョン
+トランジットゲートウェイアカウント2
+VPC
+VPCAWS Resource Access Managerを使って、TransitGatewayを他のアカウントと共有することができます。
+
+--- 第680页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPCダイアグラム
+コーポレートDCインターネットゲートウェイVPCフローログ
+顧客ゲートウェイ
+VPNゲートウェイサイトtoサイトVPN接続
+VPCピアリングエンドポイントVPC NATゲートウェイ
+ネットワークアクセスコントロールリスト
+AZ Aパブリックサブネット
+プライベートサブネット
+Amazon CloudWatch 
+AmazonS3 
+ネットワークアクセスコントロールリストルータールートテーブル
+パブリックEC2セキュリティグループ
+セキュリティグループプライベートEC2
+セキュリティグループプライベートEC2
+ルータールートテーブル
+インターネット
+www
+AmazonDynamoDB
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_137.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第681页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPC セクションの概要(1/3)•CIDR: IPアドレスの範囲•VPC: 仮想プライベートクラウド=> IPv4 とIPv6 のCIDR のリストを定義します•サブネット: アベイラビリティゾーンに関連して、CIDRを定義します•インターネットゲートウェイ: VPC レベルで、IPv4 およびIPv6 のインターネットアクセスを提供•ルートテーブル: サブネットからIGW へのルート、VPCピアリング接続、VPCエンドポイントなどを追加するために編集する必要があります•バスティオンホスト: SSH 接続できるパブリックインスタンスで、プライベートサブネット上のインスタンスにもSSH 接続できるようにする•NATゲートウェイ: AWSマネージドな、プライベートインスタンスのインターネットアクセスを可能にするサービス•プライベートDNS + Route 53: DNS 解決＋DNSホスト名の有効化（VPC）
+
+--- 第682页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPCセクションの概要(2/3)•NACL: ステートレス、インバウンドとアウトバウンドのサブネットルール、エフェメラルポートを忘れずに•セキュリティグループ: ステートフル、EC2インスタンスレベルでの運用•VPC Peering: 2つのVPC を接続、CIDRが重複していないことが必要•VPC エンドポイント: VPC からAWSサービス（S3, DynamoDB, CloudFormation, SSM）へのアクセスをプライベートネットワークで完結するようにする•VPC フローログ: VPC/サブネット/ENI レベルで、ACCEPTおよびREJECT トラフィックについて設定できます。AthenaまたはCloudWatch Log Insights を使用して分析でき、攻撃の特定に役立ちます•Site to Site VPN: DC 上にCustomer Gateway、VPC上にVirtual Private Gateway を設置して、インターネット上にSite to Site VPN を構築する•VPN CloudHub：ハブ＆スポーク型のVPN モデルでサイト間をつなぐ
+
+--- 第683页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com VPCセクションの概要(3/3)•Direct Connect: VPC 上でVirtual Private Gateway を設定し、AWS Direct Connect Location へのダイレクトプライベート接続を確立します。•Direct Connect Gateway: 異なるリージョンにある多くのVPC へのDirect Connect を設定します•プライベートリンク／VPC エンドポイントサービス: •サービスVPC からカスタマーVPC へのサービスの非公開接続•VPC ピアリング、パブリックIPアドレス、NAT ゲートウェイ、ルートテーブルは不要•Network Load Balancer & ENI との併用が必要です•トランジットゲートウェイ: VPC、VPN、DirectConnect用の推移的なピアリング接続•EgresOnly インターネットゲートウェイ: NAT ゲートウェイに似ていますが、IPv6 用
+
+--- 第684页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ディザスターリカバリーの概要•企業の事業継続や財務にマイナスの影響を与える出来事は、すべて災害（ディザスター）です•ディザスターリカバリー（DR）とは、災害に備え、災害から回復することです•どのようなディザスタリカバリがありますか？•オンプレミス=> オンプレミス: 従来のDR、しかも非常に高価•オンプレミス=> AWSクラウド: ハイブリッドリカバリー•AWSクラウドのリージョンA => AWSクラウドのリージョンB•2つの用語を定義する必要があります•RPO: Recovery Point Objective （目標復旧状態）•RTO: Recovery Time Objective（目標復旧時間）
+
+--- 第685页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RPO とRTO
+RPO災害データロス
+RTOダウンタイム
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_138.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第686页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ディザスターリカバリー戦略•バックアップとリストア•パイロットライト•ウォームスタンバイ•ホットサイト／マルチサイト・アプローチ
+RTOの高速化
+
+--- 第687页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com バックアップ＆リストア（高RPO）企業のデータセンター
+AWSクラウド
+AWSクラウド
+AWS Storage Gateway
+GlacierAmazon S3AWSSnowball
+EBS
+スナップショット
+Redshift
+RDS
+ライフサイクルAWSクラウド
+Amazon EC2
+Amazon RDS
+AMI定期的なスナップショット
+
+--- 第688页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ディザスターリカバリー-パイロットライト•アプリの縮小版、コア部分のみが常にクラウド上で動いている•重要なコア（パイロットライト）の維持に役立つ•バックアップ・アンド・リストアによく似ている•重要なシステムがすでに稼働しているため、バックアップ＆リストアよりも高速企業のデータセンター
+AWSクラウド
+RDS（稼働）
+データレプリケーションEC2（停止）
+Route53
+
+--- 第689页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ウォームスタンバイ•フルシステムが稼働しているが、サイズは最小•災害時には、本番の負荷に合わせて自動的に拡張させることもできます企業のデータセンター
+AWSクラウド
+RDSスレーブ（稼働）
+データレプリケーションRoute53
+ELB
+EC2オートスケーリング(最小)
+リバースプロキシアプリサーバマスタDBフェイルオーバー
+
+--- 第690页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com マルチサイト/ホットサイトアプローチ•非常に低いRTO（数分または数秒）-非常に高価•本番環境として、AWSとオンプレミスの両方が稼働企業のデータセンター
+AWSクラウド
+RDSスレーブ（稼働）
+データレプリケーションRoute53
+ELB
+EC2オートスケーリング(本番稼働)
+リバースプロキシアプリサーバーマスターDBフェイルオーバーアクティブアクティブ
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_139.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第691页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com すべてAWSで構成:マルチリージョンAWSクラウド
+データレプリケーションRoute53
+ELB
+EC2オートスケーリング(本番稼働)
+フェイルオーバーアクティブアクティブAWSクラウド
+EC2オートスケーリング(本番稼働)ELB
+オーロラ・グローバル（マスター）
+オーロラ・グローバル（スレーブ）
+
+--- 第692页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ディザスターリカバリー：補足•バックアップ•EBSのスナップショット、RDSの自動バックアップ/スナップショットなど... •S3 / S3 IA / Glacierへの定期的なプッシュ、ライフサイクル・ポリシー、クロスリージョン・レプリケーション•オンプレミスからのバックアップ: Snowball またはStorage Gateway•高可用性•Route53 を使ってDNS が指す先をリージョンからリージョンへ移行する•RDS Multi-AZ, ElastiCacheMulti-AZ, EFS, S3•Direct Connect からの復旧手段としてのSite to Site VPN の利用•レプリケーション•RDSレプリケーション（クロスリージョン）、AWS Aurora + Global Databases•オンプレミスからRDS へのデータベースレプリケーション•ストレージゲートウェイ•オートメーション•CloudFormation / Elastic Beanstalkで全く新しい環境を再構築する•CloudWatch アラーム発火時にEC2 インスタンスをリカバリー/リブート•カスタマイズされた自動化のためのAWS Lambda 関数•カオスエンジニアリング•Netflix は、EC2 をランダムに終了させる“Simian Army” というツールを開発しています
+
+--- 第693页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DMS(Database Migration Service)-データベース移行サービス•迅速かつ安全にデータベースをAWS に移行し、回復力、自己修復力を高める•移行中も元のデータベースは利用可能•サポート対象•同種の移行: 例-Oracle からOracle へ•異機種間の移行: 例-Microsoft SQL Server からAurora への移行など•CDC(変更データキャプチャ)  による継続的なデータレプリケーション•レプリケーションタスクを実行するために、EC2インスタンスを作成する必要があります
+DMSを動かすEC2インスタンス移行元DB
+移行先DB
+
+--- 第694页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DMSの移行元と移行先移行元:•オンプレミスおよびEC2インスタンスのデータベースOracle, MS SQL Server, MySQL, MariaDB, PostgreSQL, MongoDB, SAP , DB2•AzureAzure SQL Database•Amazon RDSAurora を含む全て•Amazon S3移行先:•オンプレミスおよびEC2インスタンスのデータベースOracle, MS SQL Server, MySQL, MariaDB, PostgreSQL, SAP•Amazon RDS•Amazon Redshift•Amazon DynamoDB•Amazon S3•ElasticSearchサービス•Kinesis Data Stream•DocumentDB
+
+--- 第695页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Schema Conversion Tool (SCT)•データベースのスキーマを、あるエンジンから別のエンジンに変換する•OLTPの例: （SQL Server やOracle）からMySQL, PostgreSQL, Auroraへ•OLAPの例: （Ter adata やOracle）からAmazon Redshift へ•データ変換を最適化するために、計算量の多いインスタンスが向いています•同じDB エンジンへ移行する場合は、SCTを使う必要はありません。•例: オンプレミスのPostgreSQL ⇒RDS のPostgreSQL•DB エンジンは引き続きPostgreSQL（プラットフォームはRDS）
+DMS + SCT移行元DB
+移行先DB（別エンジン）
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_14.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第66页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プライベートIPとパブリックIP (IPv4)基本的な相違点•パブリックIP:•パブリックIP は、インターネット（WWW）上でマシンを識別できます•ウェブ全体で一意のアドレスになります（2台のマシンが同じパブリックIP を持つことはできません）•簡単に地理的な位置を特定できます•プライベートIP:•プライベートIP は、プライベートネットワーク上でのみマシンを識別できます•プライベートネットワーク上でIP で一意のアドレスになります•しかし、別のプライベートネットワーク（2つの会社）で、同じプライベートIP を持つことは可能です•マシンは、NAT+ インターネットゲートウェイ（プロキシ）を使って、WWWに接続します•規約で決められた特定の範囲のIP のみが、プライベートIP として使えますNAT: Network Address Translation –アドレス変換する技術、またはアドレス変換するサーバのこと
+
+--- 第67页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Elastic IP •EC2 インスタンスを停止してから起動すると、多くの場合EC2インスタンスはパブリックIP が変わります•EC2 インスタンスに固定のパブリックIPが必要な場合は、ElasticIP が必要です•Elastic IPは、削除しない限り、自分が所有するパブリックIPv4 IPです•一度に1つのインスタンスに割り当てることができます
+
+--- 第68页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Elastic IP •Elastic IPアドレスを使うと、インスタンスやソフトウェアの障害が外から見えなくなるよう、アカウント内の別のインスタンスにアドレスを迅速に再マッピングすることができます•アカウントに設定できるElastic IPは5 つまでです（AWSに依頼して増やすことができます）•基本的に、ElasticIPの使用は避けるようにしてください•アーキテクチャ上、どこかに誤りがあるケースが多い•ランダムなパブリックIP を使用し、そこにDNS 名を登録するほうが一般的•あるいは、ロードバランサー（後述）を使用して、パブリックIPを使わない
+
+--- 第69页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プライベートIP とパブリックIP (IPv4)の比較in AWS EC2 -ハンズオン•デフォルトでは、EC2マシンには、以下が両方ついてきます•AWSの内部ネットワーク用のプライベートIP•WWW用のパブリックIP•EC2マシンにSSH接続するときは…•同一ネットワーク内でないため、プライベートIPでは繋がりません•パブリックIPなら繋がります•マシンを停止してから起動した場合パブリックIPが変更される可能性があります
+
+--- 第70页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 スポットインスタンスリクエスト•オンデマンドに比べて最大90％の割引が可能•スポット価格の最大値を設定し、現在のスポット価格が最大値未満の間、インスタンスを利用できます•1時間ごとのスポット価格は、需要や容量に応じて変化•現在のスポット価格が最大価格を上回る場合、2分間の猶予期間のあとにインスタンスの停止または終了を選択することができます•もう一つのやりかた: スポットブロック•指定された時間帯（1～6時間）に中断することなくスポットインスタンスを"ブロック"•まれに、インスタンスが中断されることもある•バッチジョブ、データ分析、または中断してもよいワークロードに利用•クリティカルなジョブやデータベースには向きません
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_140.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第696页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DMS -継続的なレプリケーション企業のデータセンター
+Oracle DB(ソース)VPC
+リージョンパブリックサブネット
+AWS DMSレプリケーションインスタンス
+プライベートサブネットAmazon RDS for MySQL DB(ターゲット)フルロード＋αCDCスキーマ変換データ移行
+AWS SCTがインストールされたサーバ
+
+--- 第697页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オンプレミスとAWS の併用戦略•Amazon Linux 2 AMI をVM としてダウンロードする機能（.iso形式）•VMWare、KVM、VirtualBox（OracleVM）、Microsoft Hyper-V•VM のインポート/エクスポート•既存アプリケーションのEC2 への移行•オンプレミスのVM に対するDR リポジトリの構築•EC2 からオンプレミスへのVM のエクスポートバックが可能•AWS アプリケーションディスカバリーサービス•移行計画のために、オンプレミスのサーバに関する情報を収集する•サーバーの使用状況と依存関係のマッピング•AWS Migration Hub で追跡•AWS Database Migration Service（DMS）•replicate オンプレミス⇒AWS, AWS⇒AWS, AWS⇒オンプレミス•様々なデータベース技術（Oracle、MySQL、DynamoDBなど）を使った作業•AWS サーバー移行サービス（SMS）•オンプレミスの稼働中サーバのAWS へのインクリメンタルレプリケーション
+
+--- 第698页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS DataSync •オンプレミスからAWS への大容量データの移行•Amazon S3（Glacierを含むあらゆるストレージクラス）、Amazon EFS、AmazonFSxfor Windows に同期することができます•NFS やSMB 経由で、NASやファイルシステムからデータを移動させます•レプリケーションタスクは、1時間ごと、1日ごと、1週間ごとにスケジューリングできます•DataSyncエージェントを活用してオンプレミスのシステムに接続します•帯域制限の設定が可能
+
+--- 第699页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS DataSync NFS / SMB to AWS (S3, EFS, FSx for Windows)
+オンプレミスNFSまたはSMBサーバーAWS DataSyncエージェント
+NFSまたはSMB
+リージョンAWSDataSync AWSのストレージリソース
+S3 Standard
+S3 Intelligent-TieringS3 Standard-IAS3 OneZone -IAS3 GlacierS3 GlacierDeepArchiveAWS EFS
+Amazon FSx for Windows File ServerTLS
+
+--- 第700页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+AWS DataSync EFS からEFS へ
+リージョン（ソース）
+リージョン（送信先）VPC
+Amazon EFS
+EC2インスタンスDataSyncの場合エージェント
+Amazon EFSAWS DataSync サービスエンドポイント
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_141.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第701页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 大量のデータをAWS に転送•例:200TB のデータをクラウドで転送、100Mbps のインターネット回線を利用•Internet / Site-to-Site VPN:•すぐにセットアップが可能•200(TB)*1000(GB)*1000(MB)*8(Mb)/100Mbps=16,000,000s=185d かかる•Direct Connect 1Gbps:•1 回のセットアップにかかる時間が長い（1ヶ月以上）•200(TB)*1000(GB)*8(Gb)/1 Gbps = 1,600,000s = 18.5d かかる•Snowball:•2～3個のスノーボールが必要•エンド・ツー・エンドの転送には約1週間かかります•DMS との組み合わせが可能•継続的なレプリケーション／トランスファーのためにサイト間VPN またはDX とDMS またはDataSyncの併用
+
+--- 第702页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Backup•フルマネージドサービス•AWS サービス全体のバックアップを集中的に管理し、自動化•スクリプトやマニュアルプロセスの作成が不要•サポートされるサービス•Amazon FSx•Amazon EFS•Amazon DynamoDB•Amazon EC2•Amazon EBS•Amazon RDS (全DBエンジン)•Amazon Aurora•AWS Storage Gateway（ボリュームゲートウェイ）•クロスリージョンのバックアップに対応•クロスアカウントのバックアップに対応
+
+--- 第703页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Backup•サポートされたサービスのPITR(Point in Time Recovery) をサポート•オンデマンドとスケジュールバックアップ•タグベースのバックアップポリシー•バックアッププランと呼ばれるバックアップポリシーを作成•バックアップ頻度（12時間毎、毎日、毎週、毎月、cron 表記）•バックアップ期間•コールドストレージへの移行（なし、日、週、月、年）•保存期間（常時、日、週、月、年）
+
+--- 第704页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Backup
+AWS Backupバックアッププランの作成(頻度、保存方針)AWSリソースの割り当て
+Amazon EC2Amazon EBSDynamoDBAmazon RDSAmazon EFS
+Amazon Aurora
+Amazon FSx AWS StorageGateway
+Amazon S3自動的にバックアップ
+
+--- 第705页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Machine Learning
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_142.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第706页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSの機械学習(ML)サービスの概要
+hxps://pages.awscloud.com/rs/112-TZM-766/images/1_AWS_AI_ML_Tokyo_handout.pdf
+
+--- 第707页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SageMaker•MLエンジニア・データサイエンティストが機械学習モデルを構築するときに使うフルマネージドサービス•機械学習の環境を構築してトレーニングしたり、トレーニング済みモデルをつかって予測するための環境を作ったりすることを、簡単にできるようになります•機械学習プロセス(単純化したもの):AWS認定試験の点数の予測
+履歴データ:IT業界の経験年数AWS利用の経験年数学習時間…ラベル付け
+670890934構築
+ML モデル
+訓練・テスト
+新しいデータモデルの適用予測906–合格点数
+
+--- 第708页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Rekognition•機械学習により画像やビデオから、モノ・人・テキスト検出したりシーンを判定します•ユーザ認証や人のカウントなどに使える、顔検出・分析や顔画像検索•“おなじみの顔”のデータベースを作ったり、有名人の顔を検出できます•ユースケース:•画像・ビデオのラベリング•コンテンツの検閲•テキスト検出•顔検出・分析（性別、年齢、感情）•顔検索・顔認証•有名人の検出•経路分析(例: スポーツ映像の分析)https://aws.amazon.com/rekognition/
+
+--- 第709页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Transcribe•自動的に音声をテキストに変換します•自動音声認識というディープラーニング技術を使うことで、速く正確なテキスト変換を実現しています•ユースケース:•カスタマーサービスの電話内容をテキスト化•字幕の自動生成•検索用に映像のメタデータを生成
+”Hello my name is Stéphane.I hope you’re enjoying the course!
+
+--- 第710页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Polly•ディープラーニングにより、テキストから自然な音声を生成•“しゃべる”アプリケーションを作るのに役立ちます•音声のカスタマイズが可能•Lexicon: 単語の発音を調整•SSML (Speech Synthesis Markup Language): 強調や間をとることなどが可能Hi! My name is Stéphane and this is a demo of Amazon Polly
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_143.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第711页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Translate•自然で正確な翻訳•Amazon Translate により、Webコンテンツ・アプリケーションのローカライズ（多言語対応）や大量のテキストの翻訳を効率的に実施できます
+
+--- 第712页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Lex & Connect•Amazon Lex:(Alexaでも同様の技術が使われています)•自動言語認識による、音声のテキスト変換•自然言語理解による、テキスト・話者の意図の理解•チャットボット・カスタマーサービスボットの構築に役立ちます•Amazon Connect:•電話の受付、問い合わせフローの作成など、クラウドベースの仮想カスタマーセンターの構築•他の顧客管理システム(CRM:CustomerRelationshipManagement)やAWSと統合が可能•事前支払いなし、従来のカスタマーセンター構築より80%のコストカット
+着信:予約の受付
+Connect
+Lex意図の認識
+Lambda
+CRM着信接続実行予約情報
+
+--- 第713页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Comprehend •NLP–自然言語処理のためサービス•フルマネージドでサーバレスなサービス•機械学習を使って、テキストの要点や関連を見つけます•テキストの言語（英語、日本語、etc）•重要フレーズや場所、人、ブランド、その他イベントを抽出•テキストがポジティブかネガティブかを判別•字句区切りを使ってテキストを分析•トピックによりテキストを自動分類•医療分野に特化したComprehend Medical•ユースケース例: •顧客とのe-mailによるやりとりを分析して、どのような行動・文面が顧客をポジティブ・ネガティブにさせるかを分析•記事を自動的に分類
+
+--- 第714页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Forecast•機械学習により、高精度で時系列データの予測をするフルマネージドサービス•例: レインコートの売上高の推移を予測•従来の手法より50% 以上正確•予測に必要な時間を数ヶ月程度から数時間程度に短縮•ユースケース: 需要予測、リソース消費量予測、etc…
+時系列の履歴データ:製品の機能価格割引Webのアクセス数店の住所…
+更新Amazon S3
+Amazon Forecast
+Forecasting Model生成レインコートの売上高予測:$500,000
+
+--- 第715页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Kendra•機械学習によるフルマネージドな文書検索サービス•答えを文書群から抽出(対象:テキスト, pdf, HTML, PowerPoint, MS Word…)•自然言語による検索が可能•ユーザのやりとり・フィードバックから、検索結果を改善(増分学習)•検索結果の調整が可能(重視する単語, 新しいデータを優先,etc…)
+Data Sources
+Amazon S3Amazon RDSGoogle DriveMS SharePointMS OneDrive3rdparty, APNs, Custom
+Knowledge Index(powered by ML)Amazon Kendra
+indexing
+UserITサポートデスクはどこですか?
+1階です
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_144.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第716页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Personalize•機械学習によるフルマネージドな個々人にカスタマイズした推薦エンジン•例: 顧客ごとに表示する商品や順番を変更•ガーデニング用品を買った顧客に、類似した商品を表示する•Amazon.comでも同じ技術が使われています•Webサイトやアプリ、SMSやe-mailなどと統合が可能•わずか数日で構築可能(機械学習モデルを構築・デプロイ等は不要)•ユースケース: 小売店, 音楽・映像系サービス…
+Amazon S3Amazon Personalize APIS3からデータ読み取りリアルタイムデータ統合Amazon Personalize
+カスタマイズされた推薦結果Webサイト/アプリモバイルアプリSMSEメール
+
+--- 第717页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+Amazon Textract•機械学習により、スキャンされた文書からテキストやデータを読み取ります•フォームや表からデータを抽出•PDFや画像など、様々なフォーマットのデータに対応•ユースケース:•金融・会計関係(e.g., 請求書, 会計の報告書)•ヘルスケア(e.g., 医療情報, 保険の請求書)•公共セクター(e.g., 税金申請フォーム, 身分証明書, パスポート)
+Amazon Textract{“Document ID”: “123456789-005”,“Name”: “”,“SEX”: “F”,“DOB”: “23.05.1997”,…}解析結果
+
+--- 第718页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Machine Learning –サマリー•SageMaker: 開発者・データサイエンティスト向け機械学習環境•Rekognition: 顔検出、ラベリング、有名人認識•Transcribe: 音声からテキスト生成(例: 字幕生成)•Polly: テキストから音声生成•Translate: 翻訳•Lex: 会話形ボットの構築•Connect: クラウドのコンタクトセンター•Comprehend: 自然言語処理•Forecast: 時系列データの予測•Kendra: 機械学習を利用したサーチエンジン•Personalize: リアルタイムのカスタマイズ推薦エンジン•Textr act: 文書からテキスト・データを抽出
+
+--- 第719页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com その他のサービスいくつかの問題で出てきそうなサービスの概要
+
+--- 第720页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 継続的インテグレーション（Continuous Integration: CI）•開発者は、コードを頻繁にコードリポジトリにプッシュします（GitHub / CodeCommit/ Bitbucket / etc...）•コードがプッシュされると同時にテスト／ビルドサーバーがチェックします（CodeBuild／JenkinsCI／etc...）•開発者は、テストやチェックの合格・不合格のフィードバックを得ることができます•バグの早期発見、バグの修正•コードがテストされることで、より早く納品できます•頻繁なデプロイ•ブロックされずに済むので、よい開発体験が得られますコードリポジトリビルドサーバーコードをプッシュコードの取得ビルド＆テストビルドの結果を開発者に伝える
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_145.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第721页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 継続的デリバリー（Continuous Delivery: CD）•必要なときに確実に、ソフトウェアをリリースできるようにします•デプロイメントが頻繁に行われ、迅速に行われるようにします•「3ヶ月に1回のリリース」から「1日5回のリリース」へのシフト•これは通常、自動デプロイメントで実施します•CodeDeploy•Jenkins CD •Spinnaker•などなど... コードリポジトリビルドサーバーコードをプッシュコードの取得ビルド＆テストデプロイメントサーバー毎回のデプロイ通過するビルドアプリケーションサーバーv1アプリケーションサーバーv1アプリケーションサーバーv1アプリケーションサーバーv2アプリケーションサーバーv2アプリケーションサーバーv2
+
+--- 第722页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CI/CD のためのテクノロジースタックコードビルドテストデプロイ提供AWS CodeCommitGitHub またはサードパーティコードリポジトリAWS CodeBuildJenkins CI またはサードパーティCI サーバAWS Elastic Beanstalkユーザー管理のEC2 インスタンスフリート(CloudFormation)AWS CodeDeployオーケストレーション: AWS CodePipeline
+
+--- 第723页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Infrastructure as Code•現在、私たちは多くの手作業を行っていますが•これだけの手作業を再現するのは大変なことです•別のリージョンで•別のAWSアカウントで•同一リージョンで、一度すべてを削除して再構築•もしも、すべてのインフラがコードになっていて、インフラの作成を自動化できたら、素晴らしいと思いませんか？•インフラのコード記述は、デプロイされ、私たちのインフラを作成、更新、削除します
+
+--- 第724页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFormation とは•CloudFormationは、あらゆるリソース（ほとんどのリソースがサポートされています）に対応したAWS インフラを宣言的に記述する方法です•例えば、CloudFormation のテンプレート内では、次のように書きます•セキュリティグループを作りたい•このセキュリティグループを使用して2 台のEC2 マシンを作成します•これらのEC2 マシンには2 つのElastic IP が必要です•S3 のバケットが欲しい•これらのマシンの前にロードバランサー（ELB）を設置したい•するとCloudFormationは、指定された通りの構成で、正しい順序でそれらを作成します
+
+--- 第725页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudFormation のメリット(1/2)•Infrastructureascode•手動でリソースを作成しないので、管理が容易です•コードは、例えばgit を使ってバージョン管理することができます•インフラへの変更は、コードを通してレビューされます•コスト•スタック内の各リソースには識別子が付けられているので、スタックのコストが一目瞭然です•CloudFormation のテンプレートを使って、リソースのコストを見積もることができます•節約戦略: “開発環境では午後5時にインフラを削除、午前8時に再作成する”、といったことを安全に、自動的に実施できます
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_146.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第726页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudFormation のメリット(2/2)•生産性•オンザフライでクラウド上のインフラを破壊・再構築することができます•テンプレートのダイアグラムを自動生成!•宣言型プログラミング（順序付けやオーケストレーションを考える必要がありません）•関心事の分離：多くのアプリのために多くのスタックを作成し、多くのレイヤーを作成します例:•VPCスタック•ネットワークスタック•アプリのスタック•車輪の再発明を避けましょう•ウェブ上の既存のテンプレートを活用しましょう•ドキュメントの活用（サンプルが記載されていることが多い）
+
+--- 第727页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFormation の仕組み•テンプレートはS3 にアップロードして、CloudFormation で参照できるようにする必要があります•テンプレートを更新するには、以前のテンプレートを編集することはできません。新しいバージョンのテンプレートをAWSに再アップロードする必要があります•スタックは名前で識別されます•スタックを削除すると、CloudFormationによって作成されたすべてのリソースが削除されます
+
+--- 第728页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFormation テンプレートのデプロイ•手動のデプロイ•CloudFormation Designer でのテンプレートの編集•マネジメントコンソールを使ったパラメータ入力など•自動化されたデプロイ•YAML ファイル内のテンプレートの編集•AWS CLI（コマンドラインインターフェイス）を使ってテンプレートを展開する•フローを完全に自動化したい場合の推奨方法
+
+--- 第729页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFormation のビルディングブロックテンプレートコンポーネント:1.Resources: テンプレートで宣言される作成するAWSリソース（必須）2.Parameters: テンプレートの動的な入力値3.Mappings: テンプレート用の静的変数4.Outputs: 作られたものへの参照5.Conditionals: リソース作成を行うための条件のリスト6.Metadataテンプレートヘルパー:1.References （参照）2.関数
+
+--- 第730页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 備考これは、CloudFormationの入門編です•CloudFormation を正しく学び、使いこなすには3時間以上かかります•この講義は、その仕組みを理解していただくためのものです•試験では、CloudFormationがどのようなものかを理解していることが求められます
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_147.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第731页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFormation -StackSets •複数のアカウントやリージョンにまたがるスタックの作成、更新、削除を1 回の操作で行うことが可能•スタックセットを更新すると、展開されているすべてのスタックインスタンスが更新されます
+CloudFormation StackSet管理者アカウント
+アカウントAus-east-1
+アカウントAap-south-1
+アカウントBeu-west-2
+
+--- 第732页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Step Functions•サーバーレスのビジュアルワークフローを構築し、Lambda関数をオーケストレーションします•ワークフローをJSON のステートマシンで表現•機能: 逐次処理、並列処理、条件分岐、タイムアウト、エラー処理...•EC2、ECS、オンプレミス・サーバー、API Gatewayとの統合も可能•最大で1 年間の実行時間•人間による承認ステップも追加可能•ユースケース:•オーダー執行•データ処理•Webアプリケーション•任意のワークフロー
+
+--- 第733页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Step Functions のビジュアルワークフロー
+
+--- 第734页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS SWF-シンプル・ワークフロー・サービス•アプリケーション間の作業調整•コードはEC2 上で動作する（サーバーレスではない）•1年間の最大駆動時間•「アクティビティステップ」と「デシジョンステップ」の概念•「人的介入」のステップが組み込まれている•例: ウェブから倉庫、配送までのオーダー執行•Step Functions は、新規アプリケーションに使うのが推奨ですただし、以下の場合は除く•プロセスに介入する外部信号が必要な場合•親プロセスに値を返す子プロセスが必要な場合
+
+--- 第735页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Opsworks •ChefとPuppetは、サーバーの設定を自動的に行ったり、繰り返し行う作業を支援します•EC2やオンプレミスのVMとの相性は抜群です。•AWS Opsworks= マネージドChef & Puppet•AWS SystemsManager (旧称SSM)の代替品です•試験では、Chef＆Puppet が必要⇒AWS Opsworks
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_148.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第736页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Chef/Puppetについての簡単な説明•コンフィギュレーションをコードとして管理するのに役立ちます•一貫性のあるデプロイメントに有用です•Linux / Windowsで動作します•ユーザーアカウント、cron、ntp、パッケージ、サービス...を自動化することができます•"レシピ” や"マニフェスト” を活用する•Chef / Puppet はSystemsManager/ Beanstalk / CloudFormation と似ていますが、クロスクラウドで動作するオープンソースのツールです
+
+--- 第737页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Elastic Transcoder•S3 に保存されているメディアファイル（動画＋音楽）を、タブレット、PC、スマートフォン、テレビなどの様々なフォーマットに変換することができます•機能: ビットレート最適化、サムネイル、ウォーターマーク、キャプション、DRM、プログレッシブダウンロード、暗号化•4つのコンポーネント:•Jobs: トランスコーダーのジョブ•Pipeline: トランスコードジョブを管理するキュー•Presets: あるフォーマットから別のフォーマットに変換するためのテンプレート•Notifications: たとえばSNS•使った分だけ支払う、自動的にスケーリング、フルマネージド
+
+--- 第738页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS WorkSpaces •マネージドでセキュアなクラウドデスクトップ•オンプレミスのVDI(Virtual Desktop Infrastructure)の管理が不要になります•オンデマンド、使用量に応じた課金•セキュア、暗号化、ネットワークの分離•Microsoft Active Directoryとの連携
+ユーザー
+仮想デスクトップLinux / Windows
+企業のデータセンター
+AWSクラウドセキュア
+
+--- 第739页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS AppSync•モバイルおよびウェブアプリケーション間でリアルタイムにデータを保存、同期することができます•GraphQL（Facebookのモバイル技術）の活用•クライアントコードの自動生成が可能•DynamoDB / Lambdaとの連携•リアルタイムサブスクリプション•オフラインでのデータ同期（Cognito Syncに代わるもの）•Fine-grained な（細粒度な）セキュリティ
+
+--- 第740页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Cost Explorer•AWSのコストと使用量を時系列で可視化し、理解し、管理することができます•コストと使用量のデータを分析するカスタムレポートを作成します•すべてのアカウントの総コストと使用量を、自由に集計して分析することができます•月単位、時間単位、リソースレベルの粒度で集計が可能です•最適な節約プランの選択（請求額を下げるために）•過去の使用状況から最大12ヶ月間の使用量を予測
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_149.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第741页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Cost Explorer -AWSサービス別の月額コスト
+
+--- 第742页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Cost Explorer-時間単位＆リソースレベル
+
+--- 第743页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CostsExplorer -Savings Plan リザーブドインスタンスの代替
+
+--- 第744页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Cost Explorer -使用量の予測
+
+--- 第745页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ホワイトペーパーとアーキテクチャWellArchitectedフレームワーク、ディザスターリカバリーなど...
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_15.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第71页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2スポットインスタンスの価格
+https://console.aws.amazon.com/ec2sp/v1/spot/home?region=us-east-1# ユーザー定義の最高価格
+
+--- 第72页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com スポットインスタンスの終了方法
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-requests.html 
+キャンセルできるのは、オープン、アクティブ、または無効になっているスポットインスタンスリクエストのみです。スポットリクエストをキャンセルしても、インスタンスは終了しません。まずスポットリクエストをキャンセルして、それからスポットインスタンスを終了させる必要があります。
+
+--- 第73页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com スポットフリート•スポット＋オンデマンド（オプション）のセット•スポットフリートは、価格の制約を満たしつつ目標容量を満たそうとする•使用可能なローンチプールを定義（複数設定可）：インスタンスタイプ（m5.large）、OS、アベイラビリティーゾーン•スポットフリートは、容量・最大コストを満たすまでインスタンスを起動•スポットインスタンスを割り当てるための戦略•lowestPrice：最も安い価格のプールから（コストの最適化、短いワークロード）•diversified：全てのプールに分散している（可用性や長時間のワークロードに最適）•capacityOptimized：指定インスタンスタイプに余裕のあるプール•スポットフリートでは、最低価格のスポットインスタンスを自動的にリクエストすることができます
+
+--- 第74页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プレースメントグループ•EC2 インスタンスの配置戦略をコントロールしたい場合（どのAZ で起動されるか、など）に使います•プレースメントグループで指定できる戦略•クラスター: 1 つのAZ 内の低レイテンシーグループにインスタンスを集中的に配置•スプレッド: インスタンスを別々のハードウェアに分散（1グループあたり最大7インスタンス/ AZ）•パーティション: AZ内の多数のパーティション（サーバラック）に分散して配置。1グループあたり数百台のEC2インスタンスを配置可能（Hadoop, Cassandra, Kafka）
+
+--- 第75页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 同じラック同じAZ プレースメントグループクラスター•長所: ネットワーク性能（インスタンス間で10 Gbps の帯域幅を確保）•短所: ラックが故障すると、すべてのインスタンスが同時に故障•ユースケース•早く完了させる必要のあるビッグデータの仕事•極めて低いレイテンシーと、高いネットワーク・スループットを必要とするアプリケーションEC2 EC2 EC2 EC2 EC2 EC2 プレースメントグループクラスター低レイテンシー10Gbpsネットワーク
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_150.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第746页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com セクション概要•Well Architected Framework Whitepaper•Well Architected Tool•AWS Trusted Advisor•リファレンス・アーキテクチャーのリソース（実践向け）•AWSでのディザスタリカバリに関するホワイトペーパー
+
+--- 第747页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Well-Architected Framework 一般的なガイドライン•必要な容量を推測しない•実運用規模でのシステムのテスト•アーキテクチャの実験を容易にするための自動化•進化できるアーキテクチャの実現•変化する要求に基づく設計•データを利用したアーキテクチャーの進化•“ゲームデイ”での改善•バーゲンセールの日のアプリケーションをシミュレート
+
+--- 第748页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Well-Architected Framework 5つの柱•1）オペレーショナル・エクセレンス•2）セキュリティ•3）信頼性（リライアビリティ）•4）パフォーマンス効率•5）コストの最適化•それらはバランスをとるものでも、トレードオフでもなく、相乗効果をもたらすものです
+
+--- 第749页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Well-Architected Framework•ウェルアーキテクト・ツールを見てみましょう•https://console.aws.amazon.com/wellarchitected AWS Well-Architected Tool
+
+--- 第750页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 1）オペレーショナル・エクセレンス•ビジネス価値を実現するためにシステムを運用・監視し、サポートするプロセスや手順を継続的に改善する能力を含む•デザイン原則•コードとしてのオペレーションの実行-コードとしてのインフラストラクチャ(Infrastructure as a Code) •ドキュメントのアノテーション-ビルド毎にアノテーション付きのドキュメントを自動作成•頻繁に、小さく、可逆的な変更を行う-失敗しても元に戻せるように。•操作手順を頻繁に改善する-そしてチームメンバーがそれを熟知していることを確認する•失敗を予測する•すべてのオペレーションの失敗から学ぶ
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_151.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第751页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オペレーショナル・エクセレンスAWSサービス•準備•運用•改善AWS CloudFormation
+AWS CloudFormation
+AWS CloudFormation
+AWS Config
+AWS Config
+AWS CloudTrail
+Amazon CloudWatch
+AWS X-Ray
+AWS CodeBuild AWS CodeCommit 
+AWS CodeDeploy 
+AWS CodePipeline
+
+--- 第752页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 2）セキュリティ•情報、システム、および資産を保護するとともに、リスク評価と緩和戦略を通じてビジネス価値を提供する能力を含む•デザイン原則•強力なアイデンティティ基盤の導入-特権管理の一元化と長期的な認証情報への依存度の低減（または排除）-最小特権の原則-IAM•トレーサビリティの実現-ログやメトリクスをシステムに統合して、自動的に対応したりアクションを起こしたりすることができます•すべてのレイヤーでセキュリティを適用-エッジネットワーク、VPC、サブネット、ロードバランサー、すべてのインスタンス、オペレーティング・システム、アプリケーションなど•セキュリティ・ベスト・プラクティスの自動化•通信中および保管中のデータ保護-暗号化、トークン化、アクセス制御•人をデータから遠ざける-データへの直接アクセスや手作業による処理の必要性を低減または排除する•セキュリティイベントに備える-インシデント対応のシミュレーションを行い、自動化されたツールを使用することで、検知、調査、復旧のスピードを上げることができます
+
+--- 第753页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com セキュリティAWSサービス•IAM•探知の管理•インフラ保護•データ保護•インシデント対応IAM
+AWS-STS
+MFAトークン
+AWS Organizations
+AWS Config
+AWS CloudTrail
+Amazon CloudWatch
+Amazon CloudFront
+Amazon VPC
+AWS Shield
+AWS WAF
+Amazon Inspector
+KMS
+S3Elastic Load Balancing (ELB)
+Amazon EBS
+Amazon RDS
+IAM
+AWS CloudFormamon
+Amazon CloudWatch Events
+
+--- 第754页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 3）信頼性（リライアビリティ）•インフラやサービスの障害から回復し、需要に応じてコンピューティングリソースを動的に調整し、設定ミスや一時的なネットワークの問題などの障害を緩和するシステムの能力•デザイン原則•復旧手順のテスト-自動化を利用して異なる障害をシミュレートしたり、過去に障害が発生したシナリオを再現したりします•障害からの自動回復-障害が発生する前に予測し、修正することができます•システムの可用性を高めるために水平方向に拡張する-複数の小規模なリソースにリクエストを分散し、単一障害点がないようにする•キャパシティの推測をやめる-プロビジョニングの過不足なく、需要を満たすための最適なレベルを維持する-オートスケーリングの使用•オートメーションでの変更管理-インフラの変更をオートメーションで行う
+
+--- 第755页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 信頼性AWSサービス•基盤•変更管理•故障対策ServiceQuotas
+IAM
+Amazon VPC
+AWS TrustedAdvisor
+Amazon CloudWatch
+AWS CloudTrail
+AWS Config
+AWSAutoScaling
+BackupsAWS CloudFormation
+Amazon S3 Glacier
+Amazon S3Amazon Route 53
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_152.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第756页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 4）パフォーマンス効率•システム要件を満たすためにコンピューティングリソースを効率的に使用し、需要の変化や技術の進化に応じてその効率性を維持する能力を含む•デザイン原則•先端技術の民主化-先端技術がサービス化されることで、製品開発により注力できるようになる•数分でグローバル化-複数の地域に簡単に導入可能•サーバーレス・アーキテクチャの採用-サーバー管理の負担を回避•より多くの実験-比較テストを簡単に行うことができる•機械的シンパシー-すべてのAWSサービスを意識する
+
+--- 第757页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com パフォーマンスの効率化AWSサービス•選択•レビュー•モニタリングAWSAutoScacling
+Amazon Elastic Block Store (EBS)
+Amazon Simple Storage Service（S3）
+AWS LambdaAmazon RDS
+AWS CloudFormation
+Amazon CloudWatch
+AWS Lambda
+
+--- 第758页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 5）コストの最適化•最低価格帯でビジネス価値を提供するためのシステム運営能力を含む•デザイン原則•ペイ・パー・ユースモードの採用-使った分だけ支払う•全体的な効率性の測定-CloudWatch の使用•データセンターの運用にコストをかけない-インフラ部分はAWS が行い、利用者は組織のプロジェクトに集中できる•支出の分析と帰属-システムの使用状況とコストを正確に把握し、投資収益率（ROI）の測定に役立てる-タグを必ず使用すること•マネージド・サービスやアプリケーション・レベルのサービスを利用して所有コストを削減-マネージド・サービスはクラウド規模で運用されているため、トランザクションやサービスあたりのコストを削減することができます
+
+--- 第759页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com コスト最適化AWSサービス•支出の認識•コストパフォーマンスに優れたリソース•需要と供給のマッチング•時間軸での最適化AWS BudgetsAWSCostandUsageReportAWS Cost Explorer
+ReservedInstanceReport
+スポットインスタンス
+リザーブドインスタンス
+Amazon S3 Glacier
+AWS Trusted Advisor
+AWS Auto Scaling
+AWS LambdaAWS Cost and Usage Report
+
+--- 第760页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Tr usted Advisor•事前セットアップなしで利用可能-ハイレベルなAWS アカウント評価•利用者のAWSアカウントを分析し、提案を行います•コストの最適化•パフォーマンス•セキュリティ•フォールトトレランス•サービス制限•コアチェックと推奨事項-すべての利用者•コンソールから毎週のメール通知を有効にできる•Full Trusted Advisor -Business & Enterpriseサポートプランで利用できます•制限に達したときにCloudWatch のアラームを設定する機能
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_153.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第761页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com その他のアーキテクチャ例•これまで、最も重要なアーキテクチャーパターンを探ってきました•クラシック: EC2、ELB、RDS、ElastiCacheなど...•サーバーレス: S3、Lambda、DynamoDB、CloudFront、API Gatewayなど...•もっとAWSのアーキテクチャを見たい方は•https://aws.amazon.com/jp/cdp/•https://aws.amazon.com/jp/serverless/patterns/serverless-pattern/•https://aws.amazon.com/architecture/•https://aws.amazon.com/solutions/
+
+--- 第762页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 試験の復習とヒント
+
+--- 第763页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Practice makes perfect•AWS に慣れていない人は、試験を受ける前にAWS の練習を少しでもしておきましょう（このコースのハンズオンをなぞってみるなど）•この試験では、AWSでの1年以上のハンズオン経験があることが推奨されています•Practice makes perfect!•知識の多さに圧倒されそうになったら、もう一回見直してみましょう
+
+--- 第764页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 消去法で進める•ほとんどの質問はシナリオベースで行われます•すべての質問について、間違いだとわかっている答えを除外していきましょう•残った答えについて、最も意味のあるものを選ぶとよいでしょう•トリッキーな質問はほとんどありません•考えすぎないこと•実現可能に見えても、非常に複雑な解決策であれば、それは間違っているかもしれません•迷ったときは、”フラグ”をつけておいて、後で見直しましょう
+
+--- 第765页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSのホワイトペーパーに目を通す•AWSのホワイトペーパーについてはこちらをご覧ください•クラウドのためのアーキテクト:  AWS のベスト・プラクティス•AWS Well-Architected Framework•AWS障害復旧（https://aws.amazon.com/disaster-recovery/）•コースの中で最も重要なコンセプトをすべて網羅しています•自分が面白いと思ったホワイトペーパーを見てみるのも悪くないと思います
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_154.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第766页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 各サービスのFAQを見る•FAQ = Frequently Asked Question（よくある質問）•例: https://aws.amazon.com/vpc/faqs/ •試験で出題される問題の多くを網羅したFAQ•サービスの理解度を確認するのに役立ちます
+
+--- 第767页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS コミュニティへの参加•コースのQ&Aで他の人と助け合い、議論する•Q&A で他の人が質問した内容を確認する•このセクションの模擬試験を行う•オンラインフォーラムを読む•ネット上のブログを読む•地元のミートアップに参加し、他のAWS エンジニアと議論する•You t u beでre:inventの動画を見る（AWSカンファレンス）
+
+--- 第768页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 試験はどのように行われるのですか？•https://www.aws.training/ からオンラインで登録する必要があります。•受験料は150 ドル（税別）•身分証明書2点（身分証明書、クレジットカード、詳細は送られてくるメールに記載されています）の提出•試験中にメモ、ペン、発言はできません•130 分で65 問の質問が出題されます•最後には、すべての質問と回答を確認することができます•試験の合格・不合格がすぐにわかります•どの答えが正しかったのか、間違っていたのかは、わかりません•数日後に総合的なスコアがわかります（メールでの通知）•合格には、1000点満点中720点以上のスコアが必要です•不合格になった場合、14日後に再度試験を受けることができます
+
+--- 第769页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com おめでとうございます!!
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_16.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第76页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com us-east-1a ハードウェア1 プレースメントグループスプレッド•長所: •アベイラビリティゾーン（AZ）をまたぐことができます•全インスタンスが同時に止まるリスクを低減•EC2 インスタンスが異なる物理的ハードウェア上にあります•短所: •1 つのAZ、1 つの配置グループにつき7 つのインスタンスまで•ユースケース•最大限の高可用性を必要とするアプリケーション•各インスタンスが相互に障害から隔離されていなければならない、クリティカルなアプリケーションEC2 
+ハードウェア2 EC2 us-east-1b ハードウェア3 EC2 
+ハードウェア4 EC2 us-east-1c ハードウェア5 EC2 
+ハードウェア6 EC2
+
+--- 第77页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プレースメントグループパーティション•1 つのAZ につき最大7 つのパーティション•同一地域の複数のAZにまたがることができます•数百台以上のEC2 インスタンスを扱えます•あるパーティションのインスタンスは、他のパーティションのインスタンスとラックを共有しません•パーティションの障害は、多くのEC2 に影響するものの、他のパーティションには影響しません•EC2 インスタンスはメタデータとしてパーティション情報にアクセスできます•使用例HDFS, HBase, Cassandra, Kafkaus-east-1a 
+パーティション1 EC2 EC2 EC2 EC2 パーティション2 EC2 EC2 EC2 EC2 パーティション3 EC2 EC2 EC2 EC2 us-east-1b
+
+--- 第78页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Elastic Network Interfaces (ENI)•仮想ネットワークカードを表すVPC内の論理的コンポーネント•ENIは以下の属性を持つことができます•プライマリプライベートIPv4 (1つ)セカンダリIPv4(複数可)•Elastic IP (プライベートIPv4ごとに1つ)•パブリックIPv4 (1つ)•セキュリティグループ(複数可)•MACアドレス(1つ)•ENIを独立して作成可能。フェイルオーバーのために、EC2インスタンスにその場でデタッチ・アタッチできる•ENIは、特定のアベイラビリティーゾーン（AZ）に拘束される
+EC2
+eth0 -プライマリENI192.168.0.31
+eth1 -セカンダリENI192.168.0.42
+EC2
+eth0 -プライマリENI
+移動可能利用可能ゾーン
+
+--- 第79页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 Hibernate•停止（ストップ）、終了（ターミネーション）•停止: ディスク（EBS）上のデータは次の起動時にもそのまま維持•終了: 削除設定されているEBSボリュームは失われる•起動時に起こること•初回起動：OSが起動し、EC2 User Dataスクリプトが実行される•2回目以降：OSが再起動する•その後、アプリケーションが開始され、、、•時間がかかることもあります
+
+--- 第80页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 Hibernate•EC2 Hibernateの概要•インメモリー（RAM）の状態を保持して、インスタンスを一時停止•インスタンスの起動が格段に速くなります（OSの停止や再起動がないため）•内部の振る舞い：RAMの状態は、ルートEBSボリュームのファイルに保存•ルートEBSボリュームを暗号化する必要あり•ユースケース•ロングラン処理•RAMの状態を保存したい•初期化に時間がかかるサービス
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_17.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第81页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 Hibernate -知っておきたいこと•対応するインスタンス・ファミリー: c3, c4, c5, m3, m4, m5, r3, r4, r5•インスタンスのRAMサイズ-150GB以下であること•インスタンスサイズ-ベアメタルインスタンスには非対応•AMI: Amazon Linux 2, Linux AMI, Ubuntu & Windows... •ルートボリューム：EBSであること、暗号化されていること、インスタンスストアではないこと、大容量であること。•オンデマンドとリザーブドインスタンスで利用可能•インスタンスのハイバーネーションは60日まで
+
+--- 第82页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2Nitro•次世代のEC2インスタンスの基盤となるプラットフォーム•新しい仮想化技術•パフォーマンスを向上させることができます。•より優れたネットワークオプション（拡張ネットワーク、HPC、IPv6）•より高速なEBS（EBSのIOPSを64,000にするにはNitroが必要）•基本的なセキュリティの向上•インスタンスタイプの例•仮想マシン: a1, c5, c5a, c5ad, c5d, c5n, c6g, c6gd, c6gn, d3, d3en, g4, i3en, inf1, m5, m5a,m5ad, m5d, m5dn, m5n, ...•ベアメタル：a1.metal, c5.metal, c5d.metal, c5n.metal, c6g.metal, c6gd.metal...
+
+--- 第83页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 -vCPUについて•1つのCPUで複数のスレッドを走らせることができます（マルチスレッド）•1 つのスレッドを実行するのが、仮想CPU（vCPU）です•例：m5.2xlarge•4CPU•1CPUあたり2スレッド•合計で8 つのvCPUスレッド1コア1スレッド2スレッド1コア2スレッド2スレッド1コア3スレッド2スレッド1コア4スレッド28 vCPU
+
+--- 第84页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 –CPU最適化オプション•EC2 インスタンスには必ずRAM とCPU があります•必要であれば、vCPU のオプションを変更することができます:•CPUコア数:減らすことができます(大容量RAM・少数CPUが必要なときに有効)使用例: ライセンスコストの削減•コアあたりのスレッド数:マルチスレッドの無効化使用例: ハイパフォーマンス・コンピューティング(HPC)ワークロード•起動時にのみ指定可能です
+スレッド1コア1スレッド2スレッド1コア2スレッド2スレッド1コア3スレッド2スレッド1コア4スレッド22 vCPU
+
+--- 第85页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 -キャパシティリザベーション•キャパシティリザベーションにより、必要なタイミングでEC2の容量を確保•予約の終了: 手動、または終了日を事前に設定•1年や3年の縛りは不要•キャパシティはすぐにアクセスできるので、開始と同時に課金されます•指定項目•キャパシティを予約するAZ（1つのみ）•インスタンス数•インスタンスタイプ、テナンシー、プラットフォーム/OSなどのインスタンス属性•リザーブドインスタンスやセービングプランと組み合わせてコスト削減を実現
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_18.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第86页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスのストレージ
+
+--- 第87页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBSボリュームとは？•EBS（ElasticBlock Store）ボリュームは、インスタンスの実行中に取り付けられるネットワークドライブです•インスタンスのデータを保存（永続化）させることができます•一度に1 つのインスタンスにのみマウントできます•アベイラビリティゾーンごとに固有のものになります•例えるなら、「ネットワークでつながるUSB メモリ」•無料利用枠: 30GB までは無料で使えます
+
+--- 第88页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBSボリュームの特徴•ネットワークドライブ（物理ドライブではない）であること•インスタンスの通信にはネットワークを使用するため、（物理ドライブと比較すると）多少の遅延が発生する可能性があります•EC2インスタンスから切り離して、別のインスタンスに素早く接続することができます•アベイラビリティゾーン（AZ）にロックされます•us-east-1aのEBSボリュームをus-east-1bにアタッチできません•ボリュームを移動させるには、まずスナップショットを作る必要があります•プロビジョニングされた容量（GB単位の容量、IOPS）を持ちます•プロビジョニングされたすべての容量に対して課金されます•ドライブの容量を増やすことができます（少し時間がかかります）
+
+--- 第89页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com US-EAST-1BUS-EAST-1AEBS ボリューム-例
+EBS(10 GB)
+EBS(100 GB)
+EBS(50 GB)
+EBS(50 GB)
+EBS(10 GB)未アタッチ
+
+--- 第90页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBS -Ter mination属性での削除•EC2インスタンスが終了した際のEBSの動作を制御します•デフォルトでは、ルートEBSボリュームが削除されます•デフォルトでは、ルート以外のEBSボリュームは削除されません•これは、AWSコンソール／AWS CLIで制御できます•使用例: インスタンス終了時にルートボリュームを保持する場合
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_19.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第91页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBS スナップショット•ある時点での、EBS ボリュームのバックアップ（スナップショット）を作成します•スナップショット作成時にデタッチする必要はありませんが、デタッチしておくことを推奨します•スナップショットは、AZ やリージョンをまたいでコピーできますUS-EAST-1A
+EBS(50 GB)US-EAST-1B
+EBS(50 GB)
+EBS Snapshotsnapshotrestore
+
+--- 第92页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AMI の概要•AMI = Amazon Machine Image•AMI はEC2  インスタンスのカスタマイズです•ソフトウェアや設定、OS、モニタリングなどを追加できます•事前に各種ソフトウェアが設定済みなので、起動・設定の時間が短くなります•AMI はリージョンごとに作成されます(リージョンをまたいでのコピーは可能)•EC2 インスタンスを起動する方法•パブリックAMI:AWS 提供•自身で作ったAMI:自身で作成・メンテナンス•AWS マーケットプレイスAMI:他の人が作成したAMI (無償・有償)
+
+--- 第93页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AMI 作成のプロセス(EC2 インスタンスで作る場合)•EC2 インスタンスを起動して、カスタマイズ•インスタンスを停止(データ一貫性のため)•AMI の作成–EBS スナップショットも作成されます•作成したAMI でEC2 インスタンスを起動us-east-1a
+us-east-1b
+Custom AMI
+AMI 作成AMIから起動
+
+--- 第94页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスストア•EBS ボリュームはネットワークドライブのため、良い性能ですが”限界” があります•高性能なハードウェア接続のディスクが必要なときは、EC2 インスタンスストアを使いましょう•より高いI/O パフォーマンス•EC2 インスタンスストアは停止時に内容が失われます（エフェメラル）•バッファ/ キャッシュ/ 生成データ/ 一時コンテンツに適しています•ハードウェア故障によりデータが失われるリスクがあります•バックアップ・複製は利用者の責任です
+
+--- 第95页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ローカル接続のEC2 インスタンスストア
+Very high IOPS
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_2.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第6页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 講師(Stephane)のスコア：982
+
+--- 第7页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSとは？•AWS(Amazon Web Services): クラウドサービス•オンデマンドで利用でき、簡単に拡張できるサーバーやサービスを提供します•AWSは2006年の誕生以来、ITを変革してきた•世界最大級のウェブサイトを支えるAWS •Amazon.co.jp•Netflix
+
+--- 第8页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com このコースで学ぶこと（＋もう少し）
+Amazon EC2Amazon ECRAmazon ECS
+Elastic Load BalancingAWS Elastic BeanstalkAWSLambdaAmazonS3AmazonRDSAmazonDynamoDBAmazon ElastiCache
+Amazon CloudFrontAmazonRoute 53Amazon CloudWatchAWSCloudFormationAWSCloudTrailIAMAWS KMS
+Amazon KinesisAmazon API GatewayAWS Step FunctionsAuto Scaling
+AmazonSQSAmazonSNSAmazonSES
+Amazon Aurora
+
+--- 第9页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+AWSのスパゲッティを解き明かす
+
+--- 第10页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Udemy Tips
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_20.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第96页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBSボリュームタイプ•EBSボリュームには6つのタイプがあります•gp2 / gp3 (SSD):多様なワークロードに対応する、価格と性能のバランスがとれた汎用SSD ボリューム•io1 / io2 (SSD): ミッションクリティカルな低レイテンシーまたは高スループットのワークロードに対応する最高性能のSSDボリューム•st1（HDD）: 比較的低コストのHDDボリューム-頻繁にアクセスされるスループット重視のワークロード向け•sc1（HDD）: 最も低コストのHDDボリューム-アクセス頻度の低いワークロード向け•EBSボリュームの特性: サイズ｜スループット｜IOPS（I/O Ops Per Sec.）•疑問があれば、常にAWS のドキュメントを参照しましょう（重要!）•ブートボリュームとして使用できるのはgp2/gp3 とio1/io2 のみです
+
+--- 第97页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBSボリュームタイプ汎用SSD•コストパフォーマンスに優れたストレージ、低レイテンシ•システムブートボリューム、仮想デスクトップ、開発・テスト環境•最小1GiB から最大16 TiBまで•gp3:•ベースラインは3,000 IOPS、スループット125 MiB/s•IOPS を最大16,000、スループットを最大1000MiB/sまで、それぞれ個別に向上させることが可能•gp2:•最小のgp2 ボリュームでは、IOPSを3,000までバースト可能•ボリュームのサイズとIOPS は連動しており、最大IOPSは16,000•1GBあたり3 IOPS向上。つまり5,334GBで最大IOPSに
+
+--- 第98页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBSボリュームタイププロビジョンドIOPS (PIOPS) SSD •クリティカルなビジネスアプリ用に持続的なIOPSパフォーマンスを提供•または、16,000 IOPS以上を必要とするアプリケーション•データベースのワークロードに最適（ストレージの性能・安定性を重視）•io1/io2（4GiB～16TiB）•最大PIOPS：Nitro EC2 インスタンスは64,000、その他は32,000•ストレージのサイズに依存せずにPIOPS を向上させることが可能•io2 は耐久性が高く、GiB あたりのIOPS が高い（io1と同価格）•io2 Block Express (4 GiB -64 TiB)•サブミリ秒のレイテンシー•最大PIOPS：256,000、IOPS：GiB比は1,000：1•EBSマルチアタッチ対応
+
+--- 第99页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBSボリュームタイプハードディスク(HDD) •ブートボリュームにできない•最小125 MiB～最大16 TiB•スループット最適化HDD(st1)•ビッグデータ、データウェアハウス、ログ処理•最大スループット500 MiB/s -最大IOPS 500•コールドHDD(sc1)•アクセス頻度の低いデータの場合•最低限のコストが重視されるとき向け•最大スループット250 MiB/s -最大IOPS 250
+
+--- 第100页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBS -ボリュームタイプの概要
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-volume-types.html#solid-state-drives
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_21.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第101页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBSマルチアタッチ-io1/io2ファミリー•同じAZ内の複数のEC2インスタンスに同じEBSボリュームをアタッチ•各インスタンスは、ボリュームに対する完全な読み取りと書き込みの権限を持ちます•ユースケース:•クラスタ化されたLinuxアプリケーション（例：Ter adata）における高可用性の実現•同時の書き込み操作をアプリケーションで、管理する必要があります•クラスタ対応のファイルシステムを使用する必要があります（Linuxで使われるxfs, ex4や、Windows で使われるNTFS, FAT32 などは不適）
+io2ボリューム（マルチアタッチ）AZ1
+
+--- 第102页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBSの暗号化•暗号化されたEBSボリュームを作成すると、以下のようになります•静止状態のデータをボリューム内で暗号化•インスタンスとボリュームの間を移動中のデータはすべて暗号化される•すべてのスナップショットを暗号化•スナップショットから作成されたすべてのボリュームも暗号化•暗号化と復号化は透過的に処理されます（何もする必要はありません）•暗号化によるレイテンシーへの影響はわずかです•EBSの暗号化はKMSの鍵を利用（AES-256）•暗号化されていないスナップショット、コピーすることで暗号化が可能になります
+
+--- 第103页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 暗号化：暗号化されていないEBSボリュームを暗号化する•EBS ボリュームのスナップショットを作成•EBSスナップショットを暗号化（コピーを使って）•スナップショットから新しいEBSボリュームを作成（ボリュームも暗号化される）•これで、暗号化されたボリュームを元のインスタンスにアタッチすることができます
+
+--- 第104页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBS RAIDオプション•EBS はすでに冗長化されています（AZ内で複製されている）•しかし、IOPSを例えば100,000 IOPS まで向上させたい場合、どうすればよいでしょう？•EBS ボリュームをミラーリングしたい場合は？•RAID 設定でボリュームを並列にマウントすれば大丈夫です!•OS が対応していればRAID も可能•いくつかのRAID オプションがあります•RAID 0•RAID 1•RAID 5（EBSでは推奨されません-公式ドキュメントを参照）•RAID 6（EBSでは推奨されません-公式ドキュメントを参照）•RAID 0とRAID 1について説明します
+
+--- 第105页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RAID 0（パフォーマンスの向上）•2つ以上のボリュームを結合し、分散して書き込むことで、ディスク容量とI/Oが台数分、向上します•しかし、1枚のディスクが故障すると、すべてのデータが故障してしまいます•ユースケース:•大量のIOPSを必要とし、フォールトトレランスを必要としないアプリケーション•レプリケーションが既に組み込まれているデータベース•RAID 0 を利用して、高いIOPSを持つ非常に大きなディスクを作ることができます•例:•500GIB のAmazon EBS io1 ボリュームを2つ用意して、それぞれ4,000 IOPS にしたとすると、、、•1000GiBのRAID 0アレイで、利用可能な帯域幅が8,000 IOPS、スループット1,000 MB/sが得られますEC2インスタンス
+EBSボリューム1
+EBSボリューム2
+1つの論理ボリュームどちらかABCD
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_22.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第106页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RAID 1（フォールトトレランスの向上）•RAID1 = 1つのボリュームを別のボリュームにミラーリング•1台のディスクが故障しても、論理ボリュームは動いている•2つのEBSボリュームに同時にデータを送信する必要あり（ネットワーク負荷が2倍）•ユースケース:•非常に高い耐障害性を必要とするアプリケーション•ディスク自体をサービスとして提供するアプリケーション•例:•500GIB のAmazon EBS io1 ボリュームを2つ用意して、それぞれ4,000 IOPS にしたとすると、、、•500GiBのRAID 1アレイで、利用可能な帯域幅が4,000 IOPS、スループットが500MB/sEC2インスタンス
+EBSボリューム1
+EBSボリューム2
+1つの論理ボリュームどちらもABCABC
+
+--- 第107页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EFS -Elastic File System•複数のEC2でマウント可能な、マネージドNFS (ネットワークファイルシステム)•EFS は複数のAZにあるEC2インスタンスに対応•高可用性、高スケーラビリティ、高価（gp2 の3倍）、従量課金（pay per use）EC2us-east-1aEC2us-east-1bEC2us-east-1cEFSセキュリティグループ
+
+--- 第108页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EFS -Elastic File System•使用例: コンテンツ管理、ウェブホスティング、データ共有、WordPress•NFS v4.1 プロトコルを使用•EFSへのアクセス制御にセキュリティグループを使用•LinuxベースのAMIに対応（Windowsは不可）•KMSを利用した保管時の暗号化（コンソールから作成時はデフォルト有効）•標準的なファイルAPIを持つPOSIXファイルシステム•ディスク容量は自動的に拡張され、使用した分だけの支払い→前もって容量を確保しなくて大丈夫
+
+--- 第109页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EFS -パフォーマンス＆ストレージクラス•EFS のスケーラビリティ•数千のNFS クライアントの同時接続、10 GB+ /s のスループット•自動的にペタバイト規模のネットワークファイルシステムに成長•パフォーマンスモード(EFS 作成時に設定)•汎用（デフォルト）：レイテンシーに敏感なユースケース（Webサーバー、CMS など）•Max I/O -高レイテンシー、高スループット、高並列（ビッグデータ、メディア処理）•スループットモード•バースト（1TB = 50MiB/s + 最大100MiB/s のバースト）•プロビジョニング：ストレージのサイズに関わらず、スループットを設定例：1TBのストレージに1 GiB/s•ストレージ階層（ライフサイクル管理機能-n 日後にファイルを移動させる）•標準：頻繁にアクセスするファイル用•頻繁でないアクセス（EFS-IA）：低性能、低価格
+
+--- 第110页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBS vs EFS -Elastic Block Storage•EBS ボリューム:•1度に1つのインスタンスにしか接続できない•アベイラビリティゾーン（AZ）レベルでロック•gp2: ディスクサイズが大きくなるとIOが増える•io1：独立してIOを増やすことができる•EBS ボリュームをAZ間で移行するには•スナップショットを撮る•スナップショットを別のAZに復元する•EBSのバックアップはIO を使用するため、アプリケーションが大量のトラフィックを処理しているときには実行しないことを勧めます•EC2 インスタンスが終了した場合、インスタンスのルートEBS ボリュームはデフォルトで削除されます（無効にできます）
+スナップショット
+レストアAZ1
+EBSスナップショットAZ2EBSEBS
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_23.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第111页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EBS vs EFS -Elastic File System•AZ を超えて100 台以上のインスタンスをマウント•EFS でサイトのファイルを共有（WordPress）•Linux インスタンス(POSIX) のみ•EFS はEBS よりも高価•EFS-IA を活用してコスト削減が可能•EFS vs EBS vs インスタンスストアそれぞれの違いを抑えておいてください
+AZ1
+EFSAZ2
+EFSマウントターゲット
+LinuxLinux
+EFSマウントターゲット
+
+--- 第112页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSの基礎知識-パート2ロードバランシング、オートスケーリンググループ、EBSボリューム
+
+--- 第113页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com スケーラビリティと高可用性（Highavailability）•スケーラビリティ: アプリケーション・システムが、大きな負荷にも適応できること•スケーラビリティには2種類あります•垂直方向のスケーラビリティ•水平方向のスケーラビリティ（＝弾力性: elasticity）•スケーラビリティは高可用性と関連していますが、違う概念です•コールセンターの例で、それぞれの違いをみていきましょう
+
+--- 第114页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 垂直方向のスケーラビリティ•垂直方向のスケーラビリティ: インスタンスのサイズを大きくすること•例えば、あなたのアプリケーションが、t2.micro で実行されていたとします•アプリケーションを垂直方向に拡張することは、t2.large上で実行することを意味します•垂直方向のスケーラビリティは、データベースのような非分散システムでは非常に一般的です•RDSやElastiCacheは、垂直方向に拡張できるサービスです•通常、垂直方向に拡大できる量には制限があります（ハードウェアの制限）
+新人オペレーターベテランオペレーター
+
+--- 第115页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 水平方向のスケーラビリティ•水平方向のスケーラビリティ:アプリケーションのインスタンスやシステムの数を増やすこと•水平方向のスケーリング= 分散システム•ウェブアプリケーションやモダンなアプリケーションの一般的なソリューション•Amazon EC2などのクラウドを利用することで、簡単に水平方向に拡張することができます
+オペレーターオペレーターオペレーターオペレーターオペレーターオペレーター
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_24.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第116页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サンフランシスコの第二ビルニューヨークの第一ビル高可用性（High Availability）•高可用性は通常、水平方向のスケーリングと密接に関係しています•高可用性とは、アプリケーションやシステムを少なくとも2つのデータセンター（＝AZ）で稼働させること•高可用性の目的は、データセンターの停止・損失に耐えること•高可用性という点では、性能が固定的でもよい（RDSMulti AZの場合など）•高可用性と性能の向上を両立させることもできます（水平スケーリング）
+
+--- 第117页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2の高可用性とスケーラビリティ•垂直方向のスケーリング: インスタンスサイズの拡大（=スケールアップ/ダウン）•変更前: t2.nano          -0.5G RAM, 1 vCPU•変更後: u-12tb1.metal -12.3 TB RAM, 448vCPU•水平方向のスケーリング: インスタンスの数を増やす（=スケールアウト/イン）•オートスケーリンググループ•ロードバランサー•高可用性: 同じアプリケーションのインスタンスを複数のAZ で動作させる•オートスケーリンググループマルチAZ•ロードバランサーマルチAZ
+
+--- 第118页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ロードバランシングとは？•ロードバランサーは、インターネットのトラフィックを下流の複数のサーバー（EC2インスタンス）に転送するサーバーですロードバランサーEC2インスタンスEC2インスタンスEC2インスタンスユーザー1 ユーザー2ユーザー3
+
+--- 第119页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ロードバランサーを使う理由は？•複数の下流インスタンスに負荷を分散•アプリケーションへの単一アクセス点（DNS）の公開•下流のインスタンスの障害をシームレスに処理•インスタンスの定期的なヘルスチェック•ウェブサイトへのSSL終端（HTTPS）の提供•cookie で、同じインスタンスへのアクセスを担保（stickiness）•AZ 間の高可用性•パブリックトラフィックとプライベートトラフィックの分離
+
+--- 第120页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2ロードバランサーを使う理由は？•ELB (Elastic  Load Balancing) は、AWSにより管理されている（マネージド）ロードバランサーです•AWSが動作を保証•アップグレード、メンテナンス、高可用性をAWS が担当•いくつかの設定項目を設定すると使うことができる•自分でロードバランサーをセットアップする方がランニングコストは低いですが、より多くの作業が必要です•多くのAWS 製品やサービスと統合されています
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_25.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第121页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ヘルスチェック•ロードバランサーにヘルスチェックは不可欠です•ロードバランサーは、トラフィックを転送するインスタンスがリクエストに応答できるかどうかを定期的にチェック•ヘルスチェックはポートとルートで行われる（/healthが一般的）•レスポンスが200(OK)でなければ、そのインスタンスは不健全クラシックロードバランサー（v1）EC2インスタンスヘルスチェック4567番ポートroute /health
+
+--- 第122页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSにおけるロードバランサーの種類•AWSには3種類のマネージドロードバランサーがあります•クラシックロードバランサー(v1 -旧世代) -2009年•HTTP , HTTPS, TCP•アプリケーションロードバランサー（v2 -新世代）-2016年•HTTP , HTTPS, WebSocket•ネットワークロードバランサー（v2 -新世代）-2017年•TCP ,  TLS（セキュアTCP）, UDP•原則、より多くの機能を提供する新しい/ v2世代のロードバランサーを使用することを勧めます•内部（プライベート）または外部（パブリック）のELB を設定できます。
+
+--- 第123页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ロードバランサーのセキュリティグループユーザーHTTPS / HTTPどこからでもHTTPロードバランサーのみロードバランサー
+ロードバランサーのセキュリティグループ
+アプリケーションセキュリティグループ-ロードバランサーからのトラフィックのみを許可
+EC2
+
+--- 第124页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ロードバランサー知っておきたいこと•ロードバランサーはスケールアップできます•が、スケールアップには少し（2-5分程度）時間がかかります-事前に準備したい場合は、AWSに連絡して"ウォームアップ"•トラブルシューティング•4xxエラーは、クライアントに起因するエラー•5xxエラーは、アプリケーションに起因するエラー•ロードバランサーのエラー503は容量不足または登録されたターゲットがないことを意味します•ロードバランサーがアプリケーションに接続できない場合、セキュリティグループを確認しましょう•モニタリング•ELBのアクセスログは、すべてのアクセスリクエストを記録します（リクエストごとのデバッグが可能になります）•CloudWatch Metricsでは、集約された統計情報（例：コネクション数）が得られます
+
+--- 第125页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com クラシックロードバランサー(v1)
+クライアントCLBEC2リスナーインターナル•TCP（レイヤー4）、HTTP/HTTPS（レイヤー7）に対応•ヘルスチェックはTCP またはHTTPベース•固定ホスト名XXX.region.elb.amazonaws.comここにでているレイヤーについて知りたい方は“OSI 参照モデル” を調べてください
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_26.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第126页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com アプリケーションロードバランサー（v2）•アプリケーションロードバランサーはレイヤー7（HTTP）•複数のHTTPアプリケーションへ、複数のマシンに対してロードバランシング(ターゲットグループ)•同一マシン上の複数アプリケーションへのロードバランシング(例：コンテナ)•HTTP/2とWebSocketのサポート•リダイレクトのサポート（HTTPからHTTPSへの変更など）
+
+--- 第127页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com アプリケーションロードバランサー（v2）•ルーティングテーブルで、異なるターゲットグループに振り分け•URLのパスに基づいたルーティング（example.com/users & example.com/posts)•URLのホスト名に基づくルーティング（one.example.com & other.example.com）•クエリ文字列、ヘッダーに基づくルーティング（example.com/users?id=123&order=false）•ALBはマイクロサービスやコンテナベースのアプリケーションに、とても適しています（例: DockerとAmazon ECS)•ECSの動的ポート割付にリダイレクトするポートマッピング機能•クラシックロードバランサーは、アプリケーションごとに複数、バランサーが必要になります
+
+--- 第128页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Userアプリのターゲットグループアプリケーションロードバランサー(v2)HTTPベースのトラフィック外部アプリケーションロードバランサー（v2）HTTPWWW ルート/user 
+SearchアプリのターゲットグループHTTPWWW ルート/search 
+ヘルスチェックヘルスチェック
+
+--- 第129页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com アプリケーションロードバランサー(v2)ターゲットグループ•EC2インスタンス（AutoScaling Groupで管理可能）-HTTP •ECSのタスク（ECS自身が管理するもの）-HTTP •ラムダ関数-HTTPリクエストがJSONイベントに変換される•IPアドレス-プライベートIPのみ対応•ALBは複数のターゲットグループをルーティングできます•ヘルスチェックはターゲットグループごとに実施
+
+--- 第130页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ターゲットグループ1AWS -EC2ベースアプリケーションロードバランサー(v2)クエリ文字列/パラメータのルーティング外部アプリケーションロードバランサー（v2）?Platform=MobileWWW リクエストターゲットグループ2オンプレミス-プライベートIP?Platform=Desktop
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_27.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第131页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com アプリケーションロードバランサー(v2)知っておきたいこと•固定されたホスト名(XXX.region.elb.amazonaws.com) •アプリケーションサーバーは、クライアントのIPを直接見ることはありませんが•クライアントの真のIPは、ヘッダのX-Forwarded-Forに挿入されます•ポート番号(X-Forwarded-Port)、プロトコル(X-Forwarded-Proto)も同様EC2インスタンスクライアントIP 12.34.56.78ロードバランサーのIP（プライベートIP）コネクションターミネータ
+
+--- 第132页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ネットワークロードバランサー（v2）•ネットワークのロードバランサー（レイヤー4）で、できること•インスタンスへのTCP/UDPトラフィックの転送•1秒間に数百万件のリクエストを処理•レイテンシーが少ない~100ms (ALBの400msに対して)•NLBはAZごとに1つの静的IPを持ち、ElasticIPの割り当てにも対応しています(特定のIP をホワイトリスト化するのに便利) •NLBは非常に高いパフォーマンスが必要なところで、TCP/UDPトラフィックの負荷分散に使用されます•AWSの無料利用枠には含まれません
+
+--- 第133页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ネットワークロードバランサー(v2)TCP（レイヤー4）ベースのトラフィック
+Userアプリのターゲットグループ外部ネットワークロードバランサー（v2）TCPWWW TCP + ルール
+SearchアプリのターゲットグループHTTPWWW TCP + ルール
+ヘルスチェックヘルスチェック
+
+--- 第134页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ロードバランサーのスティッキネス•スティッキネス: 同じクライアントが、常に同じインスタンスにリダイレクトされるようにすること•クラシックロードバランサーとアプリケーションロードバランサーで利用可能•スティッキネスに使われる”cookie” に有効期限を設定できます•使用例：ユーザーがセッションデータを失わないようにする•スティッキネスを有効にすると、バックエンドのEC2 インスタンスの負荷が不均衡になる可能性があります
+EC2インスタンスEC2インスタンスクライアントA クライアントB クライアントC
+
+--- 第135页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com クロスゾーンロードバランシング
+Availability Zone 1
+Availability Zone 2
+10101010101010101010
+Availability Zone 1
+Availability Zone 2
+25256.256.256.256.256.256.256.256.25
+クロスゾーンロードバランシングあり:すべてのAZ にある、すべてのインスタンスに均等に負荷を分散しますクロスゾーンロードバランシングなし:ELB のインスタンスごと（=AZ ごと）に均等に負荷を分散します50505050
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_28.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第136页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com クロスゾーンロードバランシング•アプリケーションロードバランサー•常時有効（無効化できません）•AZ間のデータ通信料が無料•ネットワークロードバランサー•デフォルトでは無効•有効になっている場合、AZ間データの料金が発生•クラシックロードバランサー•マネジメントコンソールで作成=> デフォルトで有効•CLI/API経由で作成=> デフォルトで無効•有効な場合、AZ間データの料金は不要
+
+--- 第137页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SSL/TLS の基礎知識•SSL証明書により、クライアントとロードバランサー間のトラフィックを暗号化することができます（通信路の暗号化）•SSL: Secure Sockets Layer の略で、接続を暗号化するための技術です•TLS: Transpor t Layer Security の略で、新しいバージョンのセキュリティです•現在ではTLS 証明書が主に使用されていますが、未だにSSL と呼ばれます•パブリックSSL 証明書は、認証局（CA）が発行しますComodo、Symantec、GoDaddy、GlobalSign、Digicert、Letsencryptなど...•SSL証明書には有効期限（作成者が設定）があり、更新する必要があります
+
+--- 第138页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ロードバランサー-SSL証明書•ロードバランサーはX.509 証明書（SSL/TLS サーバー証明書）を使います•ACM（AWS Certificate Manager）を使って証明書を管理することができます•独自の証明書を作成してアップロードすることも可能です•HTTPS リスナー•デフォルトのSSL 証明書を指定する必要があります•複数のドメインに対応するため、証明書を追加することが可能（オプション）•クライアントはSNI（ServerName Indication）を使って、到達するホスト名を指定可能EC2インスタンスユーザーHTTPS（暗号化）over wwwHTTPover プライベートVPCLOAD BALANCER
+
+--- 第139页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SSL -SNI（Server Name Indication）•SNI は、複数のSSL証明書を1つのWebサーバーに搭載する（複数のWebサイトに対応する）際の問題を解決します•SNI は2003 年に提案されたプロトコルで、クライアントは最初のSSLハンドシェイクでターゲットサーバーのホスト名を示す必要があります•サーバは、正しい証明書を見つけるか、デフォルトの証明書を返します注意点•ALB & NLB（v2）、CloudFrontでのみ動作します•CLB(v1)では動作しませんクライアント
+ALB
+SSL Cert:domain1.example.com
+SSL Cert:www.mycorp.com 
+リクエストwww.mycorp.comwww.mycorp.com のターゲットグループdomain1.example.com のターゲットグループ
+….正しいSSL認証を使う
+
+--- 第140页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Elastic Load Balancer -SSL証明書•クラシックロードバランサー（v1）•1つのSSL 証明書のみをサポート•複数のホスト名で複数のSSL証明書を使用する場合、複数のCLB を使用する必要があります•アプリケーションロードバランサー（v2）•複数のSSL 証明書を持つ複数のリスナーに対応•SNI（ServerName Indication）を使用して動作します•ネットワークロードバランサー（v2）•複数のSSL 証明書を持つ複数のリスナーに対応•SNI（ServerName Indication）を使用して動作します
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_29.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第141页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ELB -登録解除の遅延•機能の名前•CLB：コネクションドレイニング•ALB & NLB: 登録解除の遅延（ターゲットグループ）•インスタンスの登録解除中や不調時に「処理中のリクエスト」の完了を待つ時間•登録解除されたインスタンスへは、新規リクエストの送信を停止します•期間は1～3600秒、デフォルトは300秒•無効にすることもできます（値を0に設定）•リクエストがすぐ完了する場合は、低い値に設定しておきましょうEC2EC2 EC2 
+ELB既存の接続が完了するまで待つ
+新規接続は他のインスタンスへ
+ユーザードレイニング
+
+--- 第142页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オートスケーリンググループとは？•実際のシステムでは、ウェブサイトやアプリケーションの負荷は常に変化します•クラウドでは、サーバーの作成や処分が非常に迅速に行えます•オートスケーリンググループ（ASG）でできること•負荷の増加に合わせたスケールアウト（EC2インスタンスの追加）•負荷の減少に合わせてスケールイン（EC2インスタンスの削除）•最小限のマシンと最大限のマシンが稼働していることの確認•ロードバランサーへの新規インスタンスの自動登録
+
+--- 第143页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSのオートスケーリンググループ
+EC2インスタンスEC2インスタンスEC2インスタンス最小キャパシティ(Minumum capacity)実際のサイズ／希望する容量(Desired capacity) 最大キャパシティ(Maximum capacity) 
+EC2インスタンスEC2インスタンスEC2インスタンス必要に応じてスケールアウトオートスケーリンググループ
+
+--- 第144页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSのオートスケーリンググループロードバランサーによる
+EC2インスタンスEC2インスタンスEC2インスタンスEC2インスタンスEC2インスタンスEC2インスタンスオートスケーリンググループウェブトラフィックロードバランサー
+
+--- 第145页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ASGの属性•起動用の設定•AMI + インスタンスタイプ•EC2 ユーザーデータ•EBS ボリューム•セキュリティグループ•SSH キーペア•最小キャパシティ／最大キャパシティ／初期キャパシティ•ネットワーク+ サブネットの情報•ロードバランサー情報•スケーリングポリシー
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_3.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第11页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSの基礎知識-パート1
+
+--- 第12页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Cloud History2002: Amazon 内部でリリース2003: アマゾンのインフラが“売れる” と考えて、リリースを予告2004: パブリックリリースwith SQS2006: 再リリースwith SQS, S3 & EC22007: ヨーロッパでリリース
+
+--- 第13页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS クラウドに関する数字•2019年, AWS の年間売上は350億ドル•同年、AWS のシェアは47% (Microsoft が22%で2位)•クラウドの開拓者であり、9 年連続のリーダー•1,000,000 以上のアクティブユーザ
+Gartner Magic Quadrant
+
+--- 第14页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS クラウドのユースケース•AWS は、洗練された、スケーラブルなアプリケーション開発を可能にします•さまざまな業界で利用できます•ユースケースの一例•エンタープライズシステム、バックアップ、ビッグデータ解析•ウェブサイトのホスティング、モバイル・ソーシャルアプリ•ゲーム
+
+--- 第15页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS グローバル基盤•AWS リージョン•AWS アベイラビリティゾーン•AWS エッジロケーション/ 接続ポイント(Points of Presence)
+https://aws.amazon.com/about-aws/global-infrastructure/
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_30.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第146页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オートスケーリングのアラーム•CloudWatchのアラームに基づいて、ASGはスケーリングできます•アラームはメトリクス（平均CPU使用率などの”指標”）を監視•メトリクスは、ASGインスタンス全体から算出します•アラームに基づいて、以下を作れます•スケールアウトポリシー（インスタンス数を増やす）•スケールインポリシー（インスタンスの数を減らす）EC2インスタンスEC2インスタンスEC2インスタンスEC2インスタンス
+アラームトリガーのスケーリング
+
+--- 第147页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オートスケーリングの新ルール•EC2が直接管理する「より良い」自動スケーリングルールを定義できるようになりました•目標とする平均CPU使用率•インスタンスごとのELBへのリクエスト数•平均ネットワーク入力•平均ネットワーク出力•新しいルールは、設定が簡単でより効果のあるルールを作ることができます
+
+--- 第148页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オートスケーリングカスタムメトリクス•カスタムメトリクス（例：接続ユーザー数）に基づいてオートスケールすることができます1.EC2上のアプリケーションからCloudWatchにカスタムメトリックを送信（PutMetricAPI）2.CloudWatchのアラームを作成し、基準値（高・低）を設定3.CloudWatchアラームをASGのスケーリングポリシーとして使用するよう設定
+
+--- 第149页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ASG の雑多な説明•スケーリングポリシーは、CPU、ネットワーク、などに加えて、カスタムメトリクスやスケジュールに基づいて設定することも可能です（アクセスパターンがわかっている場合）•ASGは起動設定(Launch Configuration)または起動テンプレート(Launch Template)を使用しています(Launch Template のほうが新しい) •ASGをアップデートするには、起動設定/起動テンプレートを新しくする必要があります•ASGに割り当てられたIAMロールがEC2インスタンスに割り当てられます•ASGは無料です。ASGが起動するリソースには料金がかかります•インスタンスがASG の管理下であれば、何らかの理由でインスタンスが終了しても、ASGが自動的に新しいインスタンスを作成してくれます•ASGはLBによって不健全とマークされたインスタンスを終了させることができます（その結果、それらのインスタンスを置き換えることができます）
+
+--- 第150页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オートスケーリンググループスケーリングポリシー•ターゲットトラッキングスケーリング•最もシンプルで、セットアップが簡単•例: ASGのCPUの平均値を40％程度にしたい•シンプル／ステップスケーリング•CloudWatchのアラームが発生した場合（例: CPU > 70%）、2 台追加•CloudWatchのアラームが発生した場合（例: CPU < 30%）、1 台削除•スケジュールされたアクション•既知のアクセスパターンに基づいてスケーリングを設定する•例: 金曜日の午後5時に、最小キャパシティを10にする
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_31.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第151页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オートスケーリンググループスケーリングクールダウン•クールダウン期間: 前回のスケーリングが完了する前に、AutoScalingグループが追加のインスタンスを起動したり終了したりしないようにするためのものです•デフォルトのクールダウンに加えて、特定のシンプルスケーリングポリシーに適用するクールダウンを作成することができます•スケーリング固有のクールダウンの期間は、デフォルトのクールダウン期間よりも優先されます•スケーリング固有のクールダウン期間は、スケールインポリシー（特定の基準やメトリックに基づいてインスタンスを終了させるポリシー）によく使われます。このポリシーがインスタンスを終了させるので、AmazonEC2 Auto Scalingは、余分なインスタンスを終了させるかどうかを決定する時間を短くできます•デフォルトのクールダウン期間300 秒では長すぎる場合、スケールインポリシーに180秒というスケールに応じたクールダウン期間を適用することで、コストを削減することができます•アプリケーションが1 時間ごとに何度もスケールアップ/ダウンしている場合は、AutoScaling Groupsのクールダウンタイマーと、スケールアップのトリガーとなるCloudWatchのアラーム期間を調整します
+https://docs.aws.amazon.com/autoscaling/ec2/userguide/Cooldown.html
+
+--- 第152页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ソリューションアーキテクトのためのASG•ASG Default Termination Policy（概略）:1.インスタンスの数が最も多いAZ を探す2.AZ に選択可能な複数のインスタンスがある場合、起動テンプレート/起動設定が最も古いものを削除する•ASG はデフォルトでAZ 間のインスタンス数のバランスを取ろうとしますアベイラビリティゾーンAオートスケーリンググループアベイラビリティゾーンB
+v1v1v2v2v1v1v1
+
+--- 第153页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ソリューションアーキテクトのためのASGライフサイクルフック•デフォルトでは、ASGでインスタンスが起動されるとすぐにサービスが開始されます•インスタンスがサービスを開始する前に、追加の処理を実行させることができます（Pending状態）•インスタンスが終了する前に、追加の処理を実行させることもできます（Ter minating 状態）
+https://docs.aws.amazon.com/autoscaling/ec2/userguide/lifecycle-hooks.html
+
+--- 第154页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ソリューションアーキテクトのためのASG起動テンプレートと起動設定•両方に共通:•Amazon Machine Image（AMI）のID、インスタンスタイプ、キーペア、セキュリティグループ、およびEC2インスタンス起動用のその他のパラメータ（タグ、EC2ユーザーデータ...）•起動設定（LaunchConfiguration -レガシー）:•変更したい場合は、毎回、新しい設定を作り直す必要があります•起動テンプレート（LaunchTemplate -新しい）:•複数のバージョンを持つことができる•パラメータのサブセット（再利用や継承のための部分的な設定）の作成•オンデマンドとスポット、両方のインスタンスを組み合わせたプロビジョニング•T2のアンリミテッドバースト機能が使える•AWSによる推奨
+
+--- 第155页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDS, Aurora, ElastiCache
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_32.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第156页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS RDSの概要•RDS はRelational Database Service の略です•SQL でアクセスする、マネージドDB サービス•AWS が管理するクラウド上にデータベースを作成できます•Postgres•MySQL•MariaDB•Oracle•Microsoft SQL Server•Aurora (AWS が開発したデータベース)
+
+--- 第157页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDSとEC2でDBサーバを立てることとの違い•RDSは「マネージドサービス」•プロビジョニング、OSパッチの自動化•継続的なバックアップと特定のタイムスタンプへのリストア（Point in Time Restore）!•モニタリングダッシュボード•リードレプリカによるリードパフォーマンスの向上•DR（ディザスター・リカバリー）のためのマルチAZセットアップ•アップグレード用のメンテナンスウィンドウ•スケーリング機能（垂直・水平）•EBS（gp2またはio1）でバックアップされたストレージ•しかし、インスタンスにSSH接続することはできません
+
+--- 第158页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDSのバックアップ•RDSではバックアップが自動的に有効になります•バックアップの自動化•毎日のデータベースのフルバックアップ（メンテナンスウィンドウ中）•トランザクションログは5分ごとにRDSにバックアップされます•任意の時点にリストアする機能（最も古いものから5分前まで）•バックアップを7日間保持（35日間に延長可能）•DBスナップショット:•ユーザーが手動で起動する場合•バックアップの保持期間は自由に設定できます
+
+--- 第159页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDS -ストレージのオートスケーリング•RDS DBインスタンスのストレージを動的に増やすことができます•RDSは、データベースの空き容量が不足していることを検知すると、自動的にスケーリングを行います•データベースストレージの拡張、手動は避けましょう•Maximum Storage Threshold（DBストレージの上限）を設定する必要があります•以下の場合、自動的にストレージを変更します•空きストレージが割り当てられたストレージの10％以下•その状態が5分以上続いている•前回の変更から6時間経過•予測不可能なワークロードを伴うアプリケーションに有効•すべてのRDSデータベースエンジンをサポート（MariaDB, MySQL, PostgreSQL, SQL Server, Oracle）
+読み/書き
+アプリケーション
+ストレージ
+
+--- 第160页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com リードスケーラビリティのためのRDSリードレプリカ
+RDS DBインスタンスRDS DB インスタンスリードレプリカ
+RDS DB インスタンスリードレプリカ
+アプリケーション書き読み読み読み非同期複製非同期複製•最大5 台のリードレプリカ•AZ 内、複数AZ分散、リージョン分散•レプリケーションは非同期、読み取りは”結果整合性”•レプリカを独立したDB に昇格させることができます•アプリケーションは、リードレプリカを活用するために接続情報を更新する必要があります
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_33.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第161页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDS リードレプリカ-使用例•通常の負荷がかかっている本番用データベースがあります•レポートアプリケーションを実行して、分析したいとします•新しい分析ワークロードを実行するために、リードレプリカを作成します•本番アプリケーションは影響を受けずに分析ができます•リードレプリカには、SELECT（=読み取り）命令のみ使えます（INSERT, UPDATE, DELETE は不可）
+RDS DBインスタンス本番アプリケーション読み
+RDS DB インスタンスリードレプリカ
+読み読み非同期複製報告用アプリケーション
+
+--- 第162页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDSリードレプリカ-ネットワークコスト
+RDS DBインスタンスRDS DB インスタンスリードレプリカ
+非同期複製クロスリージョン$$$リージョン/AZus-east-1aリージョン/AZeu-west-1b•AWSでは、データをAZ間で移動させる際にネットワークコストが発生します•同一リージョン内のRDSリードレプリカについては、その費用はかかりません
+VS
+RDS DBインスタンスRDS DB インスタンスリードレプリカ
+非同期複製同じリージョン無料同じリージョン、異なるAZus-east-1a                                          us-east-1b
+
+--- 第163页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDS マルチAZ（ディザスタリカバリ）
+RDS マスターDBインスタンス（AZ A)アプリケーション書き読み
+同期複製•同期複製（同期レプリケーション）•1つのDNS名–トラブル時には、スタンバイへ自動的にフェイルオーバー•アベイラビリティの向上•AZの損失、ネットワークの損失、インスタンスやストレージの障害が発生した場合のフェイルオーバー•アプリを変更する必要なし•スケーリングには使用しない•注:リードレプリカは、ディザスタリカバリ（DR）のためにマルチAZ として設定されますRDS DB インスタンススタンドバイ(AZ B)
+1つのDNS名-自動フェイルオーバー
+
+--- 第164页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDS -シングルAZからマルチAZへ•ゼロダウンタイムで移行できます（DBを停止する必要なし）•データベースの“変更”をクリックするだけ•内部で起こること•スナップショットの撮影•スナップショットから新しいDBを新しいAZに復元する•2つのデータベースの間に同期が確立される
+RDS DBインスタンス同期複製
+スタンバイDB 
+スナップショットレストアDBスナップショット
+
+--- 第165页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDSセキュリティ-暗号化•データの暗号化•AWS KMSを使ってマスターとリードレプリカを暗号化することが可能-AES-256暗号化•起動時に暗号化を定義する必要がある•マスターが暗号化されていないと、リードレプリカも暗号化できない•透過的データ暗号化（TDE）がOracleとSQL Serverで利用可能•通信の暗号化•RDSの送受信データを暗号化するためのSSL証明書•信頼証明書付きのSSLをデータベース接続時に使うオプションがある•SSLを強制させるために•PostgreSQL: AWS RDS コンソール(パラメータグループ) で、rds.force_ssl=1•MySQL: DBの中で以下のSQL を実行GRANT USAGE ON *.* TO 'mysqluser'@'%' REQUIRE SSL;
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_34.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第166页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDSの暗号化操作•RDSバックアップの暗号化•暗号化されていないRDSデータベースのスナップショットも、暗号化されていません•暗号化されたRDSデータベースのスナップショットは暗号化されます•スナップショットを、暗号化が有効なスナップショットとしてコピーできる•暗号化されていないRDSデータベースを暗号化するには•暗号化されていないデータベースのスナップショットを作成する•スナップショットをコピーし、スナップショットの暗号化を有効にする•暗号化されたスナップショットからデータベースを復元する•アプリケーションを新しいデータベースに移行し、古いデータベースを削除する
+
+--- 第167页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDS セキュリティ-ネットワーク&IAM•ネットワークセキュリティ•RDS データベースは通常、パブリックなサブネットではなく、プライベートなサブネット内に配置されます•RDS のセキュリティは、セキュリティグループを利用しています（EC2 インスタンスと同じ）-どのIP / セキュリティグループがRDS と通信できるかを制御します•アクセス管理•IAMポリシーは、（RDS APIを通じて）AWSRDS を管理できる人を制御するのに役立ちます•従来のユーザー名とパスワードを使ったログイン制御も可能です•IAMベースの認証は、RDSのMySQLとPostgreSQLへのログインに使用できます
+
+--- 第168页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDS -IAM認証•IAMデータベース認証は、MySQLとPostgreSQLで動作します•パスワードは必要なく、IAMとRDSのAPI呼び出しで取得した認証トークンだけでOKです•認証トークンの有効期限は15分です•メリット•ネットワークの入出力がSSL で暗号化されます•DBではなくIAMでユーザーを一元管理•IAMロールやEC2インスタンスのプロファイルを活用して簡単に統合可能
+EC2
+RDSセキュリティグループSSL暗号化認証トークンを渡す
+EC2セキュリティグループ
+RDSサービスAPI呼び出し認証トークンの取得
+IAMロール
+
+--- 第169页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDSセキュリティ-まとめ•データの暗号化•最初にDBインスタンスを作成したときにのみ行われる•または、暗号化されていないDB => スナップショット=> スナップショットを暗号化してコピー=> スナップショットからDB を作成•あなたの責任:•DB のSG のポート/ IP / セキュリティグループのインバウンドルールの確認•データベース内でのユーザー作成と権限設定、またはIAM による管理•データベースの作成、公開するかどうかの設定•パラメータグループまたはDB がSSL 接続のみを許可するように設定されていること•AWS の責任:•SSH アクセスなし•手動でのDB パッチ作業が不要•手動でのOS パッチ適用が不要•DB が実際に動作するインスタンスをチェックする方法なし
+
+--- 第170页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Aurora•Aurora はAWS の独自技術です（オープンソースではない）•PostgresとMySQLの両方がAurora DBとしてサポートされています（AuroraがPostgresやMySQLのデータベースであるかのように使えます）•Auroraは「AWSクラウドに最適化」されており、RDS上のMySQLと比較して5倍、RDS上のPostgresと比較して3倍以上のパフォーマンス向上を実現しています•Aurora ストレージは、10GB 単位で最大64TB まで自動的に増加します•Aurora は、MySQL が5 つのレプリカを持つのに対し、15 のレプリカを持つことができ、レプリケーションプロセスはより高速です（10ms以下）•Auroraのフェイルオーバーは瞬時に行われます。HA（High Availability）ネイティブです•AuroraはRDSよりもコストがかかります（20％増）が、高性能です
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_35.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第171页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Aurora High Availability and Read Scaling•3つのAZに6つのデータコピー•6 つ中4 つのデータコピーに書き込み•6 つ中3 つのデータコピーから読み込み•ピアツーピア・レプリケーションによる自己ヒーリング•ストレージは100個のボリュームでストライピング•1つのAurora Instanceが書き込みを行う（マスター）•マスターのフェイルオーバーは30秒以内に自動的に実施•マスター+ 最大15 台のAurora Read Replicas がリードを担当•クロスリージョンレプリケーションのサポート共有ストレージボリューム複製＋自己修復＋自動拡張AZ 1 AZ 2 AZ 3 
+WRRRRR
+
+--- 第172页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オートスケーリングAurora DB Cluster
+共有ストレージボリューム10Gから64TBまでの自動拡張が可能
+WRRRRR読み込みエンドポイントコネクションロードバランシング書き込みエンドポイントマスターを指す
+クライアント
+
+--- 第173页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Aurora の特徴•自動フェイルオーバー•バックアップとリカバリー•隔離とセキュリティ•業界標準のコンプライアンス•ボタン1 つでスケーリング•ゼロダウンタイムの自動パッチ適用•高度なモニタリング•定期的なメンテナンス•Backtrack: バックアップを使わずに任意の時点のデータを復元できます
+
+--- 第174页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Aurora セキュリティ•同じエンジンを使用しているため、RDS と同様です•KMS を利用したデータの暗号化•自動バックアップ、スナップショット、レプリカも暗号化されます•SSL による通信の暗号化（MySQL やPostgres と同じプロセス）•IAM トークンによる認証が可能（RDS と同じ方式）•セキュリティグループでインスタンスを保護する責任は、ユーザにあります•SSH はできません
+
+--- 第175页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com レプリカオートスケーリングAurora レプリカ-オートスケーリング
+書き込みエンドポイント読み込みエンドポイント
+共有ストレージボリュームWRRRR
+クライアント
+CPU使用率CPU使用率多数のリクエストエンドポイント拡張
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_36.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第176页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Aurora –カスタムエンドポイント•Aurora インスタンスの一部をカスタムエンドポイントとして定義できます•例: 特定のレプリカで、分析クエリーを実施•カスタムエンドポイントを設定したあとは、通常、読み込みエンドポイントは使われません
+db.r5.2xlarge
+書き込みエンドポイント読み込みエンドポイント
+共有ストレージボリュームWRRRR
+クライアントクエリーカスタムエンドポイントdb.r3.largedb.r3.large
+db.r5.2xlarge分析クエリー
+
+--- 第177页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Aurora Serverless
+共有ストレージボリュームプロキシフリート(Auroraが管理) 
+クライアント
+•実際の使用状況に応じたデータベースの自動生成と自動スケーリング•頻繁でない、断続的な、または予測不可能なワークロードに向いています•キャパシティ計画が不要です•秒単位の支払いで、より高い費用対効果が期待できます
+
+--- 第178页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Aurora マルチマスター•ライトノードの即時フェイルオーバー(HA)が必要な場合に•すべてのノードがR/Wを行う-vs RR を新しいマスターとして昇格させる
+クライアント複数のDB接続（フェイルオーバー用）
+共有ストレージボリューム複製複製
+
+--- 第179页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com グローバルAurora•Aurora Cross Region Read Replicas: •ディザスターリカバリーに有効•設定が簡単•Aurora Global Database（推奨）•1 プライマリ・リージョン（リード／ライト）•最大5つのセカンダリ（リードオンリー）リージョン、レプリケーションラグは1秒以下•セカンダリ領域あたり最大16個のリードレプリカ•レイテンシーの低減に貢献•ディザスタリカバリのために別のリージョンをメインに切り替える場合、RTOは1分未満
+US-EAST-1 –プライマリリージョン
+アプリケーション読み取り/書き込み
+EU-WEST-1 -セカンダリリージョン
+アプリケーション読み取り専用レプリケーション
+
+--- 第180页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon ElastiCacheの概要•RDSがリレーショナルデータベースのマネージドサービスなように…•ElastiCacheはRedisやMemcachedのマネージドサービスです•キャッシュはインメモリーデータベースで、非常に高い性能と低いレイテンシーを実現しています•読み取りが多いワークロードで、データベースの負荷を軽減します•アプリケーションのステートレス化に貢献します•OSのメンテナンス／パッチ適用、最適化、セットアップ、設定、監視、障害復旧、バックアップをAWSが担当•ElastiCacheを使用するには、アプリケーションのコードを大きく変更する必要があります
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_37.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第181页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElasticCache アーキテクチャ-DBキャッシュ•アプリケーションはElastiCache に問い合わせ、利用できない場合はRDS から取得してElastiCache に格納するようにします•ElastiCache を活用することで、RDS の負荷を軽減できます•キャッシュには、最新のデータだけが使われるようにするための無効化戦略が必要ですアプリケーションキャッシュヒット
+AmazonRDS AmazonElastiCacheキャッシュミスDBからの読み出しキャッシュへの書き込み
+
+--- 第182页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElastiCache アーキテクチャ-ユーザーセッションストア•ユーザーがいずれかのアプリケーションにログインしたとします•アプリケーションはセッションデータをElastiCacheに書き込みます•ユーザーがアプリケーションの別のインスタンスにヒットした場合でも、、、•そのインスタンスがセッションデータを取得することで、ユーザーをログイン済み状態にできますアプリケーションセッションを取得するAmazonElastiCacheアプリケーションアプリケーションセッションを書きこみユーザー
+
+--- 第183页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElastiCache -Redis vs MemcachedRedis •オートフェイルオーバー付きマルチAZ•リードレプリカによるリードの拡張と高可用性の確保•AOFパーシスタンスによるデータの耐久性•バックアップ・リストア機能
+Memcached•データを分割するためのマルチノード（シャーディング）•ハイアベイラビリティー（レプリケーション）がない•非永続的•バックアップ・リストアなし•マルチスレッド・アーキテクチャ
++レプリケーションシャーディング
+
+--- 第184页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElastiCache -キャッシュのセキュリティ•ElastiCacheの両方に共通•IAM認証に対応していない•ElastiCacheのIAMポリシーは、AWSのAPIレベルのセキュリティにのみ使用されます•Redis 認証•Redisクラスタの作成時に「パスワード/トークン」を設定することができる•（セキュリティグループに加えて）キャッシュのセキュリティレベルを向上させられます•SSLによる通信の暗号化に対応•Memcached•SASLベースの認証に対応（上級）
+クライアント
+EC2
+RedisのセキュリティグループSSL暗号化Redis 認証
+EC2セキュリティグループ
+
+--- 第185页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElastiCache のパターン•レイジーローディング:読み込まれたデータはすべてキャッシュされますが、キャッシュのデータが古くなる（データが無効になる）可能性があります•ライトスルー: DBに書き込まれた際に、キャッシュ内のデータを追加・更新します（無効なデータが発生しない）•セッションストア:一時的なセッションデータをキャッシュに保存（TTL機能を使用）•引用: コンピュータサイエンスで難解なことは2 つだけ、キャッシュの無効化と名前の付け方アプリケーションキャッシュヒット
+AmazonRDS AmazonElastiCacheキャッシュミスDBからの読み出しキャッシュへの書き込み
+レイジーローディングの説明
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_38.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第186页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElastiCache -Redisの使用例•ゲームのリーダーボードは計算が複雑•Redisの“ソートされたセット(Sorted Set)” は、一意性と要素の順序付けの両方を保証します•新しい要素が追加されるたびに、リアルタイムでランキングされ、正しい順番で追加されていきます
+クライアント
+ElastiCachefor RedisElastiCachefor RedisElastiCchefor Redis
+1
+2
+3リアルタイムのリーダーボード
+
+--- 第187页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Route 53
+
+--- 第188页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Route 53•TTL•CNAME とAlias の違い•ヘルスチェック•ルーティングポリシー•シンプル•ウェイト•レイテンシー•フェイルオーバー•ジオロケーション•マルチバリュー•サードパーティードメインの統合
+
+--- 第189页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Route 53の概要•Route53: マネージドDNS（ドメイン・ネーム・システム）•DNSは、クライアントがURL を介してIP アドレスを知るために使う、ルール・レコードの集合体です•AWS Route53 の最も一般的なレコード•A: ホスト名をIPv4 に•AAAA: ホスト名をIPv6 へ•CNAME: ホスト名を（別の）ホスト名へ•Alias: ホスト名をAWS リソースへ
+
+--- 第190页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Route 53-A レコード
+DNS リクエストmyapp.mydomain.com 送信元IP: 32.45.67.85(Aレコード：ホスト名→IP)HTTP リクエストIP:32.45.67.85 ホスト:  http://myapp.mydomain.com HTTPレスポンスRoute 53
+ウェブブラウザ
+アプリケーションサーバーip: 32.45.67.85
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_39.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第191页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Route 53の概要•Route53 で管理できるドメイン名:•所有（または購入）しているパブリックドメイン名application1.mypublicdomain.com •VPC内のインスタンスが解決できるプライベートドメイン名application1.company.internal •Route53には、以下のような高度な機能があります•ロードバランシング（DNSによる-クライアント・ロードバランシング）•ヘルスチェック（限定的ですが・・・）•ルーティングポリシー: シンプル、フェイルオーバー、ジオロケーション、レイテンシー、ウェイト、マルチバリュー•ホスティングされたゾーンごとに月額0.50 ドル
+
+--- 第192页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DNSレコードのTTL（Time to Live）
+DNS リクエストmyapp.mydomain.com IP アドレス：32.45.67.85(A レコード：ホスト名→IP)+ TTL : 300秒Route 53
+ウェブブラウザDNS キャッシュTTL 期間中DNS リクエストmyapp.mydomain.com IPアドレス：195.23.45.22(A レコード：ホスト名→IP)+ TTL : 300秒•高TTL : （例: 1 日）•DNSのトラフィックが少ない•レコードが古い可能性がある•低TTL : （例: 60秒）•DNSのトラフィック増加•レコードが古くなっている時間が短い•レコードの変更が容易•TTL は各DNS レコードに必須
+
+--- 第193页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CNAME とAlias の違い•AWSリソース（ロードバランサー、CloudFront...）は、AWSのホスト名を公開しています。lb1-1234.ap-northeast-1.elb.amazonaws.com に、myapp.mydomain.comでアクセスできるようにしたい場合、、、•CNAME:•ホスト名を、他の任意のホスト名を指すように設定できます(app.mydomain.com=> blabla.anything.com)•非ルートドメイン（例：something.mydomain.com）に限ります•Alias:•ホスト名を、AWSリソースを指すように設定できます（app.mydomain.com=> blabla.amazonaws.com）•ルートドメインと非ルートドメイン（例：mydomain.com）で動作します•無料、ネイティブのヘルスチェック
+
+--- 第194页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ルーティングポリシー–シンプル•単一のリソースにリダイレクトする必要がある場合に使います•シンプルなルーティングポリシーにヘルスチェックを加えることはできません•複数の値が返された場合は、クライアントがランダムに1つの値を選択する
+Route 53
+ウェブブラウザfoo.example.com A: 11.22.33.44
+
+--- 第195页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ルーティングポリシー–加重•特定のエンドポイントに到達するリクエストの割合を制御する•例えば、新しいアプリのバージョンでトラフィックの1％をテストするのに役立ちます•2つのリージョン間でトラフィックを分割するのに役立つ•ヘルスチェックとの併用が可能
+Route 53
+ウェイト：70
+ウェイト：10
+ウェイト：2070%20%10%
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_4.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第16页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWSのリージョン（地域）•AWSのサービスは世界各地にある”リージョン”で提供されています•リージョン名: us-east-1, ap-northeast-1(東京), ...•リージョンは、”データセンターの集まり” です•ほとんどのAWSサービスは、リージョンごとに管理されます
+https://aws.amazon.com/about-aws/global-infrastructure/
+
+--- 第17页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS リージョンの選び方•コンプライアンス(データ統制・法的要求): 明示的な許可なしに地域外にデータをだせない•顧客分布の推定: 遅延の短縮•利用できるサービス: 新サービス・新機能は全リージョンで使えるとは限らない•価格: リージョンごとに価格が異なる（サービスの価格説明に記載）
+新しいアプリを展開するとき、どのリージョンを使う?
+?
+?
+?
+?
+
+--- 第18页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS のアベイラビリティー・ゾーン•各リージョンには複数のアベイラビリティー・ゾーン(AZ) があります（2〜6、通常3）•例: ap-northeast-1a, ap-northeast-1b, ap-northeast-1c•各AZ は、電源、ネットワーク、接続性を冗長化した独立したデータセンター（群）です•お互いに独立しているので、災害からも隔離されています•帯域幅が広く、超低遅延のネットワークで結ばれていますAWSリージョン東京：ap-northeast-1ap-northeast-1a
+ap-northeast-1bap-northeast-1c
+
+--- 第19页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS 接続ポイント(Points of Presence)、エッジロケーション•Amazon には216 の接続ポイント(205 のエッジロケーションと11 のリージョン別キャッシュ) が84 都市・42 カ国にあります•エンドユーザーに低遅延でコンテンツを届けられます
+https://aws.amazon.com/cloudfront/features/
+
+--- 第20页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS コンソール•グローバルなAWS サービス:•Identity and Access Management (IAM)•Route 53 (DNS サービス)•CloudFront (Content Delivery Network)•WAF (Web アプリケーションファイアウォール)•ほとんどのサービスはリージョン区切りです:•Amazon EC2 (Infrastructure as a Service)•Elastic Beanstalk (Platform as a Service)•Lambda (Function as a Service)•Rekognition(Software as a Service)•リージョン一覧:https://aws.amazon.com/about-aws/global-infrastructure/regional-product-services
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_40.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第196页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ルーティングポリシー–レイテンシー•クライアントの近くの、最もレイテンシー（遅延）の少ないサーバーにリダイレクトする機能•ユーザーのレイテンシーを重視する場合には非常に便利です•レイテンシーは、クライアントと設定したAWS リージョン間の遅延で評価されます•ドイツからのアクセスが米国に向けられるかもしれない（それが設定されたなかで最も遅延が低ければ）
+
+--- 第197页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ヘルスチェック•ヘルスチェックにx 回失敗した=> unhealthy (デフォルト3)•x 個のヘルスチェックに合格した後=> healthy (デフォルト3)•デフォルトのヘルスチェックの間隔: 30秒（10秒に設定することも可能ですが、コストが高くなります）•AWS が世界各国に用意した15 個のヘルスチェッカーが、エンドポイントをチェック•=> 平均して2秒に1回の割合でリクエストが発生•HTTP、TCP、HTTPS のヘルスチェックが可能（SSL検証はなし）•ヘルスチェックをCloudWatch と連携させることができます•ヘルスチェックの結果は、Route53 のDNS クエリに反映されます
+
+--- 第198页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ルーティングポリシー–フェイルオーバー
+Route 53
+プライマリー
+セカンダリー(ディザスタリカバリ)ヘルスチェック(必須)フェイルオーバー
+ウェブブラウザDNSリクエスト
+
+--- 第199页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ルーティングポリシー–位置情報•レイテンシーベースとは異なります•ユーザーの位置情報に基づいたルーティング•例: イギリスからのトラフィックは、特定のIPに送られるように指定•「デフォルト」のポリシーを作成する必要がある（ロケーションにマッチするものがない場合に備えて）
+A: 22.33.44.55A: 11.22.33.44
+デフォルトA:33.44.55.66
+
+--- 第200页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 地理的近接性ルーティングポリシー•ユーザーとリソースの地理的な位置関係に基づいて、リソースへのトラフィックをルーティングします•バイアスと呼ばれる値を指定することで、指定されたリソースに流れるトラフィックを調整できます•地理的な領域の大きさを変えるには、バイアス値を変更します拡大（1～99）、縮小（-1～-99）•リソースとして指定できるもの:•AWSリソース（リージョンを指定）•AWS 以外のリソース（緯度と経度を指定）•この機能を使うにはRoute53 トラフィックフロー(高度) を使う必要があります
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_41.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第201页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 地理的近接性ルーティングポリシー
+us-east-1
+us-west-1
+バイアス：0バイアス：0
+
+--- 第202页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 地理的近接性ルーティングポリシー
+us-east-1
+us-west-1
+バイアス：0バイアス：50
+
+--- 第203页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ルーティングポリシー–複数値回答（マルチバリュー）•複数のリソースにトラフィックをルーティングする場合に使用•Route 53 のヘルスチェックをレコードと関連付けが可能•1つのクエリーに対して、最大8つの健全なレコードが返されます•マルチバリューはELBの代わりにはなりません
+
+--- 第204页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com レジストラとしてのRoute53•ドメインネームレジストラとは、インターネット上のドメイン名を管理する組織のことです•有名なドメインネームレジストラ•GoDaddy•Google Domains•などなど...•あとは... Route53 (AWS) も!•ドメインレジストラ!= DNS
+
+--- 第205页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Route 53のサードパーティレジストラ•サードパーティのウェブサイトでドメインを購入した場合でも、Route53 を使うことができます•1) Route 53でホスティッドゾーンを作成する•2) サードパーティサイトのNS レコードを、Route53 ネームサーバを使用するように更新する•ドメインレジストラ!= DNS•(しかし、各ドメインレジストラは通常、DNS機能を備えています)
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_42.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第206页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com クラシックソリューションアーキテクチャ
+
+--- 第207页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com セクション紹介•これらのソリューション・アーキテクチャーは、このコースのイチオシの部分です•これまで見てきた技術がどのように連携しているかを理解しましょう•このセクション内容を、ぜひしっかり理解してください•多くのサンプルケーススタディを通して、ソリューションアーキテクトの考え方がどのように適用されていくのかを見ていきます•WhatIsTheTime.Com •MyClothes.Com •MyWordPress.Com •アプリケーションを素早く立ち上げ•Beanstalk
+
+--- 第208页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートレスなウェブアプリWhatIsTheTime.com •WhatIsTheTime.comでは、今の時間を知ることができます•データベースは使いません•小さくスタートしたいので、最初はダウンタイムを許容するように作ります•次に、ダウンタイムなしで垂直・水平方向にフルスケールするようにします•どうやって進めていくのか、見てみましょう
+
+--- 第209页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートレスなWebアプリWhatIsTheTime.com シンプルに始める
+パブリックEC2
+Elastic IPアドレス
+ユーザー今、何時ですか？5:30pm!
+
+--- 第210页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+ステートレスなWebアプリWhatIsTheTime.com 垂直方向のスケーリング
+パブリックEC2
+ユーザー今、何時ですか？5:30pm!
+今、何時ですか？6:30pm!
+今、何時ですか？7:30pm!
+M5 へのアップグレード時のダウンタイムElastic IPアドレス
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_43.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第211页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートレスなWebアプリWhatIsTheTime.com 水平方向のスケーリング
+ユーザー今、何時ですか？5:30pm!今、何時ですか？6:30pm!今、何時ですか？7:30pm!
+
+--- 第212页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートレスなWebアプリWhatIsTheTime.com 水平方向のスケーリング今、何時ですか？5:30pm!今、何時ですか？6:30pm!今、何時ですか？7:30pm!
+パブリックEC2 インスタンスエラスティックIP なしapi.whatisthetime.com のDNSクエリA レコードTTL 1時間
+
+--- 第213页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートレスなWebアプリWhatIsTheTime.com 水平方向へのスケールアップ、インスタンスの追加と削除今、何時ですか？5:30pm!今、何時ですか？6:30pm!今、何時ですか？7:30pm!
+パブリックEC2 インスタンス。エラスティックIP なしインスタンスがなくなった!api.whatisthetime.com のDNSクエリA レコードTTL 1時間
+
+--- 第214页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートレスなWebアプリWhatIsTheTime.com  ロードバランサーでの水平方向のスケーリング今、何時ですか？
+プライベートEC2インスタンス
+AZ1AZ1
+ELB +ヘルスチェック制限付きセキュリティグループのルールapi.whatisthetime.com のDNSクエリAlias レコードTTL 1時間
+
+--- 第215页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートレスなWebアプリWhatIsTheTime.com オートスケーリンググループを使った水平方向のスケーリング今、何時ですか？
+プライベートEC2インスタンス
+AZ1AZ1
+ELB +ヘルスチェックオートスケーリンググループ
+api.whatisthetime.com のDNSクエリAlias レコードTTL 1時間
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_44.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第216页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートレスなWebアプリWhatIsTheTime.com アプリのマルチAZ化今、何時ですか？
+AZ1～3AZ1
+ELB +ヘルスチェック+マルチAZオートスケーリンググループ
+AZ2
+AZ3
+api.whatisthetime.com のDNSクエリAlias レコードTTL 1時間
+
+--- 第217页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 最低2 AZ ⇒キャパシティを確保しよう
+AZ1～3AZ1オートスケーリンググループ
+AZ2
+最低限の容量= 予約済みインスタンス= コスト削減api.whatisthetime.com のDNSクエリAlias レコードTTL 1時間ELB +ヘルスチェック+マルチAZ
+
+--- 第218页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 今回のレッスンでは...•パブリック/プライベートIPとEC2インスタンス•Elastic IP vs Route 53 vs ロードバランサー•Route 53のTTL、Aレコード、Aliasレコードについて•EC2インスタンスを手動で維持する場合と、Auto Scaling Groupsを使用する場合の比較•障害に強いマルチAZ•ELBヘルスチェック•セキュリティグループのルール•可能な限りコスト削減のために、必要なだけのキャパシティを確保すること•Well architected アプリケーションの「5つの柱」コスト、パフォーマンス、信頼性、セキュリティ、オペレーショナル・エクセレンス
+
+--- 第219页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.com •MyClothes.comでは、オンラインで洋服を購入することができます•ショッピングカートがある•Webサイトに数百人のユーザーが同時にアクセスしています•スケールアップし、水平方向のスケーラビリティを維持し、Webアプリケーションを可能な限りステートレスに保つ必要があります•ユーザーがショッピングカートを維持できるようにする必要があります•ユーザーは、自分の詳細（住所など）をデータベースに登録する必要があります•どうやって進めていくのか、見てみましょう
+
+--- 第220页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.com
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_45.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第221页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.com スティッキネスの導入
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+ELBのスティッキネス
+
+--- 第222页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.com ユーザークッキーの導入
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+ウェブクッキーで、ショッピングカートの内容を送信ステートレスHTTPリクエストが重くなるセキュリティリスク（クッキー改ざんの可能性）クッキーの有効性確認クッキーは4KB 以下
+
+--- 第223页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.com サーバーセッションの紹介
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+ウェブクッキーでセッションIDを送信
+ElastiCache保存/取得セッションデータ
+Amazon DynamoDB（代替）
+
+--- 第224页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.comユーザーデータのデータベースへの格納
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+ユーザーデータの保存/取得（住所、名前など）ElastiCache
+Amazon RDS
+
+--- 第225页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.com スケーリングリード
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+ElastiCache
+RDSリードレプリカRDSマスター（書込）レプリケーション
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_46.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第226页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.com スケーリングリード(別解)ライトスルー
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+ElastiCache
+RDSリード/ライトキャッシュキャッシュからの読み出しヒット
+
+--- 第227页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.com マルチAZ -障害からの復旧
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+ElastiCacheマルチAZ
+RDSマルチAZ
+
+--- 第228页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリケーションMyClothes.com セキュリティグループ
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+ElastiCache
+RDSLB からEC2 のセキュリティグループにトラフィックを制限EC2 セキュリティグループからRDS のセキュリティグループにトラフィックを制限EC2 セキュリティグループからElastiCache のセキュリティグループにトラフィックを制限オープンHTTP/ HTTPS 0.0.0.0/0への接続
+
+--- 第229页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Web アプリケーションのための3層アーキテクチャ•ELB スティッキーセッション•クッキーを保存し、ウェブアプリをステートレスにするためのウェブクライアント•ElastiCache•セッションを保存するため（代替：DynamoDB）•RDS からのデータをキャッシュするためにも利用可•マルチAZ•RDS •ユーザーデータを保存するため•スケーリングリード用のリードレプリカ•ディザスタリカバリのためのマルチAZ•相互参照するセキュリティグループによる厳格なセキュリティ環境を構築
+
+--- 第230页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリMyWordPress.com •完全にスケーラブルなWordPress ウェブサイトを作成しようとしています•アップロードされた画像が正しく表示されるようにしたい•ユーザーデータと、ブログのコンテンツを、MySQLデータベースに保存されるようにします•どうすれば実現できるのか、見てみましょう。
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_47.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第231页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプMyWordPress.com  RDSレイヤー
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+RDSマルチAZ
+
+--- 第232页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリMyWordPress.com Auroraでスケールアップ複数のAZとリードレプリカ
+マルチAZAZ1
+オートスケーリンググループ
+AZ2AZ3
+Aurora MySQLマルチAZリードレプリカ
+
+--- 第233页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリMyWordPress.com EBSで画像を保存
+マルチAZ
+Amazon EBS ボリューム
+AZ1画像の送信
+
+--- 第234页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリMyWordPress.com EBSで画像を保存
+マルチAZ
+Amazon EBS ボリューム
+Amazon EBS ボリューム
+AZ1
+AZ2画像の送信
+
+--- 第235页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ステートフルなウェブアプリMyWordPress.com EFSで画像を保存
+マルチAZ
+AZ1
+AZ2
+EFS
+ENI
+ENI画像の送信
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_48.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第236页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 今回のレクチャーでは...•Aurora データベースでは、マルチAZとリードレプリカが簡単にできます•EBS にデータを保存する（シングルインスタンスアプリケーション）•vs EFS へのデータ保存（分散型アプリケーション）
+
+--- 第237页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com アプリケーションを素早く立ち上げ•フルスタック（EC2、EBS、RDS）を立ち上げる際には、時間がかかることがあります。•アプリケーションのインストール•イニシャル（またはリカバリー）データの挿入•実行に必要なすべての設定•アプリケーションの起動•クラウドを活用することで、そのスピードを上げることができます。
+
+--- 第238页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com アプリケーションを素早く立ち上げ•EC2インスタンス:•Golden AMIの使用: アプリケーションやOSの依存関係などを事前にインストールしておき、GoldenAMIからEC2インスタンスを起動します•ユーザーデータを使ったブートストラップ: 動的な設定には、ユーザーデータスクリプトを使用•ハイブリッド: Golden AMIとユーザーデータ（ElasticBeanstalk）を両方、使用•RDS のデータベース:•スナップショットからの復元: スキーマとデータがすぐに準備できます•EBSボリューム:•スナップショットからの復元: ディスクはすでにフォーマットされており、データもあります
+
+--- 第239页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 典型的な3層アーキテクチャ
+パブリックサブネットプライベートサブネットデータ/プライベートサブネット
+
+--- 第240页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS を使った開発での課題•インフラの管理•コードのデプロイ•すべてのデータベース、ロードバランサーなどの設定•スケーリングに関する懸念•ほとんどのWebアプリが同じアーキテクチャ（ALB+ ASG）•開発者が望んでいるのは、自分のコードが動くこと•できれば、複数のアプリケーション・環境でも一貫性を持たせたい
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_49.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第241页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Elastic Beanstalk の概要•Elastic Beanstalkは、AWS上でアプリケーションを展開するための開発者視点のサービスです•EC2、ASG、ELB、RDS などなど、これまでに見てきたすべてのコンポーネントを使用しています•1つのコンソールで集中的にこれらを管理できます•設定を完全にコントロールすることができる•Beanstalk は無料ですが、そこで呼び出される各コンポーネントは有料です
+
+--- 第242页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Elastic Beanstalk•マネージドサービス•インスタンスの設定/ OS はBeanstalk が担当•デプロイメント、戦略の設定は可能ですが、デプロイメント自体はElastic Beanstalkが実行します。•アプリケーションコードにのみ、開発者が責任を持てばよい仕組みです•3つのアーキテクチャモデル•シングルインスタンス展開: 開発・テスト向け•LB + ASG: プロダクションやプリプロダクションのWebアプリケーション向け•ASGのみ: 運用中の非ウェブアプリ（ワーカーなど）向け
+
+--- 第243页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Elastic Beanstalk•Elastic Beanstalkには3つのコンポーネントがあります•“アプリケーション”•“アプリケーションバージョン”: 各デプロイメントにアプリケーションバージョンが割り当てられる•“環境”: 環境名（dev, test, prod...）には適当な名前をつけます•アプリケーションバージョンを環境にデプロイし、アプリケーションバージョンを新しい環境に昇格させることができます•以前のアプリケーションバージョンへのロールバックも可能です•環境のライフサイクルを完全にコントロールできますアプリケーションの作成アップロードバージョン(+エイリアス)環境へのリリース環境の作成
+
+--- 第244页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Elastic Beanstalk•多くのプラットフォームに対応•Go•Java SE•Java with Tomcat•.NET  (Windows Server・IIS)•Node.js•PHP•Python•Ruby•Packer Builder•シングルコンテナDocker•マルチコンテナDocker•設定済みのDocker•サポートされていないプラットフォームでも、独自のプラットフォームを作成することができます（上級者向け）
+
+--- 第245页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 ストレージとデータ管理
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_5.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第21页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM Section
+
+--- 第22页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM: ユーザ& グループ•IAM  = Identity and Access Management, グローバルサービス•ルートアカウントはデフォルトで作成されています。基本、使わないようにしてください•ユーザはあなたの組織内の人で、グループ化できます•グループはユーザのみが含まれ、他のグループを入れることはできません•ユーザはグループに入らなくてよく、複数グループに入れます
+Alice
+Bob
+Charles
+David
+EdwardGroup: DevelopersGroup: OperationsGroupAudit Team
+Fred
+
+--- 第23页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM: パーミッション•ユーザ・グループには、JSONで書かれる”ポリシー” を割り当てることができます•ポリシーは、ユーザの権限を定義します•最小権限の法則: 必要な最小限の権限を割り当てるようにします
+{"Version": "2012-10-17","Statement": [{"Effect": "Allow","Action": "ec2:Describe*","Resource": "*"},{"Effect": "Allow","Action": "elasticloadbalancing:Describe*","Resource": "*"},{"Effect": "Allow","Action": ["cloudwatch:ListMetrics","cloudwatch:GetMetricStatistics","cloudwatch:Describe*"],"Resource": "*"}]}
+
+--- 第24页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAMポリシー
+Alice
+Bob
+Charles
+David
+EdwardDevelopersOperationsAudit Team
+Fred
+インラインポリシー
+
+--- 第25页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+IAM ポリシーの構成•IAM ポリシーの構成要素•Version: ポリシー記述言語のバージョン、常に“2012-10-17”•Id: ポリシーの識別子(オプション)•Statement: 一つ以上の宣言(必須)•Statementの構成要素•Sid: statement の識別子(オプション)•Effect: アクセスの許可・拒否(Allow, Deny)•Principal: このポリシーが適用されるアカウント/ユーザ/ロール•Action: このポリシーで許可/拒否されるアクションの一覧•Resource: アクションの対象となるリソースの一覧•Condition: ポリシーが適用される条件（オプション）
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_50.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第246页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com このセクションの概要•Amazon S3は、AWSの主要なサービスの1 つです•「無限に拡張可能なストレージ」と宣伝されています•広く普及しており、独立したセクションを割く価値があります•多くのWeb サイトが、バックボーンとしてAmazon S3 を利用しています•多くのAWS サービスでは、様々な形でAmazon S3 と連携をすることができます•ステップ・バイ・ステップで、S3 を見ていきます
+
+--- 第247页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon S3の概要-バケット•Amazon S3では、オブジェクト（ファイル）を「バケット」に格納することができます•バケットにはグローバルに一意な名前が必要•バケットはリージョンレベルで定義される•命名規則•小文字、数字、ドット(.)、およびハイフン(-) が使える（大文字やアンダースコアはなし）•長さは3-63文字•IP アドレスと同じ形式は不可•小文字のアルファベットまたは数字で始まること
+
+--- 第248页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon S3の概要-オブジェクト•オブジェクト（ファイル）には「キー」があります•キーとなるのはフルパス•s3://my-bucket/my_file.txt•s3://my-bucket/my_folder1/another_folder/my_file.txt•キーは、プレフィックス＋オブジェクト名で構成されます•s3://my-bucket/my_folder1/another_folder/my_file.txt•バケットには「ディレクトリ」という概念はありません（UI ではあるように見えますが）•スラッシュ（"/"）を含む非常に長い名前のキーのみ
+
+--- 第249页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon S3の概要-オブジェクト（続き）•最大オブジェクトサイズは5TB (5000GB)•5GB 以上のアップロードを行う場合は、“マルチパートアップロード” を使用する必要があります•メタデータ（テキストのキーと値のペアのリスト-システムまたはユーザーのメタデータ）•タグ（ユニコードのキーと値のペア-最大10個）-セキュリティやライフサイクルに役立つ•バージョンID（バージョニングが有効な場合）
+
+--- 第250页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon S3 -バージョニング•Amazon S3 でファイルをバージョン管理できます•バケットレベルで有効/無効を設定します•同じキーで上書きすると、「バージョン」が増加します。1, 2, 3….•バケットをバージョン管理するのがベストプラクティスです•意図しない削除からの保護（バージョンの復元機能）•前のバージョンへのロールバックが容易•メモ•バージョニングを有効にする前にバージョニングされていないファイルのバージョンは"null" になります•バージョニングを中断しても、以前のバージョンは削除されません
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_51.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第251页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com オブジェクトのS3 暗号化•S3 でオブジェクトを暗号化する方法は4 つあります•SSE-S3: AWSが管理する鍵でS3オブジェクトを暗号化します•SSE-KMS: AWS Key Management Serviceを活用した暗号化キーの管理•SSE-C: 暗号化キーを自分で管理したい場合•クライアントサイドの暗号化•それぞれが、どのような状況に適応しているのかを理解した上で試験に臨むことが大切です
+
+--- 第252页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon S3SSE-S3•SSE-S3: Amazon S3 で処理・管理される鍵を使った暗号化•オブジェクトはサーバー側で暗号化される•暗号化方式：AES-256•ヘッダーを設定する必要があります。"x-amz-server-side-encryption": "AES256"
+S3マネージドデータキー+オブジェクトバケット暗号化HTTP/S + ヘッダーオブジェクト
+
+--- 第253页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon S3+オブジェクトバケット暗号化HTTP/S + ヘッダーオブジェクト
+SSE-KMS•SSE-KMS: KMS が管理する鍵を使った暗号化•KMS の利点: ユーザーコントロール＋監査証跡•オブジェクトはサーバー側で暗号化される•ヘッダーを設定する必要があります。"x-amz-server-side-encryption": "aws:kms"
+KMS カスタマーマスターキー(CMK)
+
+--- 第254页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon S3
+SSE-C
+•SSE-C: AWSの外でユーザが完全に管理するデータキーを使ったサーバーサイドの暗号化•Amazon S3 は、ユーザが提供した暗号化キーを保存しません•HTTPSを使用する必要があります•暗号化キーは、HTTPリクエストごとにHTTP ヘッダに記載される必要があります
+クライアントが提供するデータキーオブジェクトHTTPSのみ+ヘッダーのデータキーオブジェクト
+クライアント側のデータキー++バケット暗号化
+
+--- 第255页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com クライアント-S3エンクリプションSDKAmazon S3クライアントサイドの暗号化•Amazon S3 Encryption Client などのクライアントライブラリ•クライアントは、S3 に送信する前に自分でデータを暗号化する必要があります•S3からデータを取得する際には、クライアント自身がデータを復号する必要があります•ユーザが鍵と暗号化のサイクルを完全に管理
+バケットHTTP/Sオブジェクト
+クライアント側のデータキー+
+暗号化
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_52.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第256页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 通信中の暗号化（SSL/TLS）•Amazon S3の公開エンドポイント•HTTPエンドポイント: 非暗号化•HTTPSエンドポイント: 通信路の暗号化•エンドポイント、HTTPも使えますが、HTTPSを推奨します•ほとんどのクライアントは、デフォルトでHTTPS エンドポイントを使用します•SSE-C ではHTTPS が必須です•通信路の暗号化は、SSL/ TLS とも呼ばれます
+
+--- 第257页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 セキュリティ•ユーザーベース•IAM ポリシー-IAM コンソールから特定のユーザーに対してどのAPI コールを許可するかを指定します•リソースベース•バケットポリシー-S3 コンソールからのバケット全体のルール-クロスアカウントを可能にする•オブジェクト・アクセス・コントロール・リスト（ACL）-より細かい粒子•バケットアクセスコントロールリスト（ACL）-一般的ではない•注：IAMプリンシパルは、以下の場合にS3 オブジェクトにアクセスできます•ユーザーのIAM パーミッションが許可している、またはリソースポリシーが許可している•かつ、明確なDENY がない
+
+--- 第258页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 バケットポリシー•JSON ベースのポリシー•Resource: バケットとオブジェクト•Action: 許可または拒否するAPIのセット•Effect: 許可/ 拒否•Principal: ポリシーを適用するアカウントまたはユーザー•ポリシーにS3 バケットを使用する•バケットへのパブリックアクセスの許可•アップロード時にオブジェクトを強制的に暗号化する•他のアカウントへのアクセス許可（クロスアカウント）
+
+--- 第259页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ブロック・パブリック・アクセスのバケット設定•以下で許可した場合でも、パブリックアクセスをブロックできます•新しいアクセスコントロールリスト(ACL)•任意のアクセスコントロールリスト（ACL）•新しいパブリックバケットまたはアクセスポイントのポリシー•個別のポリシーで許可した場合でも、バケットやオブジェクトへのパブリックアクセスや、クロスアカウントアクセスをブロックできます•これらの設定は、企業の情報漏えいを防ぐために作られたものです•あなたのバケットが公開されるべきではないと分かっている場合、これらをオンにしておきます•アカウントレベルで設定が可能です
+
+--- 第260页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3セキュリティ-その他•ネットワーキング•VPC エンドポイントのサポート（www アクセスのないVPC 内にあるインスタンス用）•ロギングと監査•S3 アクセスログは他のS3 バケットにも保存可能•API コールはAWS CloudTrail でログを取ることができます•ユーザーセキュリティ•MFA デリート: バージョン設定したバケットでは、オブジェクトを削除する際にMFA（多要素認証）を必須にすることができます•pre-signed URL: 限られた期間のみ有効なURL を発行できます（利用例：ログインしたユーザー向けのプレミアムビデオサービス）
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_53.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第261页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 ウェブサイト•S3は静的なウェブサイトをホストし、WWW でアクセスできるようにすることができます•ウェブサイトのURLは以下のどちらか•<bucket-name>.s3-website-<AWS-region>. amazonaws.com •<bucket-name>.s3-website.<AWS-region>. amazonaws.com •403(Forbidden) エラーが発生した場合は、バケットポリシーでパブリックリードが許可されているか確認してください
+
+--- 第262页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CORS の説明•CORS: Cross-Origin Resource Sharing•オリジン: スキーム（プロトコル）、ホスト（ドメイン）、ポート•例: https://www.example.com（デフォルトのポートは、HTTPSの場合は443、HTTPの場合は80）•Webブラウザベースのメカニズムで、どこかのオリジンへの訪問中に他のオリジンへのリクエストを許可されていることをチェックします•同じオリジン: http://example.com/app1 & http://example.com/app2 •異なるオリジン: http://www.example.com & http://other.example.com •他のオリジンがCORS ヘッダー（例：Access-Control-Allow-Origin）を使用してリクエストを許可しない限り、リクエストは実行されません
+
+--- 第263页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Access-Control-Allow-Origin: https://www.example.comAccess-Control-Allow-Methods:GET, PUT, DELETECORS -ダイアグラム
+オリジンhttps://www.example.com ウェブサーバ
+Webブラウザ
+クロス・オリジンhttps://www.other.com プリフライトリクエストOPTIONS /Host: www.other.com Origin: https://www.example.comプリフライトレスポンス
+以前に受信したCORSヘッダーでOrigin が許可されているのでウェブブラウザはリクエストを行うことができますGET /Host: www.other.com Origin: https://www.example.com
+
+--- 第264页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 CORS •クライアントが私たちのS3バケットにクロスオリジンのリクエストを行う場合、正しいCORS ヘッダーを有効にする必要があります•試験問題としてもよく出てきます•特定のオリジンまたは*（すべてのオリジン）に対して許可することができますbucket-htmlウェブサイト設定: 有効bucket-assetsCORS 設定ウェブサイト設定: 有効GET index.html GET coffee.jpg Origin: http://bucket-html.s3-website.eu-west-3.amazonaws.comAccess-Control-Allow-Origin: http://bucket-html.s3-website.eu-west-3.amazonaws.com
+ウェブブラウザ
+
+--- 第265页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon S3 -一貫性モデル•S3 は“強い整合性” を担保しています（2020年12月より）•以下の書き込みイベントがあった場合、、、•新規オブジェクトの書き込み成功（新規PUT）•または既存のオブジェクトの上書きまたは削除（上書きPUTまたはDELETE）•以下が担保されます•その後の読み取り要求では、すぐに最新バージョンのオブジェクトを受け取ることができます(書き込み後の読み取りの一貫性)•以後のlist リクエストに変更を即座に反映(リストの整合性)•パフォーマンスに影響を与えることなく、追加費用なしで利用可能
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_54.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第266页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS EC2 インスタンスメタデータ•AWS EC2 インスタンスメタデータは強力ですが、あまり知られていない機能の一つです•これにより、IAM Roleを使用せずに、AWS EC2インスタンスが「自分自身について知る」ことができます•URLはhttp://169.254.169.254/latest/meta-dataです•メタデータからIAM Role 名を取得することはできますが、IAM Policy を取得することはできません。•Metadata = EC2 インスタンスに関する情報•Userdata = EC2 インスタンスの起動スクリプト•練習してみましょう!
+
+--- 第267页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS SDK の概要•アプリケーションのコードから、直接AWS 上でアクションを実行したい場合はどうすればよいでしょうか？(CLIを使わずに)•SDK（SoftwareDevelopment Kit: ソフトウェア開発キット）を使います•公式SDKは...•Java•.NET•Node.js•PHP•Python （名称：boto3 / botocore）•Go•Ruby•C++
+
+--- 第268页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS SDK の概要•DynamoDB などのAWS サービスに対してコーディングする際には、AWSSDK を使う必要があります•面白いことに...AWS CLI はPython SDK（boto3）を使用しています•どのような場合にSDKを使うべきか、は試験でも問われます。•AWS SDK の使い方は、Lambda 関数のセクションでとりあげます•知っておくといいこと：デフォルトのリージョンを指定または設定しないと、デフォルトでus-east-1 が選択されます
+
+--- 第269页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS SDK クレデンシャルセキュリティ•デフォルトのクレデンシャル・プロバイダー・チェーンを使用することをお勧めします•デフォルトのクレデンシャルプロバイダーチェーンは、透過的に動きます•AWSの認証情報を~/.aws/credentials に登録（ローカルマシンまたはオンプレミスのみ）•IAMロールを使ったインスタンスプロファイルの認証情報（EC2マシンなどの場合）•環境変数(AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY)•どんなときでも絶対に、AWS の認証情報をあなたのコードに保存しないでください•ベストプラクティスは、上記のメカニズムからクレデンシャルを継承し、AWS サービス内で作業する場合は100% 常にIAM ロールを使うことです
+
+--- 第270页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com エクスポネンシャルバックオフ（指数的バックオフ）•呼び出しが多すぎて失敗したAPI は、Exponential Backoff で再試行する必要があります•これらはレート制限のあるAPI に適用されます。•SDK のAPI 呼び出しに含まれるリトライメカニズム12345
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_55.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第271页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com アドバンスドS3S3、Glacier、Athena
+
+--- 第272页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 MFA-Delete•MFA（多要素認証）は、ユーザーがS3上で重要な操作を行う前に、デバイス（通常は携帯電話やハードウェア）上で一時トークンの生成を求める設定です•MFA-Deleteを有効にするには、S3バケットのバージョニングを有効にします•MFAが必要となるのは•オブジェクトのバージョンを永久に削除するとき•バケットのバージョン管理を停止するとき•以下では、MFAは必要ありません•バージョニングの有効化•削除されたバージョンのリスト•バケットのオーナー（rootアカウント）のみがMFA-Deleteを有効／無効にできます•MFA-Delete は現在、CLIによってのみ有効にできます
+
+--- 第273页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 アクセスログ•監査に対応するため、S3バケットへのすべてのアクセスを記録したい場合があります•どのアカウントからであっても、S3に行われたリクエストは、承認/拒否に関わらず、別のS3 バケットにログが記録されます•そのデータは、データ分析ツールを使って分析することができます...•後述するAmazon Athena もそのツールの1 つです!•ログのフォーマットはhttps://docs.aws.amazon.com/AmazonS3/latest/dev/LogFormat.html マイバケット
+ロギングバケットリクエストすべてのリクエストをログ
+
+--- 第274页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 のアクセスログ: 注意•ロギングバケットを監視対象バケットに設定しないこと•ロギングのループが発生し、バケットのサイズが指数関数的に大きくなってしまいます
+App Bucket &ロギングバケットロギングループ
+putObject 実際に試さないでください!
+
+--- 第275页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 レプリケーション•ソースとデスティネーションでバージョニングを有効にする必要があります•クロスリージョンレプリケーション（CRR）•同一リージョンレプリケーション（SRR）•バケットは異なるアカウントでもOK•コピーは非同期•S3 への適切なIAM 権限をもつIAM ロールが必要•CRR -使用例：コンプライアンス、低レイテンシーのアクセス、アカウント間のレプリケーション•SRR -使用例：ログアグリゲーション、本番アカウントとテストアカウント間のライブレプリケーションeu-west-1us-east-1非同期のレプリケーション
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_56.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第276页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 レプリケーションの注意点•有効にした後、新しいオブジェクトのみが複製されます（既存のデータには遡及しません）•DELETE 操作の場合•バージョンID なしで削除すると、削除マーカーが追加されます。複製はされません（設定で変更可）•バージョンID で削除した場合、ソースは削除されます。複製はされません•レプリケーションの"連鎖"はありません•バケット1 がバケット2 にレプリケートされていて、バケット2 がバケット3 にレプリケートされている場合•その場合、バケット1 で作成されたオブジェクトは、バケット3 にレプリケートされません
+
+--- 第277页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 pre-signed URL•SDK やCLI を使って署名済みのURL を生成可能•ダウンロード用（手軽、CLIが使える）•アップロード用（手間、SDKを使う必要がある）•デフォルトでは3600秒間有効ですが、--expires-in [TIME_BY_SECONDS] 引数でタイムアウトを変更できます•pre-signed URL を知った人は、GET/ PUT 用のURL を生成した人の権限を継承します•例: •S3 バケット上のプレミアムビデオのダウンロードをログインしたユーザーのみに許可する•対象ユーザが頻繁に入れかわる場合でも、動的にURL を生成することでファイルをダウンロードさせることができます•一時的にユーザーがバケット内の正確な場所にファイルをアップロードできるようにできます
+
+--- 第278页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 ストレージクラス•Amazon S3 標準-汎用•Amazon S3 標準-低頻繁アクセス(IA: Infrequent Access)•Amazon S3 1ゾーン-低頻繁アクセス•Amazon S3 Intelligent-Tiering•Amazon Glacier•Amazon Glacier Deep Archive•Amazon S3 Reduced Redundancy Storage (非推奨-省略)
+
+--- 第279页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 標準•複数のAZ に分散させて高い耐久性（99.999999%) を実現•Amazon S3 に10,000,000 個のオブジェクトを保存した場合、平均して10,000 年に1 度、1 個のオブジェクトが失われると予想•年間で99.99% の稼働率•2 つの設備が同時に故障しても耐える•ユースケース: ビッグデータ分析、モバイル＆ゲームアプリケーション、コンテンツ配信...
+
+--- 第280页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 標準-低頻繁アクセス（IA）•アクセス頻度は低いが、必要なときに素早くアクセスする必要があるデータに適しています•複数AZ への分散によるオブジェクトの高い耐久性(99.999999999%)•99.9% の可用性•Amazon S3 標準に比べて低コスト•2つの設備が同時に故障しても耐える•ユースケース: ディザスタリカバリ用のデータストアとして、バックアップ...
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_57.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第281页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 1ゾーン-低頻度アクセス•IA と同じですが、データは単一のAZ に保存されます•1 つのAZ 内のオブジェクトの高い耐久性（99.999999％）、AZ が破壊されるとデータは失われる•99.5% の稼働率•低レイテンシー、高スループット性能•送信時のデータと受信時の暗号化にSSL をサポート•IA に比べて低コスト（20% 減）•ユースケース: オンプレミスのデータのセカンダリーバックアップコピーの保管、または再生成可能なデータの保管
+
+--- 第282页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 Intelligent Tiering•S3 Standard と同じ低レイテンシー、高スループットのパフォーマンス•少額のモニタリングおよび自動ティアリング料金（月額）•アクセスパターンの変化に応じて、2 つのアクセス層間でオブジェクトを自動的に移動させる•複数のAZ にまたがる99.999999% のオブジェクトの耐久性を考慮した設計•AZ 全体に影響を与えるイベントへの対応力•1 年間で99.9% の稼働率を実現する設計
+
+--- 第283页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Glacier •アーカイブやバックアップに適した低コストのオブジェクトストレージ•データは長期的に保持される（10数年）•オンプレミスの磁気テープストレージの代替•年間平均耐久性は99.999999999%。•月額コスト（$0.004 / GB）＋取り出しコスト•Glacier の各アイテムを「アーカイブ」と呼ぶ（最大40TBまで）•アーカイブは“Vaults”（”金庫”の意）に保管されている
+
+--- 第284页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon Glacier & Glacier Deep Archive•Amazon Glacier -3つの取り出し方法があります•迅速（Expedited）: 1～5分•標準（Standard）: 3～5時間•大容量（Bulk）: 5～12時間•最低保存期間は90 日•Amazon Glacier Deep Archive -長期保存用-より安価です•標準: 12時間•大容量: 48時間•最低限の保存期間は180 日
+
+--- 第285页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 ストレージクラスの比較S3 標準S3 Intelligent-TieringS3 標準-IAS3 1Zone-IAS3 GlacierS3 GlacierDeep Archive耐久性99.999999999%(11 9’s)99.999999999%(11 9’s)99.999999999%(11 9’s)99.999999999%(11 9’s)99.999999999%(11 9’s)99.999999999%(11 9’s)稼働率99.99%99.9%99.9%99.5%99.99%99.99%可用性SLA99.9%99%99%99%99.9%99.9%AZ 数≥3≥3≥31≥3≥3オブジェクトごとの最低容量料金N/AN/A128KB128KB40KB40KB最低限の保管期間の料金N/A30日30日30日90日180日取り出し料金N/AN/A取得したGBあたり取得したGBあたり取得したGBあたり取得したGBあたりhttps://aws.amazon.com/s3/storage-classes/
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_58.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第286页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 ストレージクラス-価格比較例us-east-2S3 標準S3 Intelligent-TieringS3 標準-IAS3 1Zone-IAS3 GlacierS3 GlacierDeep Archiveストレージコスト(1GBあたり/月)$0.023 $0.0125 -$0.023 $0.0125 $0.01 $0.004最低90日$0.00099最低180日検索コスト(1000リクエストあたり)GET $0.0004 GET $0.0004 GET $0.001GET $0.001GET $0.0004 + 迅速-$10.00 標準-$0.05大容量-$0.025 GET $0.0004 + 標準-$0.10大容量-$0.025 取り出しの時間瞬間瞬間瞬間瞬間迅速（1～5分）標準（3～5時間）大容量（5～12時間）標準（12時間）大容量（48時間）モニタリングコスト(オブジェクト1000個あたり)$0.0025
+
+--- 第287页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 -ストレージクラス間の移動•ストレージクラス間でオブジェクトを移行できます•アクセス頻度の低いオブジェクトは、標準IA に•リアルタイムに必要のないアーカイブオブジェクトには、Glacier やGlacier Deep Archive•ライフサイクルの設定で、オブジェクトの移動を自動化できます
+
+--- 第288页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 ライフサイクルルール•移行アクション: オブジェクトが他のストレージクラスに移行するタイミングを定義•作成後60 日でスタンダードIA クラスに移行•6ヶ月後にGlacier に移行してアーカイブを行う•期限切れアクション: 一定時間後にオブジェクトが期限切れ（削除）になるように設定•アクセスログファイルは365 日後に削除されるように設定可能•古いバージョンのファイルの削除に使用可能（バージョニングが有効な場合）•不完全なマルチパートのアップロードの削除に使用可能•特定のプレフィックスに対してルールを作成できる（例: s3://mybucket/mp3/*）•特定のオブジェクトのタグに対してルールを作成できます（例: “depar tment: finance”）
+
+--- 第289页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 ライフサイクルルール-シナリオ1•EC2 上のアプリケーションでは、プロフィール写真がAmazon S3 にアップロードされると、画像のサムネイルが作成されます。これらのサムネイルは簡単に再作成することができ、45日間だけ保存する必要があります。ソース画像は、この45 日間はすぐにアクセスできる必要がありますが、その後の取り出しはリクエストから6 時間まで待たせても構いません。これをどのように設計しますか？•S3 のソースイメージは標準で、45 日後にGlacier に移行するようなライフサイクル設定が可能です•S3のサムネイルは1Zone IA に置くことができ、45 日後に期限切れ（削除）になるようなライフサイクル構成になっています
+
+--- 第290页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 ライフサイクルルール-シナリオ2•あなたの会社のルールでは、まれにしか起こらないかもしれませんが、15 日間は削除されたS3 オブジェクトをすぐに回復できるようにしなければなりません。その後、365日間は、削除されたオブジェクトは48 時間以内に復元可能でなければなりません。•オブジェクトのバージョンを持つためには、S3のバージョニングを有効にする必要があります。これにより、「削除されたオブジェクト」が実際には「削除マーカー」によって隠されるようになり、復元することができます•これらの「最新でないバージョン」のオブジェクトをS3 IA に移行することができます•これらの「最新でないバージョン」を、後でDeepArchiveに移行することができます
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_59.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第291页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 Analytics -ストレージクラスの分析•S3アナリティクスを設定することで、オブジェクトをStandard からStandard_IAに移行するタイミングを判断することができます•1 Zone IA、Glacierでは動作しません•レポートは毎日更新されます•最初のレポート集計には約24 時間から48 時間かかります•ライフサイクルルールを作っていく（あるいは改善する）ための最初の一歩としては最適です
+
+--- 第292页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 -ベースライン・パフォーマンス•Amazon S3 は高いリクエストレートに自動的に対応します。レイテンシーは100-200ms •アプリケーションは、バケット内のプレフィックス1 つにつき、1 秒間に少なくとも3,500 件のPUT/COPY/POST/DELETE リクエストと5,500 件のGET/HEAD リクエストをさばくことができます•1 つのバケットに含まれるプレフィックスの数に制限はありません•例（オブジェクトパス⇒プレフィックス）•bucket/folder1/sub1/file => /folder1/sub1/ •bucket/folder1/sub2/file => /folder1/sub2/ •bucket/1/file                   => /1/•bucket/2/file                   => /2/•読み取りを4 つのプレフィックスに均等に分散させた場合、GET とHEAD で22,000 リクエスト/秒を達成することができます
+
+--- 第293页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 -KMSの制限について•SSE-KMS を使用している場合は、KMSの制限の影響を受ける可能性があります•アップロードの際には、GenerateDataKeyKMS API が呼び出されます•ダウンロード時には、DecryptKMS API が呼び出されます•1 秒あたりのKMS の上限:リージョンによって5500、10000、30000 req/s•今のところ、KMSの上限増加を申請することはできません
+KMSキーS3バケット
+ユーザーアップロード/ダウンロードSSE-KMSAPIコール
+
+--- 第294页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3パフォーマンス•マルチパートのアップロード•100MB以上のファイルには推奨、5GB以上のファイルでは必須•アップロードの並列化により、転送を高速化•S3 Transfer Acceleration •AWS エッジロケーションにファイルを転送し、ターゲットリージョンのS3 バケットにデータを転送することで、転送速度を向上させます•マルチパートのアップロードに対応
+Amazon S3並列アップロード
+分割大きなファイル
+S3バケットオーストラリア
+エッジの位置アメリカ
+速い(公開www)速い(private AWS)アメリカのファイル
+
+--- 第295页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3パフォーマンス-S3 バイト・レンジ・フェッチ•特定のバイト範囲を要求することによるGETの並列化•障害発生時の回復力の向上S3のファイルヘッダのバイトレンジ要求(最初のXXバイト)ヘッダーS3のファイルパート1パート2パートN…ダウンロードの高速化に利用できる
+並行してリクエスト部分的なデータ（ファイルの先頭など）の取得に使用可能
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_6.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第26页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM –パスワードポリシー•強いパスワード= 高いセキュリティ•AWSでは、パスワードポリシーを設定できます:•最小文字数の設定•必要な文字種別:•大文字•小文字•数字•記号•一定期間が過ぎたらパスワード変更を必須にすることができます(パスワード有効期限)•パスワード再利用の禁止
+
+--- 第27页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 多要素認証(Multi Factor Authentication -MFA)
+•MFA = パスワード(you know) + セキュリティデバイス(you have)•MFA の主なメリット: もしパスワードが盗まれたりハックされても、アカウントが保護されます
+Alice+Password
+=> Successful login
+
+--- 第28页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS で使えるMFA デバイスバーチャルMFA デバイス
+Google Authenticator(スマホのみ)
+Authy(様々なデバイス)Universal 2nd Factor (U2F) Security Key 
+YubiKeyby Yubico(3rdparty)
+一つのデバイスで複数トークンをサポート一つのセキュリティキーで、複数のルート・IAM ユーザをサポート
+
+--- 第29页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS で使えるMFA デバイス(cont.)
+Hardware Key Fob MFA Device 
+Provided by Gemalto (3rdparty)
+Hardware Key Fob MFA Device forAWS GovCloud (US)
+Provided by SurePassID(3rdparty)
+
+--- 第30页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS へのアクセス方法•AWSへアクセスする3つの選択肢:•AWS マネジメントコンソール(パスワード+ MFAで保護)•AWS Command Line Interface (CLI):アクセスキーで保護•AWS Software Developer Kit (SDK)-コード向け: アクセスキーで保護•アクセスキーは、AWSマネジメントコンソールで生成•利用者が、自身のアクセスキーを管理します•パスワード同様、アクセスキーも秘密にしてください共有しないこと!•アクセスキーID ~= ユーザ名•シークレットアクセスキー~= パスワード
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_60.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第296页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 Select & Glacier Select•サーバー側でフィルタリングを行うことで、必要なデータのみをSQL で取得する•行や列によるフィルタリングが可能（簡単なSQL文）•ネットワークの転送量を減らし、クライアント側のCPU コストを削減
+Amazon S3
+CSVファイルサーバーサイドフィルタリングフィルタリングされたデータセットの送信
+https://aws.amazon.com/blogs/aws/s3-glacier-select/ S3 SelectでCSVを取得
+
+--- 第297页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 のイベント通知
+Amazon S3イベント
+lambda
+SQS
+SNS•S3:ObjectCreated, S3:ObjectRemoved, S3:ObjectRestore, S3:Replication...•オブジェクト名のフィルタリングが可能(*.jpg)•使用例：S3 にアップロードされた画像のサムネイルを生成•S3 イベントの通知先は、好きなだけ作成可能•S3 のイベント通知は、通常は数秒でイベントを配信します。まれに1 分以上かかることもあります•バージョン管理されていない1 つのオブジェクトに同時に2 つの書き込みを行った場合、1 つのイベント通知しか送信されないことがあります•書き込みが成功するたびにイベント通知が送信されるようにしたい場合は、Bucket のバージョニングを有効にします
+
+--- 第298页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 -Requester Pay•通常、バケットの所有者が、そのバケットに関連するコスト（Amazon S3 ストレージとデータ転送）を負担します•Requester Pay のバケットでは、バケットのオーナーではなく、要求者がリクエストとバケットからのデータダウンロードにかかる費用を支払います•大規模なデータセットを他のアカウントと共有したいときに有用です•要求者はAWSで認証されている必要があります（匿名は不可）
+オーナー$$保存コスト
+オーナー$通信コスト
+ダウンロード要求者
+オーナー$$保存コスト要求者$通信コスト
+ダウンロード
+要求者がバケットを支払う標準バケット
+
+--- 第299页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Athena•S3 ファイルに対して直接、分析を行うサーバーレスサービス•SQL 言語を使用してファイルを照会•JDBC / ODBC ドライバを持つ•クエリとスキャンしたデータ量に応じて課金されます•CSV, JSON, ORC, Avro, Parquet をサポート（Prestoで構築）•使用例: ビジネスインテリジェンス／分析／レポーティング、VPCフローログ、ELBログ、CloudTrailなどの分析/照会•試験に出るPoint!: S3 で直接データを分析する⇒Athena を使う
+
+--- 第300页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Glacier Vault Lock•WORM（WriteOnce Read Many）モデルの採用•今後の編集を防ぐためポリシーをロック（もう変更できない）•コンプライアンスやデータ保持に役立つ
+オブジェクトVault Lock ポリシーオブジェクトが削除できない
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_61.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第301页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 オブジェクトロック（バージョニングの有効化が必要）•WORM（Write Once Read Many）モデルの採用•オブジェクトのバージョン削除を一定時間ブロックする•オブジェクトの保持•保存期間: 一定の期間を指定する•リーガル・ホールド: 同様の保護、有効期限なし•モード:•ガバナンスモード: 特別な権限がない限り、ユーザーはオブジェクトのバージョンを上書き、削除したり、ロック設定を変更することができません•コンプライアンスモード: 保護されたオブジェクトのバージョンは、AWSアカウントのrootユーザーを含む、どのユーザーからも上書きや削除ができない状態です。オブジェクトがコンプライアンスモードでロックされている場合、その保持モードを変更することはできず、保持期間を短縮することもできません
+
+--- 第302页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudFront•コンテンツ・デリバリー・ネットワーク（CDN）•コンテンツはエッジでキャッシュされ、読み込みパフォーマンスが向上します•世界中に216 個、エッジロケーションがあります•DDoS 対策、Shieldとの統合、AWS Web Application Firewall•外向けにHTTPS を公開することができ、内部のHTTPSバックエンドと対話することがでます
+出典: https://aws.amazon.com/cloudfront/features/?nc=sn&loc=2
+
+--- 第303页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront -Origins •S3 バケット•ファイルを配布し、エッジでキャッシュするために•CloudFront Origin Access Identity（OAI）によるセキュリティ強化•CloudFront をS3にファイルをアップロードする入り口として利用できます•カスタムオリジン（HTTP）•アプリケーションロードバランサー•EC2 インスタンス•S3 ウェブサイト（バケットを静的なS3 ウェブサイトとして有効にする必要があります）•お好きなHTTP バックエンド
+
+--- 第304页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront の概要
+Edge LocationあなたのOriginにリクエストを転送
+ローカルキャッシュ
+S3HTTPまたはオリジン
+クライアントGET /beach.jpg? size=300x300 HTTP/1.1User-Agent: Mozilla/4.0 (compatible; MSIE5.01; Windows NT)Host: www.example.comAccept-Encoding: gzip, deflateクエリ文字列とリクエストヘッダー
+
+--- 第305页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront -S3 がOrigin
+エッジロサンゼルス
+エッジムンバイ
+エッジメルボルン
+オリジン（S3バケット）
+パブリックwww
+パブリックwwwエッジサンパウロOrigin Access IdentityS3 バケットポリシー
+OAIプライベートAWSプライベートAWSプライベートAWSプライベートAWSAWSクラウド
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_62.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第306页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront-ALB やEC2 をOrigin とする場合http://d7uri8nf7uskq.cloudfront.net/tools/list-cloudfront-ips 
+Edge LocationパブリックIP
+アプリケーションロードバランサー公開しなければならない
+EC2 インスタンスプライベートでもOKロードバランサーのセキュリティグループの許可Edge Location のパブリックIPを許可セキュリティグループセキュリティグループ
+Edge LocationEC2 インスタンス公開しなければならない
+Edge Location のパブリックIPを許可セキュリティグループ
+
+--- 第307页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront Geo Restriction•ディストリビューションにアクセスできる人を制限することができます•ホワイトリスト: 承認された国のリストに載っている国に住んでいるユーザーにのみ、コンテンツへのアクセスを許可します。•ブラックリスト: 禁止国のブラックリストに登録されている国にいるユーザーが、コンテンツにアクセスできないようにすることができます。•アクセス元の国はサードパーティのGeo-IP データベースを使用して決定されます•ユースケース: 著作権法によるコンテンツへのアクセス制御
+
+--- 第308页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront とS3 のクロスリージョンレプリケーションの比較•CloudFront:•グローバルエッジネットワーク•ファイルはキャッシュされ、TTL(有効期限) は1日程度•どこでも利用できる必要がある静的コンテンツに最適•S3クロスリージョンレプリケーション:•レプリケーションを行いたいリージョンごとに設定が必要•ファイルをほぼリアルタイムで更新•読み取り専用•少ない地域で低遅延に配信する必要がある動的コンテンツに最適
+
+--- 第309页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS CloudFront ハンズオン•S3 バケットを作成します•CloudFront のディストリビューションを作成します•Origin Access Identity を作成します•ここで作ったID でしかアクセスできないようにS3 バケットを制限します
+
+--- 第310页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront Signed URL / Signed Cookies•有料の共有コンテンツを、世界中のプレミアムユーザーにだけ配信したい•CloudFront Signed URL / Cookieを使用することができます。以下を含むポリシーを付けます:•URL の有効期限•データにアクセス可能なIPアドレスの範囲•信頼できる署名者（署名付きURLを作成できるAWS アカウント）•URLの有効期限はどのくらいがよいでしょう?•共有コンテンツ（映画、音楽）：短くする（数分程度）•プライベートコンテンツ（ユーザーに非公開）：年単位で長くしてもOK•Signed URL = 個々のファイルへのアクセス（1つのSigned URL で1つのファイルにアクセス可能）•Signed Cookies = 複数のファイルへのアクセス（1つのSigned Cookies で多くのファイルにアクセス可能）
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_63.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第311页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront Signed URL
+Edge Location
+Edge Location
+Amazon CloudFront
+Amazon S3
+オブジェクト
+クライアントSigned URLOAI
+アプリケーション認証+ 認可Signed URL を戻すAWS SDKの使用Signed URLの生成
+
+--- 第312页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront のsigned URL とS3 のpre-signed URLの比較-S3のpre-signed URL•CloudFront のSignedURL:•オリジンに関係なく、パスへのアクセスを許可する•アカウントワイドな鍵ペアで、ルートのみが管理可能•IP、パス、日付、期限でフィルタリング可能•キャッシング機能を活用できる
+Edge Location
+クライアントsignedURL•S3 Pre-Signed URL:•pre-signed URL を発行した人としてリクエスト•署名するIAM プリンシパルのIAM キーを使用する•期限付きオリジン
+クライアントpre-signed URL
+
+--- 第313页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront -価格•CloudFront Edge の拠点は世界各地にある•エッジロケーションごとにデータ送信コストが変わる
+低いより高い
+
+--- 第314页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront -料金クラス•エッジロケーションの数を減らしてコスト削減を図ることができます•3つの料金クラス1.料金クラスすべて: すべての地域で有効-最高のパフォーマンスを発揮2.料金クラス200: ほとんどの地域、ただし最も価格の高い地域は除く3.料金クラス100: 最も安価な地域のみ
+
+--- 第315页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront -料金クラス
+料金クラス100料金クラス200料金クラスすべて
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_64.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第316页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com •コンテンツタイプに応じて異なる種類のオリジンにルーティング•パスパターンに基づくルールを設定:•/images/*•/api/*•/* CloudFront -マルチプルオリジン
+Amazon CloudFront
+キャッシュオリジンALBS3バケット/api/*/*
+
+--- 第317页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront -Origin Groups•可用性を高め、フェイルオーバーを行うためのしくみ•オリジングループ：1 つのプライマリーオリジンと1 つのセカンダリオリジン•プライマリオリジンが故障した場合、セカンダリオリジンが使用される
+オリジングループ
+オリジンA(プライマリーオリジン)オリジンBクライアント同じリクエストを試すOKステータスコードで応答するリクエストを送るエラーステータスコードで応答するAmazon CloudFront
+オリジングループオリジンA(プライマリーオリジン)オリジンB同じリクエストを試すOKステータスコードで応答するリクエストを送るエラーステータスコードで応答するAmazon CloudFront
+レプリケーションクライアントS3 + CloudFront -リージョンレベルの高可用性
+
+--- 第318页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com CloudFront -フィールドレベルの暗号化•アプリケーションスタックによる、ユーザーの機密情報の保護•HTTPS に加えて、さらにセキュリティの層を追加する•機密情報をユーザーに近いエッジで暗号化•非対称暗号化を採用•使用方法•暗号化したいPOST リクエストのフィールドのセットを指定する（最大10フィールドまで）•暗号化するための公開鍵を指定する
+オリジン
+クライアントEdge LocationAmazon CloudFrontALBウェブサーバ
+公開鍵による暗号化秘密鍵による復号化
+HTTPSHTTPSHTTPSHTTPSPOST /submit HTTP/1.1host:www.example.comfield1field2POST /submit HTTP/1.1host: www.example.comfield1field2
+
+--- 第319页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 私たちのアプリケーションのグローバルユーザー•アプリケーションをデプロイし、直接アクセスしたいグローバルユーザーがいる場合•インターネット経由のため、ホップ数が多く、遅延が大きくなります•遅延を最小限にするために、AWSのネットワークを有効活用しましょう
+アメリカ
+オーストラリア
+ヨーロッパ
+インド
+パブリックALB
+ホップ数=6
+
+--- 第320页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ユニキャストIPとエニーキャストIP•ユニキャストIP: 1台のサーバーが1つのIPアドレスを持つ•エニーキャストIP: すべてのサーバーが同じIPアドレスを持ち、クライアントは最も近いサーバーにルーティングされる
+12.34.56.7898.76.54.32クライアント
+12.34.56.7812.34.56.78クライアント
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_65.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第321页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Global Accelerator•AWS の内部ネットワークを活用してアプリケーションへのルートを確保•2 つのエニーキャストIP が作成されます•エニーキャストIP によって、クライアントは最寄りのエッジロケーションに対して送信します•エッジロケーションは、アプリケーションにトラフィックを送信します
+アメリカ
+オーストラリア
+ヨーロッパ
+インドパブリックALB
+Edge LocationAWS 内ネットワーク
+
+--- 第322页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Global Accelerator•Elastic IP、EC2 インスタンス、ALB、NLB で動作します（パブリック、プライベート問わず）•安定したパフォーマンス•最小限のレイテンシーと高速なリージョナル・フェイルオーバーを実現するインテリジェント・ルーティング•クライアントキャッシュに問題なし（IPが変わらないため）•AWSの内部ネットワーク•ヘルスチェック•Global Accelerator がアプリケーションのヘルスチェックを行います。•アプリケーションのグローバル化を支援（不健全な状態に対して、1分以内のフェイルオーバー）•ディザスターリカバリーに最適•セキュリティ•ホワイトリストに登録する外部IP は2 つだけで済みます•AWS Shield によるDDoS 対策
+
+--- 第323页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Global Accelerator とCloudFront の比較•どちらのサービスも、AWSのグローバルネットワークと世界各地のEdge Location を利用します•どちらのサービスも、DDoS対策のためのAWS Shield と統合されています•CloudFront •キャッシュ可能なコンテンツ（画像や動画など）のパフォーマンスを向上させます•動的コンテンツ（APIアクセラレーションや動的サイトの配信など）•コンテンツはエッジで提供•Global Accelerator •TCP またはUDP を介した様々なアプリケーションのパフォーマンスを向上させます•1 つまたは複数のAWS リージョンで動作するアプリケーションへ、エッジがパケットをプロキシします•ゲーム（UDP）、IoT（MQTT）、Voice over IP など、HTTP以外のユースケースに適しています•固定IPアドレスを必要とするHTTP ユースケースに最適•決定的・高速なリージョナルフェイルオーバーを必要とするHTTP ユースケースに適しています
+
+--- 第324页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Snow ファミリー•エッジでデータを収集・処理し、データをAWSに出入りさせるための高セキュリティなポータブルデバイス•データ移行•エッジコンピューティング
+Snowball EdgeSnowmobileSnowconeSnowball EdgeSnowcone
+
+--- 第325页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Snow ファミリーによるデータ移行転送時間100Mbps1Gbps10Gbps10 TB12日30時間3時間100TB124日12日30時間1 PB3年124日12日課題•限られた接続性•帯域幅の制限•高いネットワークコスト•共有帯域（回線を最大限使えない）•接続安定性AWS Snow ファミリー：データ移行を行うためのオフラインデバイスネットワークでの転送に1週間以上かかる場合は、Snowballデバイスを使用してください
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_66.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第326页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ダイアグラム•S3へのダイレクトアップロード•Snow ファミリークライアントAmazon S3 バケットインポート/エクスポートAmazon S3 バケットAWS SnowballクライアントAWS Snowballwww: 10Gbit/s輸送（物理的に）
+
+--- 第327页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Snowball Edge （データ転送用）•物理的なデータ転送ソリューション:  TB やPB のデータをAWS とやりとり•ネットワークでのデータ移動（ネットワーク料金を支払う）に替わる選択肢•料金は、貸し出し日数とデータ転送量（AWSからの持ち出し分のみ）に基づいて算出•ブロックストレージとAmazon S3 互換のオブジェクトストレージの提供•Snowball Edge Storage Optimized•ブロックボリュームとS3 互換のオブジェクトストレージ用に80TB のHDD 容量を確保•Snowball Edge Compute Optimized •ブロックボリュームとS3 互換のオブジェクトストレージ用に42TB のHDD 容量を確保•使用例：大規模データのクラウド移行、データセンターの閉鎖、ディザスタリカバリ
+
+--- 第328页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Snowcone•小型、ポータブルコンピューティング、どこでも、頑丈で安全、過酷な環境にも耐える•軽量（4.5ポンド（2.1kg））•エッジコンピューティング、ストレージ、およびデータ転送に使用されるデバイス•8TB の使用可能なストレージ•Snowball が入らないところにSnowcone を使う（スペースが限られている環境）•バッテリー/ケーブルは各自で用意する必要があります•オフラインでAWSに送り返すこともできるし、インターネットに接続してAWS DataSync を使ってデータを送ることもできます
+
+--- 第329页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Snowmobile
+•エクサバイトのデータを転送（1EB＝1,000PB＝1,000,000TB）•Snowmobile 1 台あたり100PB の容量を持つ（複数台を並行して使用）•高いセキュリティ: 温度管理、GPS、24時間365日のビデオ監視システム•10PB 以上を転送する場合は、Snowball よりも優れています
+
+--- 第330页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com データ移行のためのAWS Snow Family
+Snowball Edge
+Snowmobile
+Snowcone
+SnoconeSnowball EdgeStorage OptimizedSnowmobileストレージ容量8TB 使用可能80TB 使用可能< 100 PBマイグレーションサイズ最大24TB、オンラインおよびオフライン最大ペタバイト規模オフライン最大エクサバイト規模オフラインDataSyncエージェントプリインストールされているストレージクラスタリング最大15 ノード
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_67.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第331页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Snow Family -使用プロセス1.AWS コンソールからSnowball デバイスの配信をリクエスト2.サーバーにsnowball client / AWS OpsHubをインストール3.スノーボールをサーバーに接続し、クライアントを使ってファイルをコピーする4.使い終わったデバイスを返送する（適切なAWS施設に送られます）5.データはS3 バケットに読み込まれます6.最後にSnowball デバイスのデータは完全に消去されます
+
+--- 第332页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com エッジコンピューティングとは？•エッジ環境で作成中のデータを処理する•道路を走るトラック、海を走る船、地下の採掘場... •これらの場所には•インターネットへのアクセスが制限されている/ない•コンピューティングパワーへのアクセスが限られている／容易ではない•エッジコンピューティングを行うためにSnowball Edge/Snowconeデバイスを設定しました•エッジコンピューティングのユースケース•データの前処理•エッジでの機械学習•メディアストリームのトランスコード•最終的には（必要であれば）、デバイスをAWSに返送することもできます（例: データの転送など）
+
+--- 第333页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Snow Family -エッジコンピューティング•Snowcone（小型）•2CPU、4GBのメモリ、有線または無線アクセス•USB-C 電源-コードまたはオプションのバッテリー•Snowball Edge -Compute Optimized•52 個のvCPU、208GiB のRAM•オプションのGPU（映像処理や機械学習に有効）•42TB の使用可能なストレージ•Snowball Edge -Storage Optimized•最大40 個のvCPU、80GiB のRAM•オブジェクトストレージのクラスター化が可能•共通: EC2 インスタンスとAWS Lambda ファンクションを実行可能（AWS IoT Greengrassを使用）•長期導入オプション: 1 年、3 年の割引価格
+
+--- 第334页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS OpsHub•従来、Snow Familyのデバイスを使用するには、aws-cliが必要でした•現在では、AWS OpsHub（コンピュータ/ラップトップにインストールするソフトウェア）を使用して、Snow Family Deviceを管理することができます•シングルまたはクラスターのデバイスのロック解除と設定•ファイルの転送•Snow Family デバイス上で動作するインスタンスの起動と管理•デバイスのメトリクス（ストレージ容量、デバイス上のアクティブなインスタンス）の監視•対応するAWS サービスを端末で起動（例: Amazon EC2 インスタンス、AWS DataSync、Network File System（NFS）など）
+https://aws.amazon.com/blogs/aws/aws-snowball-edge-update/
+
+--- 第335页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Snowball to Glacier•Snowball はGlacier に直接インポートできません•Amazon S3 をライフサイクル・ポリシーと一緒につかう必要があります
+Snowball
+Amazon S3
+Amazon GlacierS3 ライフサイクルポリシーインポート
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_68.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第336页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ストレージのハイブリッドクラウド•AWSは“ハイブリッドクラウド” を推進している•インフラの一部をクラウド化•インフラの一部がオンプレミス•理由: •クラウドへの移行は時間がかかる•セキュリティ要件•コンプライアンス要求•IT 戦略•S3は（EFS / NFSとは異なり）独自のストレージ技術•S3のデータをオンプレミスからアクセスするにはどうすればよいか?•AWS Storage Gateway!
+
+--- 第337页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com クラウドネイティブなAWS ストレージブロック
+ファイルオブジェクトAmazon EBSEC2インスタンスストアAmazon EFSAmazon FSx Amazon S3Amazon Glacier
+
+--- 第338页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Storage Gateway•オンプレミスのデータとS3のクラウドデータの橋渡しをする•使用例: ディザスタリカバリ、バックアップ＆リストア、階層型ストレージ•3 種類のStorage Gateway•ファイルゲートウェイ•ボリュームゲートウェイ•テープゲートウェイ•試験に向けて: 3つの違いを知っておく必要がありますAmazon EBS S3GlacierテープボリュームファイルAWS Storage Gateway
+
+--- 第339页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ファイルゲートウェイ•設定されたS3 バケットは、NFSおよびSMB プロトコルを使ってアクセスできます•S3標準、S3 IA、S3 One Zone IA に対応•ファイルゲートウェイごとのIAM ロールによるバケットアクセス•直近に使用したデータはファイルゲートウェイにキャッシュされる•多くのサーバーにマウント可能•Active Directory（AD）との連携によるユーザー認証コーポレートデータセンター
+AWSクラウド
+リージョン
+Active DirectoryHTTPSアプリケーションサーバーファイルゲートウェイS3標準S3標準-IAS3 GlacierNFS (v3 / v4.1)認証(オプション)
+
+--- 第340页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ボリュームゲートウェイ•iSCSI プロトコルによるブロックストレージで、S3 にデータを保存•EBS スナップショットによるバックアップは、オンプレミスのボリュームの復元に役立ちます•キャッシュボリューム: 最新のデータをS3に保存、ローカルにキャッシュがあり低レイテンシーでアクセス可能•ストアドボリューム: 最新のデータはオンプレミス、S3に定期的に保存されるコーポレートデータセンター
+AWSクラウド
+リージョン
+S3バケット
+Amazon EBSスナップショット
+アプリケーションサーバーiSCSI
+ボリュームゲートウェイHTTPS
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_69.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第341页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com テープゲートウェイ•物理的なテープを使ってバックアップを行っている会社もあります（！）•テープゲートウェイにより、これまで同様のプロセスでクラウドを使用できます•Amazon S3 とGlacier にデータを保存する仮想テープライブラリ（VTL）•既存のテープベースのプロセス（およびiSCSIインターフェース）を使用したデータのバックアップが可能•主要なバックアップソフトウェアベンダーとの連携コーポレートデータセンター
+AWSクラウド
+リージョン
+バーチャルテープin Amazon S3
+アーカイブされたバーチャルテープin Amazon Glacier
+バックアップサーバーiSCSIHTTPS
+テープゲートウェイメディアチェンジャーテープドライブ
+
+--- 第342页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Storage Gateway ハードウェアアプライアンス•Storage Gatewayを使うには、オンプレミス側でゲートウェイを動かす環境が必要です•それが難しい場合、StorageGateway ハードウェアアプライアンスを使うことができます•amazon.comで購入できます•ファイルゲートウェイ、ボリュームゲートウェイ、テープゲートウェイとの連携•必要なCPU、メモリー、ネットワーク、SSDキャッシュのリソースが備わっています•小規模データセンターでの毎日のNFSバックアップに役立ちます
+
+--- 第343页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Storage Gatewayの概要•試験のヒント：問題をよく読むと、どのゲートウェイを使用するかのヒントがあります•オンプレミスのデータをクラウドへ=> Storage Gateway•ファイルアクセス/ NFS -Active Directory によるユーザー認証=> File Gateway (S3 でファイルを共有)•ボリューム/ ブロックストレージ/ iSCSI => ボリュームゲートウェイ(S3 にバックアップ)•VTL テープソリューション/ iSCSI によるバックアップ=> テープゲートウェイ(S3 とGlacier でバックアップ)•オンプレミスでの仮想化なし=> ハードウェア・アプライアンス
+
+--- 第344页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon FSx for Windows（ファイルサーバー）•EFSは、Linuxシステム用の共有ネットワークファイルシステムです•FSxfor Windowsは、フルマネージドなWindows 用共有ファイルシステム•SMB プロトコルとWindows NTFS に対応•Microsoft Active Directory の統合、ACL、ユーザークォータ•SSD 上に構築され、数十GB/s、数百万IOPS、数百PB のデータへのスケールアップが可能•オンプレミスのインフラからアクセス可能•マルチAZ の構成が可能（高可用性）•データは毎日S3 にバックアップされます
+
+--- 第345页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon FSx for Lustre •Lustreは並列分散ファイルシステムの一種であり、大規模コンピューティングのためのシステムです•Lustreという名前は、"Linux "と"cluster "に由来しています•機械学習、ハイパフォーマンスコンピューティング(HPC)•映像処理、財務モデリング、設計モデリングの自動化•数百GB/s、数百万IOPS、サブミリ秒のレイテンシーにまでスケールアップ可能•S3とのシームレスな連携•ファイルシステムとして「S3」を読み込める（FSx 経由）•演算結果をS3に書き戻すことができる（FSx 経由）•オンプレミスのサーバーからも利用可能
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_7.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第31页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 例: アクセスキー
+•アクセスキーID: AKIASK4E37PV4983d6C•シークレットアクセスキー: AZPN3zojWozWCndIjhB0Unh8239a1bzbzO5fqqkZq•忘れないで! : アクセスキーを共有しない!
+
+--- 第32页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サービス向けIAM ロール•AWS サービスのなかには、あなたの代わりにアクションを実施する必要があるものがあります•そのために、IAM ロールを使ってAWS サービスに権限を割り当てます•一般的なロール: •EC2 インスタンスロール•Lambda ファンクションロール•CloudFormation 向けのロール
+EC2 インスタンス(仮想サーバ)
+IAM ロール
+各種AWSサービスにアクセス
+
+--- 第33页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM セキュリティツール•IAM Credentials Report (アカウントレベル)•すべてのアカウントのユーザや認証情報の状態をレポート•IAM Access Advisor (ユーザレベル)•ユーザに許可されているサービスと、それぞれのサービスに最後にアクセスしたのがいつかが見られます•権限を見直すのに使えます
+
+--- 第34页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM ガイドライン&ベストプラクティス•AWS アカウントのセットアップ以外では、ルートアカウントを使わないようにしましょう•1物理ユーザ= 1 AWS ユーザ•ユーザをグループに割り当て、権限をグループに割り当てましょう•強いパスワードポリシーを設定しましょう•多要素認証(MFA)を使い、できれば必須にしましょう•AWS サービスに権限を割り当てるためにロールを使います•CLI /SDK のアクセスではアクセスキーを使います•IAM Credentials Reportで権限を管理しましょう•決して、IAMユーザやアクセスキーを共有しないでください
+
+--- 第35页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com IAM Section –サマリー•ユーザ:物理ユーザに対応、パスワードを持つ•グループ: ユーザを含む（グループの入れ子は不可）•ポリシー:ユーザ、グループの権限を書くJSONドキュメント•ロール:EC2 インスタンスやAWS サービスなどで利用•セキュリティ:多要素認証(MFA) + パスワードポリシー•アクセスキー:CLI, SDK でアクセスする時に利用•監査: IAM Credential Reports & IAM Access Advisor
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_70.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第346页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ストレージの比較•S3: オブジェクトストレージ•Glacier: アーカイブ・バックアップ•EFS: Linux 用ネットワークファイルシステム、POSIXファイルシステム•FSxfor Windows: Windows 用ネットワークファイルシステム•FSxfor Lustre: ハイパフォーマンスコンピューティング(HPC) Linux ファイルシステム•EBSボリューム: 1つのEC2インスタンスに接続できるネットワークストレージ•インスタンスのストレージ: EC2インスタンス付属の物理ストレージ（高IOPS）•ストレージゲートウェイ: ファイルゲートウェイ、ボリュームゲートウェイ（キャッシュ＆ストアド）、テープゲートウェイ•Snowball / Snowmobile: 大量のデータをクラウドに移すための物理デバイス•データベース: 特定のワークロードのためのもので、通常はインデックスやクエリーを備えている
+
+--- 第347页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS インテグレーション＆メッセージングSQS、SNS、Kinesis
+
+--- 第348页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com セクション紹介•複数のアプリケーションを展開する場合、必然的にアプリケーション同士の連携が必要になります。•アプリケーションの通信には2つのパターンがあります。1）同期通信アプリケーションとアプリケーションの間2）非同期／イベントベース(アプリケーション→キュー→アプリケーション)販売サービス配送サービス販売サービス配送サービスキュー
+
+--- 第349页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com セクション紹介•アプリケーション間で同期的に通信していると、トラフィックが急激に増加した場合に問題が生じることがあります•通常は10 本のところ、急に1000 本のビデオをエンコードすることになったら？•解決策: アプリケーションをデカップリング（分離）する•SQS の使用: キューモデル•SNS の活用: Pub/Subモデル•Kinesis の活用: リアルタイム・ストリーミング・モデル•これらのサービスは、アプリケーションから独立してスケールします
+
+--- 第350页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SQSキューとは？プロデューサープロデューサープロデューサーSQSキューコンシューマーコンシューマーコンシューマーコンシューマーメッセージの送信メッセージポーリング
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_71.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第351页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SQS -スタンダードキュー•AWS で最も古いサービス（10年以上前）•フルマネージドサービス。アプリケーションのデカップリングに使用•特徴:•無制限のスループット、無制限のキュー内メッセージ数•メッセージのデフォルトの保存期間は4日間、最大14日間•低レイテンシー（送信・受信時に10ms未満）•送信メッセージあたり256KB の制限•重複したメッセージが発生する可能性がある（少なくとも1回の配信を保証、重複送信はまれにある）•順序付けされないメッセージ（ベストエフォート順序付け）
+
+--- 第352页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS -メッセージの送信•SDK（SendMessageAPI）を使ってSQS に送信•メッセージは、コンシューマーが削除するまでSQS に保存されます•メッセージの保存期間：デフォルトで4日、最大で14日•例：注文を送信して処理させる•オーダーID•お客様ID•そのほか、好きな属性•スループット無制限SQSに送信
+メッセージ最大256kb
+
+--- 第353页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS -メッセージの消費（Consume）•コンシューマー（EC2 インスタンス、サーバー、またはAWS Lambda）•SQS へのメッセージのポーリング（一度に最大10件まで受信可能）•メッセージを処理する（例: RDSのデータベースにメッセージを挿入する•DeleteMessageAPI を使ってメッセージを削除するコンシューマポール/レシーブメッセージメッセージの削除
+インサート
+
+--- 第354页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS -複数のコンシューマSQSキュー
+ポーリング•コンシューマはメッセージの受信と処理を並行して行います•最低1 回、どこかに配信•ベストエフォート型のメッセージオーダー•コンシューマはメッセージを処理した後に削除します•コンシューマを水平方向に拡張し、処理のスループットを向上させることができます
+
+--- 第355页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS とオートスケーリンググループ（ASG）の組み合わせSQSキュー
+CloudWatch Metric -Queue Lengthおおよそのメッセージ数オートスケーリンググループ
+EC2インスタンスメッセージの送信
+CloudWatchアラームスケールメッセージ増加時のアラーム
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_72.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第356页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQSによるアプリケーション層間のデカップリング
+SQSキュー
+オートスケーリング
+バックエンド処理アプリケーション
+フロントエンドウェブアプリリクエスト送信
+オートスケーリング受信
+保存
+
+--- 第357页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SQS -セキュリティ•暗号化:•HTTPS API による通信路の暗号化•KMS キーを使ったデータの暗号化•クライアント自身が暗号化/復号化を行いたい場合は、クライアントサイドの暗号化•アクセスコントロール: SQS API へのアクセスを規制するIAM ポリシー•SQS アクセスポリシー（S3 バケットポリシーに似ています）•SQS キューへの別アカウントからのアクセス許可に使います•他のサービス（SNS, S3...）がSQS キューに書き込めるようにするのにも使います
+
+--- 第358页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQSキューのアクセスポリシーアカウント444455556666 アカウント111122223333
+SQSキュー(queue1)
+EC2インスタンスメッセージポーリングクロスアカウントアクセスS3 バケット(bucket1)オブジェクトのアップロードメッセージの送信S3 イベント通知の発行SQS キューへ
+{"Version": "2012-10-17","Statement": [{"Effect": "Allow", "Principal": { "AWS": [ "111122223333"] }, "Action": [ "sqs:ReceiveMessage"], "Resource": "arn:aws:sqs:us-east-1:444455556666:queue1"}] }{"Version": "2012-10-17","Statement": [{"Effect": "Allow", "Principal": { "AWS": "*"}, "Action": [ "sqs:SendMessage"], "Resource": "arn:aws:sqs:us-east-1:444455556666:queue1","Condition": { "ArnLike": { "aws:SourceArn": "arn:aws:s3:*:*:bucket1"},"StringEquals": { "aws:SourceAccount": "<bucket1_owner_account_id>" },}}] }
+SQS キュー(queue1)
+
+--- 第359页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS -メッセージ可視性タイムアウト•メッセージがあるコンシューマによってポーリングされた後、他のコンシューマからは見えなくなります•デフォルトでは、「メッセージ可視性タイムアウト」は30 秒です•つまり、メッセージが処理されるのは長くても30 秒程度ということになります•メッセージ可視性のタイムアウト後、メッセージはSQS で「可視」になります時間受信メッセージリクエスト
+可視性タイムアウト返信されたメッセージ受信メッセージリクエスト返さない受信メッセージリクエスト返さない受信メッセージリクエスト
+返信されたメッセージ（再び）
+
+--- 第360页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS -メッセージ可視性タイムアウト
+時間受信メッセージリクエスト
+Visibility timeout返信されたメッセージ受信メッセージリクエスト返さない受信メッセージリクエスト返さない受信メッセージリクエスト
+返信されたメッセージ（再び）•可視性タイムアウト内にメッセージが処理されない場合は、2 回処理されます•コンシューマーは、ChangeMessageVisibilityAPI を呼び出すことで、可視性タイムアウトを延長することができます•可視性タイムアウトが大きい（数時間）場合、コンシューマーがクラッシュすると、再処理に時間がかかります•可視性タイムアウトが小さい（数秒）と、処理が重複してしまうことがあります
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_73.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第361页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SQS -Dead Letter Queue•コンシューマーが可視性タイムアウト内にメッセージの処理に失敗した場合...そのメッセージはキューに戻ります•メッセージが何回キューに戻るかの閾値を設定できます•最大受信数の閾値を超えると、メッセージはDLQ（Deadletter queue）に入ります•障害調査に便利です•DLQ 内のメッセージが期限切れになる前に必ず処理してください•DLQ で14日間の保持を設定するのが良いコンシューマー失敗ループSQSキューデッドレターキュー
+
+--- 第362页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS -リクエスト・レスポンスシステム
+リクエストキュー応答キュー2リクエストを送る
+回答者ポーリング回答を送るレスポンス•このパターンを実装するには、SQSTempor ar y Queue Clientを使用します•SQSキューの作成・削除ではなく、仮想キューを活用（費用対効果が高い）
+プロデューサー1
+プロデューサー2要求者
+応答キュー1回答を送るレスポンス関連ID返信先: “応答キュー1”関連ID返信先: “応答キュー2”
+オートスケーリンググループ
+関連IDレスポンスペイロード関連IDレスポンスペイロード
+
+--- 第363页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SQS -遅延キュー•メッセージを一定時間（最大15 分）、遅延させる設定が可能（コンシューマーはすぐには見ない）•デフォルトは0秒（メッセージはすぐに利用可能）•キューレベルでのデフォルト設定が可能•送信時のDelaySecondsパラメータを使用して、送信時のデフォルトを上書きすることができます。プロデューサーコンシューマーメッセージの送信メッセージポーリング
+
+--- 第364页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SQS -FIFOキュー•FIFO = First In First Out (キュー内のメッセージの順番を保つ)プロデューサーコンシューマー送信ポーリング
+12341234•スループット上限：バッチなしで300msg/s、バッチありで3000msg/s•重複を排除した、ただ1 度のみの配信を保証•メッセージはコンシューマーによって順番に処理される
+
+--- 第365页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS とオートスケーリンググループ（ASG）の組み合わせSQSキュー
+CloudWatch CustomMetric -おおよそのメッセージ数/ インスタンス数オートスケーリンググループ
+EC2インスタンスメッセージの送信
+CloudWatchアラームスケールメッセージ増加時のアラーム
+参考: https://docs.aws.amazon.com/ja_jp/autoscaling/ec2/userguide/as-using-sqs-queue.html
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_74.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第366页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQSによるアプリケーション層間のデカップリング
+SQSキュー
+オートスケーリング
+バックエンド処理アプリケーション
+フロントエンドウェブアプリリクエスト送信
+オートスケーリング受信
+保存
+スケーリング
+
+--- 第367页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SNS•1つのメッセージを多くの受信者に送りたい場合は？
+購入サービスメール通知不正検知サービス配送サービスSQSキューメール通知不正検知サービス配送サービスSQSキューSNSトピック購入サービス直接結合Pub / Sub(Publish / Subscribe)
+
+--- 第368页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SNS•「イベントプロデューサー」は、1 つのSNS トピックにメッセージを送信します•SNSのトピック通知を受け取る（listen）ための「イベントレシーバー」（サブスクリプション）を、好きなだけ接続できます•トピックの各購読者は、すべてのメッセージを受け取ることになります（メッセージのフィルタリングも可能）•1 トピックにつき最大10,000,000 件のサブスクリプション•作成できるトピックは100,000 トピック（1 AWS アカウントあたり）•以下のリソースを、サブスクライバーとして登録可能:•SQS •HTTP / HTTPS (配信リトライ回数あり)•AWS Lambda•電子メール•SMS メッセージ•モバイル通知
+
+--- 第369页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SNSは多くのAWSサービスと連携•多くのAWSサービスは、SNSに直接データを送信して通知することができます•CloudWatch（アラーム用）•オートスケーリンググループの通知•Amazon S3（バケットのイベント時）•CloudFormation(状態変化時⇒ビルド失敗など)•などなど...
+
+--- 第370页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SNS -パブリッシュまでの流れ•トピックパブリッシュ（SDKを使用）•トピックの作成•サブスクリプションの作成（複数可）•トピックにメッセージをパブリッシュ•ダイレクトパブリッシュ（モバイルアプリSDK用）•プラットフォーム上のアプリケーションの作成•プラットフォーム・エンドポイントの作成•プラットフォーム・エンドポイントにパブリッシュ•Google GCM、AppleAPNS、AmazonADM...と連携
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_75.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第371页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SNS -セキュリティ•暗号化:•HTTPS API による通信路の暗号化•KMS キーを使ったデータの暗号化•クライアント自身が暗号化/復号化を行いたい場合は、クライアントサイドの暗号化•アクセスコントロール: •SNS API へのアクセスを許可/禁止するIAM ポリシー•SNSアクセスポリシー（S3バケットポリシーと同様）:•SNS のトピックに別のアカウントからアクセスする際に利用•他のサービス（S3...）からSNSトピックへの書き込みを許可するのに利用
+
+--- 第372页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SNS＋SQS: ファンアウト•SNS で一度プッシュすると、サブスクライバーであるすべてのSQSキューで受信できます•完全にデカップリングされており、データの損失がありません•SQS を入れるメリット: データの永続性、遅延処理、作業の再試行•徐々にSQS サブスクライバーを増やすことも可能です•SQS キューのアクセスポリシーがSNS の書き込みを許可していることを確認してください不正検知サービス配送サービスSNSトピック購買サービスSQSキューSQSキュー
+
+--- 第373页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 応用例: S3イベントを複数のキューへ•イベントタイプ（例：objectcreate）とプレフィックス（例：images/）の同じ組み合わせには、1つのS3 イベントルールしか設定できません。•同じS3イベントを多くのSQSキューに送りたい場合は、SNS を利用します
+SNSトピックSQSキュー
+Amazon S3イベントS3オブジェクトを作成
+AWS Lambdaファンアウト
+
+--- 第374页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon SNS -FIFOトピック•FIFO = First In First Out (トピック内のメッセージの順番)プロデューサー購読者SQS FIFOメッセージの送信メッセージの受信12341234•SQS FIFOと同様の機能:•メッセージグループIDによる順序付け（同じグループのメッセージはすべて順序付けされる）•重複排除IDを用いた重複排除、またはコンテンツベースの重複排除•サブスクライバーはSQS FIFOキューのみ•スループットに上限あり（SQSFIFOと同じスループット）
+
+--- 第375页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SNS-FIFO＋SQS-FIFO: ファンアウト•ファンアウト＋順序付け＋重複除去が必要な場合不正検知サービス配送サービスSNS FIFOトピック購買サービスSQS FIFOキューSQS FIFOキュー
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_76.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第376页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SNS -メッセージフィルタリング•メッセージを絞り込むポリシーをサブスクリプションごとに設定できます（JSON で記述）•サブスクリプションがフィルタポリシーを持たない場合、すべてのメッセージを受信します
+SNSトピック購買サービス
+新規取引Order: 1036Product: 鉛筆Qty: 4State: PlacedSQSキュー(注文受け付け)Eメール購読(注文キャンセル)SQSキュー(受注辞退)
+State: Placedフィルターポリシー
+State: DeclinedフィルターポリシーState: Cancelledフィルターポリシー
+SQSキュー(全て)
+SQSキュー(注文キャンセル)
+
+--- 第377页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis の概要•ストリーミングデータの収集、処理、分析をリアルタイムで簡単に行うことができます•以下のようなリアルタイムデータを取り込めます:アプリケーションログ、メトリクス、ウェブサイトのクリックストリーム、IoTテレメトリーデータ...•Kinesis Data Streams: データストリームの取り込み、処理、保存•Kinesis Data Firehose: データストリームをAWS のデータストアに書き出し•Kinesis Data Analytics: SQL やApache Flinkでデータストリームを解析•Kinesis Video Streams: ビデオストリームのキャプチャ、処理、保存
+
+--- 第378页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis データストリーム
+シャード1シャード2シャードNKinesis Data Streams
+プロデューサーストリームコンシューマーアプリケーションクライアントKinesis Agent
+アプリ(KCL, SDK)
+Lambda
+Kinesis DataFirehoseKinesis DataAnalyticsレコードパーティションキーデータブロブ(up to 1 MB)シャードごとに1 MB/sec または1000 msg/secレコードパーティションキーデータブロブシーケンス番号シャードごとに2 MB/sec (共有)全コンシューマーまたはシャードごとに2 MB/sec (拡張)コンシューマーごとシャード数はスケール可
+SDK, KPL
+
+--- 第379页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data Stream•必要なだけシャードを持つことができます。課金はプロビジョニングされたシャードごとになります•保存期間は1 日（デフォルト）から365 日まで•データの再処理（リプレイ）機能•一度Kinesis に挿入されたデータは削除できません（immutability: 不変性）•同じパーティションを共有するデータは、同じシャードに入ります（順序付け）•プロデューサー:  AWS SDK, Kinesis Producer Library（KPL）, Kinesis Agent •コンシューマー: •自分で書く: Kinesis Client Librar y (KCL), AWS SDK•マネージド: AWS Lambda、KinesisData Firehose、KinesisData Analytics
+
+--- 第380页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data FirehoseAWS Destinations
+Amazon S3Amazon Redshift(S3 経由のCOPY)Amazon ElasticSearchHTTP エンドポイント
+プロデューサーアプリケーションクライアントKinesis Agent
+SDK, KPL
+KinesisData StreamsAmazon CloudWatch(Logs & Events)AWS IoTKinesisData Firehose
+データ変換Lambdafunction最大1 MBレコードバッチ書き込み
+S3 バックアップバケットすべて、または失敗データCustom Destinations
+Datadog
+3rd-party Partner Destinations
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_77.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第381页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data Firehose•フルマネージドサービス、管理不要、自動スケーリング、サーバーレス•AWS: Redshift / Amazon S3 / ElasticSearch •サードパーティパートナー: Splunk / MongoDB / DataDog / NewRelic / ... •カスタム: 任意のHTTPエンドポイントに送信•Firehose を経由するデータ量に応じた課金•ニア・リアル・タイム•非フルバッチの場合、最小60 秒のレイテンシー•または一度に最小32MB のデータ•多くのデータ形式、変換、変形、圧縮に対応•AWS Lambda を使ったカスタムデータ変換に対応•失敗したデータやすべてのデータをバックアップのS3バケットに送ることが可能
+
+--- 第382页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data Streams とFirehoseの比較
+Kinesis Data StreamsKinesis Data Firehose•大規模に対応可能なデータストリーミングサービス•カスタムコードの作成（プロデューサ／コンシューマ）•リアルタイム（～200ms）•スケーリングの管理（シャードの分割／統合）•1～365日のデータ保存•リプレイ機能に対応•ストリーミングデータをS3 / Redshift / ES / サードパーティ/ カスタムHTTP に書き出す•フルマネージド•ニアリアルタイム（バッファタイム最小60 秒）•オートスケーリング•データ保存なし•リプレイ機能に対応していない
+
+--- 第383页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data Analytics(SQL アプリケーション)
+ソースKinesisData StreamsKinesisData Firehose
+KinesisData Streams
+KinesisData AnalyticsKinesisData FirehoseAWS LambdaSQLステートメント
+Amazon S3Amazon Redshift(S3 経由のCOPY)その他のFirehose 宛先…
+アプリケーションどこでも
+シンクどこでも
+
+--- 第384页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis Data Analytics•SQL を使用したKinesis Streams のリアルタイム分析•フルマネージドで、サーバーのプロビジョニングが不要•オートスケーリング•リアルタイム・アナリティクス•実際の処理量に応じた課金•リアルタイムのクエリ結果からストリームを作成できる•ユースケース:•時系列データの分析•リアルタイムのダッシュボード•リアルタイムでの計測
+
+--- 第385页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis でのデータの順番•100 台のトラック（truck_1, truck_2, ... truck_100）が道路上を走行していて、そのGPS 位置を定期的にAWS に送信しているとします•トラックの動きを正確に把握するために、トラックごとにデータを順番に受け取るようにしたい•そのデータをどのようにしてKinesisに送ればいいでしょうか？•答：“パーティションキー” として“truck_id” を使うようにする•同じキーは常に同じシャードに入るシャード3シャード2シャード1
+12345Kinesis Stream with 3 Shardsパーティションキーは"truck_id"
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_78.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第386页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS でのデータの順番•標準SQS の場合、順不同で処理されます•SQS FIFO では、グループID を使用しない場合、メッセージは送信された順に処理されます。コンシューマーは1 つだけです
+•コンシューマの数を増やしたいが、互いに関連しているメッセージは、同じグループとして処理されたいケースもあります•その場合、「グループID」を使います（Kinesis のパーティションキーに似ています）
+https://aws.amazon.com/blogs/compute/solving-complex-ordering-challenges-with-amazon-sqs-fifo-queues/
+
+--- 第387页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Kinesis とSQS の比較•100台のトラック、5つのKinesis シャード、1つのSQS FIFOを想定してみましょう•Kinesis Data Stream•1 シャードあたり平均20 台のトラックのデータを処理します•トラックは、各シャード内でデータが並べられます•並列できる最大のコンシューマー数は5 です•最大で5MB/s のデータを受信可能•SQS FIFO•SQS FIFO キューが1 つしかない場合•100 個のグループID を持つことになります•最大100 個のコンシューマーを設定できます（100 グループID のため）•1 秒間に最大300 通のメッセージ（バッチを使用している場合は3000 通）
+
+--- 第388页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com SQS vs SNS vs KinesisSQS:•コンシューマーがデータを"プル"•データは処理された後に削除されます•コンシューマーをいくつでも設定できます•スループットのプロビジョニングが不要•順番保証なし（FIFOキューを除く）•個別メッセージ遅延機能SNS:•多数のサブスクライバーにデータを“プッシュ”•最大10,000,000 のサブスクライバー•データが永続化されない（配信失敗すると消える）•Publish / Subscribe モデル•最大100,000 トピック•スループットのプロビジョニングが不要•SQSとの統合によるファンアウトアーキテクチャパターンの実現Kinesis:•コンシューマがデータを“プル"•コンシューマーをいくつでも設定できます•データのリプレイが可能•リアルタイムのビッグデータ、アナリティクス、ETLに適しています•シャードレベルでの順番保証•データはX 日後に失効•スループットの設定・課金が必要
+
+--- 第389页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon MQ•SQS やSNS は「クラウドネイティブ」なサービスであり、AWS独自のプロトコルを使用しています•オンプレミスで動作する従来のアプリケーションでは、以下のようなオープンなプロトコルを使用していることがありますMQTT, AMQP , STOMP , Openwire, WSS•クラウドに移行するときに、SQSやSNS を使用するためにアプリケーションを再構築するのではなく、AmazonMQ を使うことができます•Amazon MQ = マネージドApache ActiveMQ•Amazon MQ はSQS / SNS ほどのスケーラビリティはない•Amazon MQ は専用のマシンで動作し、フェイルオーバーに対する高可用性があります•Amazon MQ にはキュー機能（～SQS）とトピック機能（～SNS）がある
+
+--- 第390页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon MQ -ハイアベイラビリティ
+リージョン(us-east-1)アベイラビリティゾーン(us-east-1a)
+アベイラビリティゾーン(us-east-1b)ACTIVESTANDBY
+Amazon EFSストレージ
+Amazon MQ Broker
+Amazon MQ Broker
+クライアントフェイルオーバー
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_79.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第391页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com コンテナーセクション
+
+--- 第392页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Dockerとは？
+•Docker は、アプリケーションをデプロイするためのソフトウェア開発プラットフォームです•アプリは「コンテナ」にパッケージされており、他のマシンで簡単に実行できます•アプリはどこで動かしても、同じように動きます•任意のマシン•互換性に問題なし•予測可能な振る舞い•少ない作業量•維持・デプロイが容易になる•あらゆる言語、あらゆるOS、あらゆるテクノロジーで動作します
+
+--- 第393页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com OS 上のDocker
+サーバー（例：EC2インスタンス）
+
+--- 第394页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Docker イメージのありか•Docker イメージはDocker リポジトリに格納されます•パブリック: Docker Hub https://hub.docker.com/ •多くのソフトウェアやOS のベースイメージを見つけられます•Ubuntu•MySQL•NodeJS、Java... •プライベート: Amazon ECR (Elastic Container Registr y)•パブリック: Amazon ECR Public
+
+--- 第395页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Docker と仮想マシンの比較•Dockerは"ある種の" 仮想化技術ですが、仮想マシンではないです•OS 環境・リソースをホストと直接共有⇒1 つのサーバーで多数のコンテナを実行
+コンピュータHWホストOSハイパーバイザーアプリゲストOS(VM)アプリゲストOS(VM)アプリゲストOS(VM)コンピュータHWホストOS（EC2インスタンス)Docker Daemonコンテナコンテナコンテナコンテナコンテナコンテナコンテナコンテナコンテナ
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_8.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第36页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 Basics
+
+--- 第37页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon EC2•EC2 は、AWSのとてもよく使われるサービスのひとつ•EC2 = Elastic Compute Cloud = 計算機インフラの時間貸し(Infrastructure as a Service)•さまざまな機能から構成:•仮想マシンの時間貸し(EC2)•仮想ディスクへのデータ保存(EBS)•アクセス負荷を複数のマシンに分散(ELB: Elastic Load Balancer)•負荷に応じてマシン数を自動で増減(ASG: Auto-scaling Group)•EC2 を理解することは、”クラウド”を理解する基礎
+
+--- 第38页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2で設定できること•オペレーティング・システム(OS): Linux or Windows•CPU のクロック数・コア数:•メモリの容量:•ストレージ(ディスク)の容量:•ネットワーク経由で接続(EBS & EFS)•仮想マシン直結(EC2 Instance Store)•ネットワークインタフェース: 速さ、グローバルIPの有無•ファイアウォールのルール: セキュリティグループ•起動時のスクリプト: EC2 User Data
+
+--- 第39页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスタイプ: 例InstancevCPUMem (GiB)StorageNetwork PerformanceEBS Bandwidth (Mbps)t2.micro11EBS-OnlyLow to Moderatet2.xlarge416EBS-OnlyModeratec5d.4xlarge16321 x 400 NVMe SSDUp to 10 Gbps4,750r5.16xlarge64512EBS Only20 Gbps13,600m5.8xlarge32128EBS Only10 Gbps6,800t2.micro はAWS 無料利用枠に含まれています(月750 時間まで)Great website:https://instances.vantage.sh
+
+--- 第40页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ハンズオンLinuxを実行するEC2インスタンスの起動•今回は、AWSコンソールを使って最初の仮想サーバーを立ち上げます•様々なパラメーターに最初のハイレベルなアプローチをする•インスタンスの起動／停止／終了の方法をご紹介します。
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_80.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第396页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Docker 入門
+Dockerfilebuild
+Docker イメージrun
+Docker コンテナPushPull
+Amazon ECRDocker Hub
+Docker リポジトリ
+
+--- 第397页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Dockerコンテナの管理•コンテナを管理するためには、コンテナ管理プラットフォームが必要です•3 つの選択肢があります•ECS: Amazon 独自のプラットフォーム•Fargate: Amazon 独自のサーバーレスプラットフォーム•EKS: AmazonのマネージドKubernetes（オープンソース）
+Amazon ECSAWS FargateAmazon EKS
+
+--- 第398页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECS とは？•ECS = Elastic Container Service•AWS 上でDocker コンテナを起動•インフラ（EC2インスタンス）のプロビジョニングとメンテナンスを行う必要があります•AWS がコンテナの起動/停止を制御します•アプリケーションロードバランサーとの連携が可能
+EC2インスタンスEC2インスタンスEC2インスタンス
+新しいDocker コンテナ
+ECSサービス
+
+--- 第399页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 
+ECSのEC2 起動タイプVPCRegion
+Auto Scaling group
+Amazon ECS Clusterアベイラビリティゾーン1アベイラビリティゾーン2
+コンテナインスタンス(m5.xlarge)コンテナインスタンス(t2.small)コンテナインスタンス(m5.xlarge)
+コンテナインスタンス(t2.small)ECS エージェントECS タスク
+
+--- 第400页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Fargate とは？•AWS上でDockerコンテナを起動•インフラのプロビジョニングが不要（EC2インスタンスの管理が不要）で、よりシンプルになります•サーバーレスのサービス•AWSは、必要なCPU/RAM に基づいて、コンテナを自動的に実行します
+新しいDockerコンテナ
+Fargate
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_81.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第401页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECS のFargate 起動タイプ
+VPCリージョン
+Amazon ECS Clusterアベイラビリティゾーン1アベイラビリティゾーン2
+AWS Fargate
+タスクタスクタスク
+ENIENIENI
+タスクタスクタスク
+ENIENIENI
+
+--- 第402页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECS タスクのIAM ロール
+Amazon ECS Cluster
+•EC2 インスタンスのIAM ロール•ECS エージェントが使用する•ECS サービスへのAPI コール•コンテナのログをCloudWatch Logs に送信•ECR からDocker イメージをpull•Secrets Manager またはSSM Parameter Store での機密データの参照•ECSタスクのIAM ロール•各タスクに特定のIAM ロールを持たせる•実行するECSサービスごとに異なるロールを使用する•タスクのIAM ロールは、タスク定義で定義されているEC2インスタンスECSエージェントタスク1
+ECSサービスECRサービスCloudWatchログS3バケットDynamoDB
+EC2インスタンスのIAM ロール
+ECSタスク1のIAM ロール
+タスク2
+ECSタスク2のIAM ロール
+
+--- 第403页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECS データボリューム-EFSファイルシステムEC2インスタンス
+EC2 + EFS NFS
+マウント
+マウント•EC2 タスクとFargateタスクの両方で動作します•EFS ボリュームをタスクにマウントする機能•どのAZ で起動したタスクも、EFSボリューム内の同じデータを共有できるようになる•Fargate+ EFS = サーバーレス+ サーバー管理不要なストレージ•使用例: コンテナ用の永続的なマルチAZ 共有ストレージFargateタスク
+
+--- 第404页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECS の“サービス” と”タスク”
+Amazon ECS クラスタ
+ECSコンテナインスタンス
+アプリケーションロードバランサーアプリケーションロードバランサー
+ECSコンテナインスタンスECSサービスA
+ECSサービスB
+
+--- 第405页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 起動タイプのロードバランシング
+Amazon ECS クラスタ
+ECSコンテナインスタンスALB
+ECSコンテナインスタンス
+NodeJSコンテナNodeJSコンテナNodeJSコンテナNodeJSコンテナポート80/443ポート36789ポート39586ポート39748ポート39856ダイナミックポートマッピング•ダイナミックなポートマッピングを設定できます•ALB は、EC2 インスタンスの適切なポートを自動的に見つけます•EC2 インスタンスのセキュリティグループで、ALBのセキュリティグループのすべてのポートを許可する必要があります
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_82.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第406页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Fargate起動タイプのロードバランシング
+ALBタスクAポート80/443•各タスクには固有のIP •ENI のセキュリティグループで、ALBのセキュリティグループからのタスクのポートを許可する必要があります
+172.16.4.5タスクB
+172.17.35.88タスクC
+172.18.8.192ポート80ポート80ポート80
+
+--- 第407页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECS タスクを都度、起動する
+クライアント
+オブジェクトのアップロード
+AmazonEventBridgeVPCリージョン
+Amazon ECS クラスタ
+AWS Fargateタスク(new)S3バケットイベントルール:ECSタスクの実行
+AmazonDynamoDB結果保存
+ECSタスクのIAMロール（S3とDynamoDBへのアクセス）オブジェクトの取得
+
+--- 第408页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECS スケーリング-CPU使用率の例
+ECS サービスA
+Auto Scaling Group
+ECSCapacity Provider(オプション)オートスケーリング
+タスク1タスク2CPU 使用率
+CloudWatch Metric(ECSサービスのCPU使用率)
+CloudWatchアラームトリガースケール
+タスク3(new)
+
+--- 第409页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECS スケーリング-SQSキューの例
+ECS サービスA
+Auto Scaling Group
+ECSCapacity Provider(オプション)オートスケーリング
+タスク1タスク2CloudWatch Metric (キューの長さ)
+CloudWatchアラームトリガースケール
+タスク3(new)
+SQSキューメッセージメッセージポーリング
+
+--- 第410页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECS ローリングアップデート•v1 からv2 にアップデートするときに、一度にタスクを開始・停止する割合や順番をコントロールすることができますv1v1v1v1v1v1v1v1v1v2v2v2実際の稼働率（100%）Minumum healthy percent（0-100%)Maximum percent（100-200%)タスクの終了を許可するタスクの作成を許可する
+ECSサービスアップデート画面
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_83.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第411页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECSローリングアップデート-最小50 %、最大100%•タスクの開始数4v1v1v1v1v2v2v1v1v1v1v2v2v2v2v2v2
+
+--- 第412页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ECSローリングアップデート-最小100%、最大150%•タスクの開始数4v1v1v1v1v2v2v1v1v1v1v2v2v2v2
+v2v2v1v1
+v2v2v2v2v1v1
+
+--- 第413页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon ECR -Elastic Container Registry•AWS 上でDocker イメージを保存、管理•保管したデータ量・通信したデータ量に応じた課金•ECS およびIAM と完全に統合されたセキュリティ、AmazonS3 によるバックアップ•Docker イメージの脆弱性スキャン、バージョン、タグ、イメージのライフサイクルのサポート
+Amazon ECRDockerイメージ
+DockerイメージEC2インスタンス
+pullIAMロール
+CodeBuildCI/CD
+
+--- 第414页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Amazon EKS の概要•Amazon EKS = Amazon Elastic Kubernetes Service•マネージドなKubernetes クラスターをAWS 上で立ち上げるサービス•Kubernetes は、コンテナ化された（通常はDocker）アプリケーションを自動的にデプロイ、スケーリング、管理するためのオープンソースのシステムです•ECS と目的は同様ですが、APIが違います•EKS は、ワーカーノードを展開する場合はEC2 を、サーバーレスコンテナを展開する場合はFargateをサポートしています•使用例：すでにオンプレミスや他のクラウドでKubernetes を使用している企業が、Kubernetesを使ってAWS に移行したいと考えている場合•Kubernetes はクラウドに依存しません（AzureやGCP など、どのクラウドでも使用可能）
+
+--- 第415页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プライベートサブネット3プライベートサブネット1プライベートサブネット2Amazon EKS 
+AWSクラウドVPC
+アベイラビリティゾーン1アベイラビリティゾーン2アベイラビリティゾーン3パブリックサブネット1
+パブリックサブネット2
+パブリックサブネット3
+NGW
+NGW
+NGW
+ELB
+ELB
+EKSパブリックサービスLBELB
+オートスケーリンググループEKSノード
+EKS PodsEKSノード
+EKS PodsEKSノード
+EKS PodsEKS ワーカーノードEKS プライベートサービスLB
+ELB
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_84.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第416页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サーバーレスの概要
+
+--- 第417页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サーバーレスとは？•サーバーレスとは、開発者がサーバーを管理する必要のない、新しいパラダイムです•コードをデプロイするだけ、開発者がサーバを用意する必要はありません•展開するのは...Function!•最初は...サーバーレス== FaaS (Function as a Service)•サーバーレスは、AWS Lambdaによって開拓されましたが、今では"データベース、メッセージング、ストレージ”  などのマネージドサービスにも、サーバレスのものがあります•サーバーレスとは、サーバーがないということではありません...サーバを管理したり、用意したり、確認したりする必要がないということ
+
+--- 第418页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS のサーバーレス•AWS Lambda•DynamoDB•AWS Cognito•AWS API Gateway•Amazon S3•AWS SNS & SQS•AWS Kinesis Data Firehose•Aurora Serverless•Step Functions•Fargate 静的コンテンツREST APIログイン
+S3 バケットAPI Gateway
+Cognito
+ユーザー
+LambdaDynamoDB
+
+--- 第419页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com なぜAWS Lambda なのか•クラウド上の仮想サーバー•RAM とCPU による制限•ずっとマシンが稼働しつづける•スケーリングとは、サーバーの追加や削除に介入すること
+Amazon LambdaAmazon EC2•仮想機能-サーバーの管理が必要ない•時間の制約がある-短い実行時間（〜15分）•オンデマンドで実行•自動化されたスケーリング!
+
+--- 第420页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Lambda のメリット•低い価格設定•リクエストと計算時間ごとに支払う•毎月の無料利用枠として、1,000,000 件のAWS Lambda リクエストと400,000GB のコンピュートタイムがある•非常に多くのAWS サービスと統合•多くのプログラミング言語に対応•AWS CloudWatch による簡単なモニタリング•機能ごとのリソースを簡単に増やせる（最大10GBのRAM!）•RAM を増やせば、CPU やネットワークも改善されます
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_85.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第421页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Lambda でサポートされる言語•Node.js (JavaScript)•Python•Java (Java 8互換)•C# (.NET Core)•Golang•C# / Powershell •Ruby•カスタムランタイムAPI (コミュニティサポート、例: Rust)•Lambda Container Image•独自コンテナイメージをLambda として実行することもできます•コンテナイメージは、Lambda Runtime APIを実装している必要があります。•Docker イメージを実行するには、基本的にECS / Fargate が向いています
+
+--- 第422页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Lambda Integration主なもの
+CloudWatch LogsSNSCognitoSQS
+S3KinesisAPI GatewayDynamoDB
+CloudFrontCloudWatch EventsEventBridge
+
+--- 第423页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 例: サーバーレスでサムネイルを作成
+S3での新しいイメージAWS Lambda Fuctionサムネイルの作成トリガープッシュ新しいサムネイル
+DynamoDBのメタデータプッシュ画像名画像サイズ作成日など
+
+--- 第424页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 例サーバーレスCRONジョブ
+CloudWatch EventsEventBridgeAWS Lambda Functionタスクを実行するトリガー1時間ごと
+
+--- 第425页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Lambdaの価格：例•最新の価格情報は下記を確認ください: https://aws.amazon.com/lambda/pricing/ •呼び出しごとの課金•最初の1,000,000 回のリクエストは無料•以降、100 万リクエストあたり0.20 ドル（1 リクエストあたり0.0000002 ドル）•稼働時間ごとの課金(1ms 単位で)•月間400,000GB・秒の計算時間を無料で提供•== 400,000 秒（1GB RAMの場合）•== 3,200,000 秒（128MB RAMの場合）•その後、60,000GB・秒で1ドル•たいていの場合、AWS Lambdaを動かすのは非常に安いので、とても人気があります
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_86.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第426页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 知っておきたいAWS Lambdaの限界•実行:•メモリの割り当て: 128MB～10GB•最大実行時間: 900秒（15分）•環境変数:  4 KB•実行環境のディスク容量（/tmp内）: 512MB •並列実行回数: 1000 (リージョンごと・増加可能)•デプロイ:•ラムダ関数の展開サイズ（圧縮された.zip）: 50MB•圧縮されていない展開サイズ（コードと依存ライブラリ）: 250 MB•起動時に他のファイルをロードするために/tmpディレクトリを使用可能•環境変数: 4 KB
+
+--- 第427页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Lambda@Edge•CloudFrontを使ってCDNを導入した場合•グローバルにAWS Lambdaを並走させたい場合は？•あるいは、アプリケーションに到達する前にリクエストのフィルタリングを行う方法は？•そのために、Lambda@Edgeを利用します。CloudFront CDN と一緒にLambda 関数をデプロイします•レスポンシブなアプリケーションの構築•サーバーを管理する必要はなく、Lambda はグローバルに展開される•CDN コンテンツのカスタマイズ•利用料に応じた支払い
+
+--- 第428页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Lambda@Edge•CloudFront のリクエストやレスポンスをLambda で変えることができます•CloudFront がユーザーからのリクエスト（Viewer Request）を受信してから•CloudFront がオリジンにリクエストを転送する前に（Origin Request）•CloudFront がオリジンからのレスポンスを受信した後（Origin Response）•CloudFront が応答をユーザーに転送する前（Viewer Response）CloudFront •オリジンにリクエストが送信されなかった場合でも、ビューアーに対するレスポンスを変えることもできますオリジンユーザーViewer RequestOrigin RequestOrigin ResponseViewer Response
+
+--- 第429页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Lambda@Edge: グローバルアプリケーション
+CloudFront キャッシュされたレスポンスLambda@EdgeFunction各CloudFront Edgeでグローバルにコードを実行Amazon S3 バケットHTMLウェブサイトAmazonDynamoDB ユーザーがウェブサイトを訪問ダイナミックAPIリクエストクエリーデータ
+
+--- 第430页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Lambda@Edge: 使用例•ウェブサイトのセキュリティとプライバシー•ダイナミックなWebアプリケーションをエッジで実現•検索エンジン最適化（SEO）•オリジンやデータセンターを越えたインテリジェントなルーティング•エッジでのボット・ミティゲーション•リアルタイムでの画像変換•A/Bテスト•ユーザー認証とオーソリゼーション•ユーザーの優先順位付け•ユーザートラッキングとアナリティクス
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_87.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第431页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDB •フルマネージド、3つのAZ にまたがるレプリケーションによる高可用性•NoSQLデータベース-リレーショナル・データベースではない•大規模ワークロードや分散型データベースへの対応•毎秒数百万のリクエスト、数兆のデータ、数百TB のストレージ•高速で安定したパフォーマンス（検索時のレイテンシーが少ない）•IAM  との統合により、セキュリティ、認証、管理を実現•DynamoDB Streams によるイベントドリブンなプログラミングを実現•低コストとオートスケーリング機能
+
+--- 第432页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDB -基礎編•DynamoDB はテーブルで構成されます•各テーブルには主キーがあります（作成時に決定、変更不可）•各テーブルは無限のアイテム（=行）を持つことができます•各アイテムには属性がある（後から追加可能-NULLでもよい）•各アイテムの最大サイズは400KB です•サポートされているデータタイプ:•スカラータイプ: 文字列、数値、バイナリ、ブーリアン、Null•ドキュメントタイプ: リスト、マップ•集合タイプ(Set Types): 文字列セット、数値セット、バイナリセット
+
+--- 第433页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDB -プロビジョンスループット•テーブルには、プロビジョニングされた「リードキャパシティユニット」・「ライトキャパシティユニット」が必要です•リードキャパシティユニット(RCU) 読み取りスループット(RCUあたり$0.00013)•1RCU = 1 秒間に1回の強い整合性のある読み取り(1回の読み取りで4KBまで）•1RCU = 1 秒間に2回の結果整合性のある読み取り(1回の読み取りで4KBまで）•ライトキャパシティユニット(WCU) 書き込みスループット(WCUあたり$0.00065)•1WCU＝1 秒間に1KB の書き込みが可能•需要に応じたスループットの自動スケーリングを設定できます（オプション）•スループットを一時的に超えることができる“バーストクレジット” があります•バーストクレジットが空の場合は、「ProvisionedThroughputException」が発生します•リトライする場合、指数関数的なバックオフ・リトライを行うことをお勧めします
+
+--- 第434页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDB -DAX•DAX = DynamoDB Accelerator•DynamoDB のシームレスなキャッシュ、アプリケーションの書き換え不要•書込みはDAX を経由してDynamoDB へ•キャッシュされたリードとクエリーのレイテンシーはマイクロ秒•ホットキーの問題を解決（特定キーの読み込み過多）•デフォルトではキャッシュのTTL が5 分•クラスター内で最大10 ノード•マルチAZ（本番環境では最低3ノードを推奨）•セキュア（KMSによるキャッシュデータの暗号化、VPC、IAM、CloudTrail）
+アプリケーション
+Amazon DynamoDB Accelerator
+テーブル
+アマゾンDynamoDB テーブル
+テーブル
+
+--- 第435页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDB Streams•DynamoDBでの変更（Create, Update, Delete）を、DynamoDBStream に流すことができます•このストリームをAWSLambdaで読み込んで、次のようなことができます•リアルタイムに変化に対応する（新規ユーザーへのウェルカムメール）•アナリティクス•派生テーブル/ビューの作成•ElasticSearchへの挿入•Streams を使って別リージョンにレプリケーションを作ることができます•Stream は24時間のデータ保持が可能です
+テーブル
+アマゾンDynamoDB Stream変更履歴
+LambdaFunction
+CreateUpdateDelete
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_88.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第436页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDB -新機能•トランザクション（2018年11月より新設）•オール・オア・ナッシング型のオペレーション•複数のテーブルへの挿入、更新、削除を、1 トランザクションとして扱うことが可能（どれかが失敗したら、他の操作が取り消される）•最大10 個のユニークアイテムまたは最大4MB のデータまで•オンデマンド（2018年11月より新設）•キャパシティプランニングが不要（WCU/RCU）-自動的に拡張可能•プロビジョニングされた容量と比較して2.5倍の価格（利用時は注意）•スパイクが予測できない場合や、アプリケーションのスループットが非常に低い場合に有効です
+
+--- 第437页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDB-セキュリティとその他の機能•セキュリティ•インターネットを経由せずにDynamoDB にアクセスできるVPC エンドポイント•IAM による完全なアクセス制御•KMS を利用したデータの暗号化•SSL/TLS による通信路の暗号化•バックアップ＆リストア機能•RDS のようなポイント・イン・タイム・リストア•パフォーマンスに影響なし•グローバルテーブル•マルチリージョン、フルレプリケーション、ハイパフォーマンス•Amazon DMS: DynamoDBへの移行（Mongo, Oracle, MySQL, S3などから）•ローカルDynamoDB: 開発用に自分のコンピュータでローカルのDynamoDB を立ち上げ
+
+--- 第438页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDB -その他の機能•グローバルテーブル(クロスリージョンでの複製)•アクティブなレプリケーション、多くのリージョンで利用可能•DynamoDB Streams が必要•低レイテンシー、DR 目的に有効•キャパシティプランニング•プロビジョンドキャパシティ: WCUとRCUのプロビジョニング、オートスケーリングが可能•オンデマンドキャパシティ: WCUとRCUを無制限に利用可能、スロットルなし、価格は高い
+テーブルCRUD
+テーブル複製CRUDus-east-1ap-southeast-2
+
+--- 第439页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 例: サーバーレスAPIの構築
+REST APIリクエスト転送CRUD
+API GatewayクライアントLambda DynamoDB
+
+--- 第440页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS API Gateway•AWS Lambda + API Gateway: 管理すべきインフラなし•WebSocket プロトコルのサポート•API のバージョニング（v1, v2...）を扱えます•さまざまな環境（開発、テスト、試作...）を扱えます•セキュリティ（認証・認可）•API キーの作成、リクエストスロットルの処理•Swagger / Open API のインポートによるAPI の迅速な定義•リクエストとレスポンスの変換と検証•SDK とAPI の仕様書の作成•API レスポンスのキャッシュ
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_89.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第441页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com API Gateway -インテグレーションの概要•Lambda 関数•Lambda 関数の起動•AWS Lambda を利用したREST API を簡単に公開する方法•HTTP•バックエンドでのHTTP エンドポイントの公開•例: オンプレミスの内部HTTP API、アプリケーションロードバランサー...•なぜ？-レート制限、キャッシング、ユーザー認証、APIキーなどを追加•AWS サービス•API Gateway を介して任意のAWS API を公開•例: AWS Step Functionのワークフローを開始し、SQSにメッセージを投稿する•なぜ？-認証を追加したり、パブリックに展開したり、レート制御したり...
+
+--- 第442页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com API Gateway -エンドポイントの種類•Edge-Optimized（デフォルト）: グローバルクライアント用•リクエストはCloudFront エッジロケーションを経由して行われる（レイテンシーの向上）•API Gateway は1つのリージョンにのみデプロイ•リージョナル:•同一リージョン内のクライアントの場合•手動でCloudFrontと組み合わせることも可能（キャッシング戦略と配信をよりコントロールできる）•プライベート: •VPC エンドポイント（ENI）を使ってVPCからのみアクセス可能•リソースポリシーを使用してアクセスを定義する
+
+--- 第443页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com API Gateway -セキュリティIAM パーミッション•IAM ポリシー認証を作成し、ユーザー/ロールにアタッチする•API Gateway は、呼び出し元から渡されたIAM パーミッションを確認する•自身のインフラでアクセスを提供するのが良い•IAM クレデンシャルがヘッダーに含まれる「Sig v4」機能の活用
+Amazon API Gateway 
+REST API w/Sig v4IAMポリシーのチェック
+バックエンド
+IAM
+
+--- 第444页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com API Gateway -セキュリティLambda オーソライザー•AWS Lambda を使用して、渡されたヘッダーのトークンを検証する•認証の結果をキャッシュするオプション•OAuth/SAML/サードパーティタイプの認証の使用を支援します•Lambda はユーザーのIAM ポリシーを返す必要があります
+ラムダオーソライザー
+Amazon API Gateway 
+REST APIトークンリクエストトークンを評価するIAMポリシーを返す
+バックエンド
+
+--- 第445页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com APIゲートウェイ-セキュリティCognito ユーザープール•Cognito はユーザーのライフサイクルを完全に管理します•APIゲートウェイは、AWSCognito から自動的にID を検証します•カスタム実装が不要•Cognito は認証のみをサポートし、認可はサポートしませんCognitoユーザープール
+Amazon API Gateway 
+REST API + Pass TokenCognitoトークンを評価する
+バックエンド
+認証するトークンを取得する
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_9.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第41页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスタイプ•ユースケースに応じた、さまざまなEC2 インスタンスタイプが用意されています(https://aws.amazon.com/ec2/instance-types/)•以下のような名前付け規則で、名付けられていますm5.2xlarge•m: インスタンスクラス•5: 世代（AWS は年々、改善を進めています）•2xlarge: インスタンスクラス内での大きさ
+
+--- 第42页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスタイプ–汎用•Web サーバやコードリポジトリなど、さまざまな目的に適しています•以下の要素をバランス良く備えています•CPU•メモリ•ネットワーク•このコースでは、汎用EC2 インスタンスの1 つであるt2.micro を使っていきます
+* this list will evolve over time, please check the AWS website for the latest information
+
+--- 第43页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスタイプ–コンピューティング最適化•高パフォーマンスなCPU を必要とする、計算負荷の高いタスクに適しています:•バッチ処理ワークロード•メディア変換（ビデオ処理など）•高性能Web サーバHigh performance web servers•ハイパフォーマンスコンピューティング(HPC)•科学的モデリング（製薬向け計算など）& 機械学習•ゲームサーバー
+* this list will evolve over time, please check the AWS website for the latest information
+
+--- 第44页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスタイプ–メモリ最適化•メモリで大規模なデータを扱うタスクに適しています•ユースケース: •高性能が求められるデータベースサーバ•大規模な分散キャシュサーバ•BI (ビジネスインテリジェンス) に最適化されたインメモリデータベース•大規模非構造化データのリアルタイム処理
+* this list will evolve over time, please check the AWS website for the latest information
+
+--- 第45页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com EC2 インスタンスタイプ–ストレージ最適化•ローカルストレージにある大規模データを大量に読み書きするような、ストレージが重要なタスクに適しています•ユースケース: •高頻度なオンライントランザクション処理(OLTP) システム•リレーショナル& NoSQL ・データベース•インメモリデータベースのキャッシュ(例: Redis)•データウェアハウスアプリケーション•分散ファイルシステム
+* this list will evolve over time, please check the AWS website for the latest information
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_90.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第446页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com APIゲートウェイ-セキュリティ-概要•IAM:•AWS アカウント内にすでに存在するIAM ユーザー/ロールを利用可能•認証・認可の処理（Authenticationand Authorization）•Sig v4 機能の活用•Lambda オーソライザー:•サードパーティートークンに最適•どのようなIAMポリシーを返すか、とても柔軟に処理できます•認証・認可の処理（Authentication  and Authorization）•Lambda の起動ごとに支払い•Cognito ユーザープール:•独自のユーザープールを管理することができます（Facebook、Googleログインなどを利用可能）•カスタムコードを書く必要はありません•認証の処理（認可はバックエンドで実装する必要がある）
+
+--- 第447页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Cognito•ユーザが、開発したアプリのなかでの適切な権限を得られるようにしたい•Cognito ユーザープール:•アプリユーザーのサインイン機能•API Gateway との連携•Cognito Identity Pools（Federated Identity）:•AWS の認証情報をユーザーに提供し、AWS リソースにアクセスできるようにする•アイデンティティプロバイダとしてCognito User Pools と統合できます•Cognito Sync: •デバイスからCognito にデータを同期させます•AppSync に取って代わられる可能性があります
+
+--- 第448页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Cognito User Pools（CUP）について•サーバーレスでユーザーのデータベースを作成•シンプルなログイン: ユーザー名（またはメール）／パスワードの組み合わせ•メール/電話番号の確認やMFA の追加が可能です•サードパーティのID（Facebook、Google、SAML...）の使用が可能•JSON Web T okens (JWT)を送り返します•認証のためのAPI Gateway との統合が可能です
+CUP
+登録/ログインJWTの返送アプリ
+
+--- 第449页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Cognito -Federated Identity Pools•ゴール: •クライアントサイドからAWS リソースへの直接アクセスを実現•どのように: •連携したID プロバイダーへのログイン、または匿名でのログイン•Federated Identify Pools から一時的なAWS 認証情報を得ます•これらのクレデンシャルには、そのパーミッションを明記したIAMポリシーがあらかじめ設定されています•例•Facebook ログインを利用して、S3 バケットへの書き込み権限を一時的に付与
+FederatedIdentity
+FIPに認証を行う一時的なAWS認証情報アプリアイデンティティ・プロバイダー
+CUP
+Google
+FacebookTwitterSAMLOpenID….ログイントークンベリファイトークン
+認証情報の取得
+Amazon S3 バケット
+コール
+
+--- 第450页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Cognito Sync•非推奨-現在はAWS AppSyncを使用してください。•設定、構成、アプリの状態を保存•クロスデバイスの同期（iOS, Androidなどプラットフォームを問わない）•オフライン機能（オンライン復帰時に同期）•Cognito のFederated Identity Pool が必要です（User Poolではありません）•データセットにデータを保存（最大1MBまで）•最大20個のデータセットを同期させることができます
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_91.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第451页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS SAM -サーバーレスアプリケーションモデル•SAM = Serverless Application Model•サーバーレスアプリケーションを開発・デプロイするためのフレームワーク•すべての設定はYAML コード•ラムダ関数•DynamoDB テーブル•API Gateway•Cognito ユーザープール•SAMは、Lambda、API Gateway、DynamoDB をローカルで実行するのにも役立ちます•SAM はCodeDeploy を使用してLambda 関数をデプロイできます
+
+--- 第452页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サーバーレスアーキテクチャー
+
+--- 第453页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com モバイルアプリケーション:  MyTodoList •以下の要件を満たすモバイルアプリケーションを作成したいと考えています•HTTPS でREST API として公開•サーバーレスアーキテクチャ•ユーザーがS3 内の自分のフォルダを直接読み書きできます•ユーザーはマネージドなサーバーレスサービスを介して認証する必要があります•ユーザーはTo D oを読み書きできますが、主に読み込みが多い•ユーザ増加に備えて、データベースは高いスケーラビリティ・高い読み取りスループットが必要です
+
+--- 第454页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com モバイルアプリ:  REST APIレイヤー
+Amazon API Gateway
+Amazon Cognito
+AWS LambdaAmazon DynamoDB
+モバイルクライアントREST HTTPS呼び出しクエリー認証する認証の確認
+
+--- 第455页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com モバイルアプリ: ユーザーにS3へのアクセスを提供
+Amazon API Gateway
+Amazon Cognito
+AWS LambdaAmazon DynamoDB
+Amazon S3
+AWS STS
+ファイルの保存/取り出しパーミッション
+認証するモバイルクライアント一時的な資格情報の生成
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_92.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第456页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com モバイルアプリ: 高い読み取りスループット、静的データ
+Amazon API Gateway
+Amazon Cognito
+AWS LambdaDynamoDB
+Amazon S3
+AWS STS
+ファイルの保存/取り出しパーミッション
+REST HTTPS呼び出しクエリー／読み込み認証する認証の確認
+DAXキャッシング層モバイルクライアント一時的な資格情報の生成
+
+--- 第457页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com モバイルアプリ: API Gateway でのキャッシング
+Amazon API Gateway
+Amazon Cognito
+AWS LambdaDynamoDB
+Amazon S3
+AWS STS
+ファイルの保存/取り出しパーミッション
+REST HTTPS呼び出しクエリー／読み込み認証する認証の確認
+DAXキャッシング層レスポンスのキャッシングモバイルクライアント一時的な資格情報の生成
+
+--- 第458页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 今回の講義では•サーバーレスREST API:  HTTPS, API Gateway, Lambda, DynamoDB•Cognito を使ってSTS で一時的な認証情報を生成し、制限されたポリシーのあるS3 バケットにアクセスするようにできます•アプリユーザーはこの方法でAWS リソースに直接アクセスできます•このパターンは、DynamoDBやLambda などにも応用できます•DAX を使ってDynamoDB の読み込みのキャッシング•API Gateway レベルでのREST リクエストのキャッシング•Cognito, STS による認証・認可
+
+--- 第459页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サーバーレスなウェブサイトホスティングMyBlog.com•このサイトはグローバルに展開します•ブログは書き込みは少ないが、読み込みアクセスは多い•ウェブサイトの一部は純粋に静的なファイルで、残りは動的なRESTAPI です•可能な限りキャッシングを導入すること•新規に登録したユーザーには、ウェルカムメールが届きます•ブログにアップロードされた写真には、サムネイルが生成されます
+
+--- 第460页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 静的コンテンツをグローバルに提供するAmazon CloudFrontグローバルディストリビューション
+Amazon S3
+クライアント
+エッジロケーションとのやりとり
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_93.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第461页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 静的コンテンツをグローバルかつセキュアに配信するAmazon CloudFrontグローバルディストリビューション
+Amazon S3
+エッジロケーションとのやりとりOAI: Origin Access Identity
+バケットポリシーOAI からのオーソライズのみ
+クライアント
+
+--- 第462页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 公開サーバーレスREST APIの追加Amazon CloudFrontグローバルディストリビューション
+Amazon S3
+エッジロケーションとのやりとりOAI: Origin Access Identity
+バケットポリシーOAI からのオーソライズのみ
+Amazon API Gateway
+AWS LambdaDynamoDB
+REST HTTPS呼び出しクエリー／読み込み
+DAXキャッシング層クライアント
+
+--- 第463页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDBグローバルテーブルの活用Amazon CloudFrontグローバルディストリビューション
+Amazon S3
+エッジロケーションとのやりとりOAI: Origin Access Identity
+バケットポリシーOAIからのオーソライズのみ
+Amazon API Gateway
+AWS LambdaDynamoDBグローバルテーブル
+REST HTTPS呼び出しクエリー／読み込み
+DAXキャッシング層クライアント
+
+--- 第464页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ユーザーウェルカムメールの流れAmazon CloudFrontグローバルディストリビューション
+Amazon S3
+エッジロケーションとのやりとりOAI: Origin Access Identity
+バケットポリシーOAI からのオーソライズのみ
+Amazon API Gateway
+AWS LambdaDynamoDB
+REST HTTPS呼び出しクエリー／読み込み
+DAXキャッシング層
+DynamoDBStream変更の通知
+AWS Lambdaラムダの呼び出し
+Amazon Simple Email Service (SES)メール送信用SDKIAM ロール
+クライアント
+
+--- 第465页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com サムネイル生成の流れAmazon CloudFrontグローバルディストリビューション
+Amazon S3
+エッジロケーションとのやりとりOAI: Origin Access Identity
+バケットポリシーOAI からのオーソライズのみ
+Amazon API Gateway
+AWS LambdaDynamoDB
+REST HTTPS呼び出しクエリー／読み込み
+DAXキャッシング層
+Amazon CloudFrontグローバルディストリビューション
+Amazon S3OAI写真のアップロード転送の効率化トリガー
+Amazon S3サムネイルAWS Lambda
+SQSSNS
+任意クライアント
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_94.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第466页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com AWS Hosted Website の概要•CloudFront とS3 を使って静的コンテンツを配信します•REST API はサーバーレスで、パブリックなのでCognito は使いません•グローバルDynamoDB テーブルを利用して、グローバルにデータを提供しています•(Aurora Global Tablesを使うこともできました)•DynamoDB Stream をLambda 関数のトリガーとして使うようにしました•Lambda 関数では、SES(Simple Email Service) を利用して、サーバーレスでメールを送信します•Lambda 関数には、SES を使用できるIAM ロールをつけています•S3 はSQS / SNS / Lambda をトリガーにしてイベントを通知することができます
+
+--- 第467页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com マイクロサービスアーキテクチャ•マイクロサービスアーキテクチャ:アプリケーションを、複数のマイクロサービス（例:注文、決済、配送etc）に分割し、マイクロサービス間のRESTAPI通信で全体を構成する考え方•多くのサービスがREST API を使って直接、相互にやりとり•各マイクロサービスのアーキテクチャは、それぞれ形が異なる場合があります•マイクロサービスアーキテクチャを採用し、各サービスの開発ライフサイクルを効率化したい
+
+--- 第468页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com マイクロサービス環境
+Amazon API Gateway
+AWS LambdaElastiCache
+Elastic Load Balancer
+Amazon EC2Auto ScalingAmazon RDS
+Elastic Load Balancer
+ECS
+DynamoDB
+Amazon Route 53
+service1.example.comservice2.example.comservice3.example.com
+ユーザーDNSクエリHTTPS
+
+--- 第469页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com マイクロサービスに関する議論•各マイクロサービスに適した形を柔軟に組み合わせることがやりやすい•同期パターン:  API Gateway, ロードバランサー•非同期パターン:  SQS, Kinesis, SNS, Lambdaトリガー(S3)•マイクロサービス化でのよくある課題•新しいマイクロサービスを作るたびに繰り返されるオーバーヘッド•サーバー台数/利用率の最適化に関する問題•複数のマイクロサービス、それぞれ複数のバージョンを同時に実行する際の複雑さ•多くのサービスと統合するために必要なクライアントサイドのコードの急増•課題のいくつかは、Serverlessパターンによって解決されます•API Gateway, Lambda は自動的にスケールアップし、使用量に応じた支払い•API のクローニングや環境の再現が容易にできます•API Gateway のSwagger 統合によるクライアントSDK の生成
+
+--- 第470页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 有料コンテンツの配信•オンラインでビデオを販売し、ユーザーはビデオを購入するためにお金を払わなければなりません•それぞれの動画は、様々なお客様が購入することができます•プレミアムユーザーであるユーザーにのみ動画を配信したい•プレミアムユーザーのデータベースを持っている•プレミアムユーザーに送るリンクは短期間で無効になるべき（退会したら見られなくなるようにしたいので）•私たちのアプリケーションはグローバル•完全なサーバーレスにしたい
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_95.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第471页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プレミアムユーザーサービス最初の一歩
+クライアント
+Amazon API Gateway
+AWS LambdaDynamoDB
+REST HTTPS呼び出しクエリー／読み込みユーザーテーブルプレミアムの区分
+
+--- 第472页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 認証の追加
+クライアント
+Amazon API Gateway
+AWS LambdaDynamoDB
+REST HTTPS呼び出しクエリー／読み込みAmazon Cognito
+認証する認証の確認
+
+--- 第473页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ビデオストレージサービスの追加
+クライアント
+Amazon API Gateway
+AWS LambdaDynamoDB
+REST HTTPS呼び出しクエリー／読み込みAmazon Cognito
+認証する認証の確認
+Amazon S3
+
+--- 第474页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com グローバルかつセキュアに配信Amazon CloudFrontグローバル展開
+Amazon S3OAI: Origin Access Identity
+バケットポリシーOAI からのオーソライズのみ
+クライアント
+Amazon API Gateway
+AWS LambdaDynamoDB
+REST HTTPS呼び出しクエリー／読み込みAmazon Cognito
+認証する認証の確認
+
+--- 第475页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プレミアムユーザーにのみコンテンツを配信Amazon CloudFrontグローバル展開
+Amazon S3OAI:  Origin Access Identity
+バケットポリシーOAI からのオーソライズのみ
+クライアント
+Amazon API Gateway
+AWS LambdaDynamoDB
+呼び出しクエリー／読み込みAmazon Cognito
+認証する認証の確認Amazon API Gateway
+AWS Lambda呼び出しプレミアムユーザーの確認URLクエリーAWS SDKを用いたCloudFrontsignedURLの生成有効期限5分signedURLsigned URLでアクセス
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_96.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第476页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com プレミアムユーザービデオサービス•完全なサーバーレスを実現しました•認証のためのCognito•プレミアムなユーザーを保存するDynamoDB•2 つのサーバーレスアプリケーション•プレミアムユーザー登録•CloudFront Signed URL ジェネレータ•コンテンツはS3 に保存（サーバーレスでスケーラブル）•OAI でセキュリティを確保したCloudFront と統合（ユーザーは迂回できない）•CloudFront は、権限のないユーザーを防ぐためにsigned URL を使ったときのみアクセスできる•S3 pre-signed URL はどうでしょう？グローバルなアクセスには非効率的（バケットがあるリージョンのURL になるため）
+
+--- 第477页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ソフトウェアアップデートファイルのオフロード化•EC2 上で動作するアプリケーションで、ソフトウェアのアップデートを配信することがあります•新しいソフトウェアのアップデートがあると、たくさんのリクエストがあり、その内容がネットワーク上で大量に配信されます。非常にコストがかかる•アプリケーションは変えずに、コストとCPU を最適化したいのですが、どうすればいいでしょうか？
+
+--- 第478页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 私たちのアプリケーションの現状
+AZ1～3AZ1
+オートスケーリンググループ
+AZ2
+AZ3
+Amazon Elastic File System
+
+--- 第479页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 簡単に直せる！？
+AZ1～3AZ1
+オートスケーリンググループ
+AZ2
+AZ3
+Amazon Elastic File System
+Amazon CloudFront
+
+--- 第480页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com なぜCloudFront なのか？•アーキテクチャに変更なし•ソフトウェアアップデートファイルをエッジにキャッシュする•ソフトウェアのアップデートファイルは動的なものではなく、静的な（変化しない）ものである•EC2 インスタンスはサーバーレスではない•しかし、CloudFrontは、自動でスケールアップしてくれます•ASG はそれほどスケールしませんし、EC2 ホスティングコストも非常に節約できます•また、可用性やネットワークの帯域幅のコストなども節約できる•既存のアプリケーションをよりスケーラブルに、より安価にする簡単な方法です
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_97.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第481页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ビッグデータ収集パイプライン•データ収集パイプラインを完全にサーバーレスにしたい•リアルタイムにデータを収集したい•データを変換したい•変換されたデータをSQLで照会したい•クエリを使って作成されたレポートは、S3 に保存したい•そのデータをウェアハウスに読み込み、ダッシュボードを作成したい
+
+--- 第482页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ビッグデータ収集パイプライン
+Amazon KinesisData Stream
+Amazon Kinesis Data Firehose
+AWS Lambda
+Amazon Simple Storage Service（S3）Amazon Simple Queue Service
+AWS Lambda
+Amazon Athena
+Amazon Simple Storage Service（S3）レポートバケット
+IoTデバイス収集バケット(オプション)1分ごとリアルタイムトリガーデータ読み取り
+Amazon QuickSight
+Amazon Redshift(サーバーレスではない)
+
+--- 第483页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ビッグデータ収集パイプラインの議論•IoT Core は、IoT デバイスからデータを収集することができます•Kinesis はリアルタイムのデータ収集に最適です•Firehose はS3 へ、ほぼリアルタイムでデータを配信できます（1分）•Lambda はデータ変換でFirehose を助けることができます•Amazon S3 はSQS への通知のトリガーとなります•Lambda はSQS にサブスクライブできます（S3 とLambda を接続することも可能）•Athena はサーバーレスのSQL サービスで、結果はS3 に保存されます•レポーティングバケットには分析したデータが格納され、AWS QuickSight やRedshift などのレポーティングツールで利用することができます
+
+--- 第484页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com データベース
+
+--- 第485页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com 適切なデータベースの選択•AWSは様々なマネージドデータベースを用意しています•アーキテクチャに応じて適切なデータベースを選択するための検討事項•リードヘビー、ライトヘビー、それともバランスのとれたワークロード？スループットのニーズは？日中に変化するのか、スケーリングが必要か、変動するか？•どのくらいの量のデータをどのくらいの期間保存するか？成長するのか？オブジェクトの平均サイズは？どのようにアクセスされるのか？•データの耐久性は？データの情報源は？（再構築は可能？不可能？）•レイテンシーの要求は？同時ユーザー数は？•データモデルは？データをどのようにクエリするのか？ジョイン？構造化？半構造化？•強いスキーマ？柔軟性は？レポート？検索？RDBMS/NoSQL？•ライセンスコスト？AuroraなどのクラウドネイティブDBに切り替える？
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_98.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第486页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com データベースの種類•RDBMS（=SQL / OLTP）:  RDS, Aurora -効率的なjoin 操作が可能•NoSQL データベース:  DynamoDB（～JSON）, ElastiCache（キー／バリューペア）, Neptune（グラフ）, DocumentDB（MongoDB互換）, Keyspaces（ApacheCassandra 互換）•オブジェクトストア:  S3（ビッグオブジェクト用）／Glacier（バックアップ／アーカイブ用）•データウェアハウス（=SQL Analytics / BI）:  Redshift（OLAP）、Athena•検索:  ElasticSearch-フリーテキスト、非構造化検索•グラフ:  Neptune-データ間の関係を表示•台帳: Amazon Quantum Ledger Database -ブロックチェーン技術による耐改ざん性を備えた中央集権型台帳データベース•時系列: Amazon Timestream –サーバレス時系列データベース
+
+--- 第487页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDSの概要•マネージドPostgreSQL / MySQL / Oracle / SQL Server•EC2 インスタンスとEBS ボリュームの種類とサイズを指定する必要があります•リードレプリカとマルチAZのサポート•IAM、セキュリティグループ、KMSによるセキュリティ、通信路のSSL•バックアップ/スナップショット/ポイントインタイムリストア機能•マネージドおよび定期メンテナンス•CloudWatch によるモニタリング•ユースケース:  リレーショナルデータセットの保存（RDBMS/OLTP）、SQLクエリの実行、トランザクションの挿入/更新/削除が可能
+
+--- 第488页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com RDS for Solutions Architect•運用:  フェイルオーバー時やメンテナンス、リードレプリカやEC2 インスタンスのスケーリング、EBSのリストアでのダウンタイムが小さい•セキュリティ:  AWS の担当は、OSのセキュリティ。私たちの担当はKMS、セキュリティグループ、IAMポリシーの設定、DBでのユーザー認証、SSLの使用など•信頼性:  マルチAZ 機能、障害発生時のフェイルオーバー•性能:   EC2 インスタンスの種類、EBSボリュームの種類、リードレプリカの追加機能に依存します。ストレージのオートスケール•コスト:  プロビジョニングされたEC2 とEBS に基づいて時間ごとに課金されます
+
+--- 第489页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com •PostgreSQL / MySQL 互換のRDBエンジン•データは3つのAZにまたがる6つのレプリカに保持されています•オートヒーリング機能•マルチAZ, Auto Scaling リードレプリカ•リードレプリカはグローバルに対応•オーロラデータベースは障害復旧やレイテンシーに優れ、グローバルに利用可能•10GB から64TB までのストレージの自動スケーリング•Aurora インスタンスのEC2 インスタンスタイプの定義•RDS と同じセキュリティ/監視/保守機能•Aurora Serverless -予測不可能な/断続的なワークロードのために•Aurora Multi-Master -継続的なライトのフェイルオーバーを実現•ユースケース: RDSと同じだが、メンテナンスが少なく、柔軟性があり、パフォーマンスが高いAurora の概要
+
+--- 第490页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com Aurora for Solutions Architect•運用: 少ない運用、オートスケーリングストレージ•セキュリティ:  AWSの担当はOSのセキュリティ、私たちの担当はKMS、セキュリティグループ、IAMポリシーの設定、DBでのユーザー認証、SSLの使用など•信頼性:  マルチAZ、高可用性（RDS以上）、Aurora Serverlessオプション、AuroraMulti-Master オプション•パフォーマンス:  アーキテクチャの最適化により、5倍のパフォーマンス（AWS調べ）。最大15個のリードレプリカ（RDSでは5個まで）•コスト:  EC2 とストレージの使用量に応じて時間単位で課金。Oracleなどの商用のデータベースと比較して、低コストである可能性があります
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
+# chatgpt_block_99.txt
+
+请整理以下日语内容，提取核心信息、关键词、重点句和中文总结，不必逐句解析：
+
+--- 第491页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElastiCache の概要•マネージドRedis / Memcached（マネージドなキャッシュサーバ）•インメモリーデータストア、サブミリ秒のレイテンシー•EC2 インスタンスタイプをプロビジョニングする必要があります•クラスタリング（Redis）とマルチAZ、リードレプリカ（シャーディング）のサポート•IAM、セキュリティグループ、KMS、RedisAuthによるセキュリティ•バックアップ/スナップショット/ポイントインタイムリストア機能•マネージドおよび定期メンテナンス•CloudWatchによるモニタリング•ユースケース:  キー/バリューストア、頻繁な読み取りと少ない書き込み、DBクエリの結果のキャッシュ、ウェブサイトのセッションデータの保存（SQLは使えません）
+
+--- 第492页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com ElastiCachefor Solution Architect•運用: RDSと同じ•セキュリティ:  AWS の担当はOS のセキュリティ、私たちの担当はKMS、セキュリティグループ、IAMポリシー、ユーザー（Redis Auth）、SSLの使用など•信頼性:  クラスタリング、マルチAZ•パフォーマンス:  サブミリ秒のパフォーマンス、インメモリー、シャーディングのためのリードレプリカ、キャッシュサーバとしてよく利用されます•コスト:  EC2 とストレージの使用量に応じた時間単位での支払い
+
+--- 第493页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDB の概要•AWSの独自技術、マネージドNoSQL データベース•サーバーレス、プロビジョンドキャパシティ、オートスケーリング、オンデマンドキャパシティ•ElastiCacheと同様のキー／バリューストアとして利用可能（例: セッションデータの保存）•高可用性:  デフォルトでマルチAZ、リードとライトの切り離し、リードキャッシュにDAX を採用•リード:  結果整合性、または強い整合性•セキュリティ:  認証、認可はIAM で行う•AWS Lambda と連携するDynamoDB Streams•バックアップ/リストア機能、グローバルテーブル機能•CloudWatch によるモニタリング•プライマリキー、ソートキー、またはインデックスのみを対象としたクエリが可能•ユースケース:  サーバーレスアプリケーション開発（100KB 程度の小さなドキュメント）、分散型サーバーレスキャッシュ（SQLクエリ言語は利用できない、トランザクションはサポート）
+
+--- 第494页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com DynamoDBforSolutionArchitect•運用:  運用が不要、オートスケーリング機能、サーバーレス•セキュリティ:  IAMポリシーによる完全なセキュリティ、KMSの暗号化、SSL化による通信路の暗号化•信頼性:  マルチAZ、バックアップ•パフォーマンス:  1桁ミリ秒のパフォーマンス、読み込みをキャッシュするDAX、アプリケーションがスケールアップしてもパフォーマンスが低下しない•コスト:  プロビジョニングされた容量とストレージの使用量に応じて支払う（事前に容量を推測する必要はなく、オートスケーリングを利用できる）
+
+--- 第495页 ---
+© Stephane MaarekNOT FOR DISTRIBUTION © Stephane Maarekwww.datacumulus.com S3 の概要•S3は...オブジェクトのキー／バリューストア•大きなデータには強いが、小さなデータには弱い（遅くなりがち）•サーバーレス、無限にスケールアップ、最大オブジェクトサイズは5TB•上書きと削除の強い整合性•階層:  S3 標準、S3 IA、S31ゾーンIA、Glacier（バックアップ向け）•機能:  バージョニング、暗号化、クロスリージョンレプリケーションなど... •セキュリティ:  IAM、バケットポリシー、ACL•暗号化:  SSE-S3、SSE-KMS、SSE-C、クライアントサイド暗号、SSL•使用例:  静的ファイル、大容量ファイルのキーバリューストア、ウェブサイトのホスティング
+
+请输出格式如下：
+日语概要：
+中文总结：
+关键词：
+重点句：
+
+
+---
+
