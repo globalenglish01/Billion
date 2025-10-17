@@ -1,0 +1,23 @@
+# Netscape HTTP Cookie File
+# https://curl.haxx.se/rfc/cookie_spec.html
+# This is a generated file! Do not edit.
+
+.bilibili.com	TRUE	/	FALSE	1793108769	buvid3	D931BB5C-8008-6126-AAC2-8A211DC7282069759infoc
+.bilibili.com	TRUE	/	FALSE	1790084768	b_nut	1758548769
+.bilibili.com	TRUE	/	FALSE	1790084770	_uuid	C91EF418-8258-312D-C135-C71A1895947470593infoc
+.bilibili.com	TRUE	/	FALSE	1761140771	buvid4	2097980B-9D4C-D914-8FF7-8D985E4C02AG71332-125092221-XK/kNZvZ4HM9eIlbRlTIAg%3D%3D
+.bilibili.com	TRUE	/	FALSE	1793108771	buvid_fp	d4d2e322a8bd54fab44afb538cb67d57
+.bilibili.com	TRUE	/	TRUE	1774508733	sid	qa7q2v75
+.bilibili.com	TRUE	/	FALSE	1790084818	enable_web_push	DISABLE
+.bilibili.com	TRUE	/	FALSE	1790084818	home_feed_column	4
+.bilibili.com	TRUE	/	FALSE	1790084818	browser_resolution	980-1819
+.bilibili.com	TRUE	/	FALSE	1790084818	theme-tip-show	SHOWED
+.bilibili.com	TRUE	/	FALSE	0	b_lsid	7103FB523_19989E742DC
+m.bilibili.com	FALSE	/	FALSE	0	bmg_af_switch	1
+m.bilibili.com	FALSE	/	FALSE	0	bmg_src_def_domain	i2.hdslb.com
+.bilibili.com	TRUE	/	FALSE	1759214459	bili_ticket	eyJhbGciOiJIUzI1NiIsImtpZCI6InMwMyIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3NTkyMTQ0NTksImlhdCI6MTc1ODk1NTE5OSwicGx0IjotMX0.1EB529yapf9wbhTgblyWDLyKql0mYSbn-ANsmh2NORU
+.bilibili.com	TRUE	/	FALSE	1759214459	bili_ticket_expires	1759214399
+.bilibili.com	TRUE	/	TRUE	1774508733	SESSDATA	1fc9260f%2C1774508734%2Cbc83a%2A91CjCqOmpWfQb9q9Ft9upzRP6h4hpyhmQcKrhmHE48zL7dcLPbEAwqKOCZ_VoHcMr4OnUSVkFxeXZUZUVhUjJJSGQzWG9YMWNncEpKRVFqUTR5R1N0alFxMDFpU0ZwMjhrd25WTXF5a1REbkhmanJQbmxlOFVucmZjMU9TZ3h1WGFwZ2RLQnF3NHhBIIEC
+.bilibili.com	TRUE	/	TRUE	1774508733	bili_jct	f6617101e897f7596b9dd3d31399c1af
+.bilibili.com	TRUE	/	TRUE	1774508733	DedeUserID	403040903
+.bilibili.com	TRUE	/	TRUE	1774508733	DedeUserID__ckMd5	651e3130cea8b161
